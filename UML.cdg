@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Tacos">
+  <ClassDiagramComponents>
+    <Class name="Personnage" package="" visibility="public" xPosition="358.0" yPosition="75.0">
+      <Fields>
+        <Field name="nom" type="String" visibility="private"/>
+        <Field name="image" type="String" visibility="private"/>
+        <Field name="niveau" type="int" visibility="private"/>
+        <Field name="experience" type="int" visibility="private"/>
+        <Field name="argent" type="int" visibility="private"/>
+        <Field name="carac" type="Caracteristique" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="untitledMethod" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Boulanger" package="" visibility="public" xPosition="565.0" yPosition="20.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Cuisinier" package="" visibility="public" xPosition="565.0" yPosition="125.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Pharmacien" package="" visibility="public" xPosition="565.0" yPosition="227.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Sav" package="" visibility="public" xPosition="565.0" yPosition="328.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Item" package="" visibility="public" xPosition="282.0" yPosition="358.0">
+      <Fields>
+        <Field name="nom" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Arme" package="" visibility="public" xPosition="581.0" yPosition="436.0">
+      <Fields>
+        <Field name="dmin" type="int" visibility="private"/>
+        <Field name="dmax" type="int" visibility="private"/>
+        <Field name="nom" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Armure" package="" visibility="public" xPosition="581.0" yPosition="524.0">
+      <Fields>
+        <Field name="carac" type="Caracteristique" visibility="private"/>
+        <Field name="nom" type="String" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Consommable" package="" visibility="public" xPosition="282.0" yPosition="512.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Action" package="" visibility="public" xPosition="32.0" yPosition="585.0">
+      <Fields>
+        <Field name="cible" type="Personnage" visibility="private"/>
+        <Field name="source" type="Personnage" visibility="private"/>
+        <Field name="pa" type="int" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Capacite" package="" visibility="public" xPosition="87.0" yPosition="452.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Tour" package="" visibility="public" xPosition="32.0" yPosition="767.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Controlleur" package="" visibility="public" xPosition="167.0" yPosition="125.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="untitledMethod" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="IA" package="" visibility="public" xPosition="19.0" yPosition="8.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Joueur" package="" visibility="public" xPosition="190.0" yPosition="8.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Jeu" package="" visibility="public" xPosition="358.0" yPosition="850.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Lieu" package="" visibility="public" xPosition="617.0" yPosition="850.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Enum name="Caracteristique" package="" visibility="public" xPosition="9.0" yPosition="227.0">
+      <Literals>
+        <Literal name="VITALITE"/>
+        <Literal name="FORCE"/>
+        <Literal name="DEXTERITE"/>
+        <Literal name="INTELLIGENCE"/>
+        <Literal name="PA"/>
+      </Literals>
+    </Enum>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <IsRelation name="is" source="Sav" target="Personnage"/>
+    <HasRelation name="a" source="Action" target="Tour" type="Default" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <IsRelation name="is" source="Armure" target="Item"/>
+    <HasRelation name="a" source="Capacite" target="Action" type="Default" sourceCardinality="0..1" targetCardinality="0..1"/>
+    <IsRelation name="is" source="Consommable" target="Item"/>
+    <HasRelation name="a" source="Jeu" target="Personnage" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="a" source="Consommable" target="Action" type="Default" sourceCardinality="0..1" targetCardinality="0..1"/>
+    <IsRelation name="is" source="Arme" target="Item"/>
+    <HasRelation name="a" source="Controlleur" target="Personnage" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="IA" target="Controlleur"/>
+    <IsRelation name="is" source="Pharmacien" target="Personnage"/>
+    <IsRelation name="is" source="Cuisinier" target="Personnage"/>
+    <HasRelation name="a" source="Personnage" target="Capacite" type="Default" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
+    <HasRelation name="a" source="Lieu" target="Jeu" type="Default" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Joueur" target="Controlleur"/>
+    <IsRelation name="is" source="Boulanger" target="Personnage"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

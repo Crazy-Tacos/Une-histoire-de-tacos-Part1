@@ -1,6 +1,11 @@
-public class Crazytacos {
-	//Je retest un truc, bisous
-	// Je dois toujours taper mon mot de passe c'est chiant :(
+package crazytacos;
 
-	// Je crois que c'est bon !!!
+
+public class Crazytacos {
+    
+    
+    public static void main(String[] args) {
+
+    }
+    
 }

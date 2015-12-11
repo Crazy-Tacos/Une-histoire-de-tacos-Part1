@@ -13,7 +13,7 @@ public class Personnage {
 
     private int argent;
 
-    private Caracteristique;
+    private Caracteristique carac;
 
     public void untitledMethod() {
     }

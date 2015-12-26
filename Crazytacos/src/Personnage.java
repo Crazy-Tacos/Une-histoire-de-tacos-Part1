@@ -8,11 +8,11 @@ import java.util.EnumMap;
 public class Personnage {
 
     private String nom;
-    private String image;
     private int niveau;
     private int experience;
     private int argent;
     private EnumMap<Caracteristique, Integer> carac;
+    private Capacite[] capacites;
 
     // Constructeur du joueur
     public Personnage(String nom) {
@@ -26,6 +26,8 @@ public class Personnage {
         carac.put(Caracteristique.DEXTERITE, 10);
         carac.put(Caracteristique.INTELLIGENCE, 10);
         carac.put(Caracteristique.PA, 2);
+        capacites = new Capacite[4];
+        capacites[0] = new Capacite("Auto attaque", 1);
     }
     
     // Constructeur d'un ennemi
@@ -40,6 +42,8 @@ public class Personnage {
         carac.put(Caracteristique.DEXTERITE, dext);
         carac.put(Caracteristique.INTELLIGENCE, intell);
         carac.put(Caracteristique.PA, pa);
+        capacites = new Capacite[4];
+        capacites[0] = new Capacite("Auto attaque", 1);
     }
     
     public String[] stringPersonnage(int ligne){
@@ -48,7 +52,7 @@ public class Personnage {
             str[i] = "";
         }
         if (ligne + 8 <20){
-            str[ligne + 0] = nom;
+            str[ligne + 0] = "Personnage : " + nom;
             str[ligne + 1] = "Niveau : " + niveau;
             str[ligne + 2] = "XP : " + experience;
             str[ligne + 3] = "Argent : " + argent;
@@ -57,27 +61,17 @@ public class Personnage {
             str[ligne + 6] = "Dexterite : " + carac.get(Caracteristique.DEXTERITE);
             str[ligne + 7] = "Intelligence : " + carac.get(Caracteristique.INTELLIGENCE);
             str[ligne + 8] = "Points d'action : " + carac.get(Caracteristique.PA);
+            int j = 0;
+            while(capacites[j] != null && j < 4){
+                str[ligne + 9 + j] = capacites[j].stringCapacite();
+                j++;
+            }
         }
         return str;
     }
     
     public void drawPersonnage(Jeu j,int ligne){
-        String[] str = new String[20];
-        for (int i = 0; i<20; i++){
-            str[i] = "";
-        }
-        if (ligne + 8 <20){
-            str[ligne + 0] = nom;
-            str[ligne + 1] = "Niveau : " + niveau;
-            str[ligne + 2] = "XP : " + experience;
-            str[ligne + 3] = "Argent : " + argent;
-            str[ligne + 4] = "Vitalité : " + carac.get(Caracteristique.VITALITE);
-            str[ligne + 5] = "Force : " + carac.get(Caracteristique.FORCE);
-            str[ligne + 6] = "Dexterite : " + carac.get(Caracteristique.DEXTERITE);
-            str[ligne + 7] = "Intelligence : " + carac.get(Caracteristique.INTELLIGENCE);
-            str[ligne + 8] = "Points d'action : " + carac.get(Caracteristique.PA);
-        }
-        j.addChaine(str);
+        j.addChaine(stringPersonnage(ligne));
     }
     
     public void levelUp(int vie, int force, int dext, int intel, int pa){
@@ -101,5 +95,15 @@ public class Personnage {
     
     public String getNom(){
         return nom;
+    }
+    
+    public void addCapacite(Capacite c){
+        int i = 0;
+        while (capacites[i] != null){
+            i++;
+        }
+        if (i<4){
+            capacites[i] = c;
+        }
     }
 }

@@ -5,6 +5,7 @@ public class Cuisinier extends Personnage {
 
     public Cuisinier(String nom) {
         super(nom);
+        addCapacite(new Capacite("Lancer de tacos", 2));
         
     }
     

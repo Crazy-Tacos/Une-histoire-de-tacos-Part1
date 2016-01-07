@@ -1,0 +1,1 @@
+crazytacos.Consommable

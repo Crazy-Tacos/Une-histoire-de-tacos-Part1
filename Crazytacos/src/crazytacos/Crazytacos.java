@@ -116,7 +116,7 @@ public class Crazytacos {
         Combat combat = new Combat(player, ennemi);
         combat.doCombat(jeu);
         
-        player.drawPersonnage(jeu, 0);
+        player.drawPersonnage(jeu);
         jeu.draw();
         
         ennemi = new Personnage("Planche", 2, 15, 0, 10, 12, 12, 12);
@@ -125,7 +125,7 @@ public class Crazytacos {
         combat = new Combat(player, ennemi);
         combat.doCombat(jeu);
         
-        player.drawPersonnage(jeu, 0);
+        player.drawPersonnage(jeu);
         jeu.draw();
     }
     
@@ -137,7 +137,7 @@ public class Crazytacos {
         Combat combat = new Combat(player, ennemi);
         combat.doCombat(jeu);
 
-        player.drawPersonnage(jeu, 0);
+        player.drawPersonnage(jeu);
         jeu.draw();
 
         ennemi = new Personnage("Planche", 2, 15, 0, 10, 12, 12, 12);
@@ -146,7 +146,7 @@ public class Crazytacos {
         combat = new Combat(player, ennemi);
         combat.doCombat(jeu);
 
-        player.drawPersonnage(jeu, 0);
+        player.drawPersonnage(jeu);
         jeu.draw();
     }
     

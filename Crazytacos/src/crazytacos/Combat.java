@@ -19,23 +19,17 @@ public class Combat {
         return ennemi;
     }
     
-    public void drawCombat(Jeu j, int ligne){
-        String[] str = new String[20];
-        for (int i = 0; i<20; i++){
-            str[i] = "";
-        }
-        if (ligne + 1 <20){
-            str[ligne] = "--- COMBAT ---";
-            str[ligne + 1] = joueur.getNom() + " VS " + ennemi.getNom();
-        }
-        j.addChaine(str);
-        j.addChaine(joueur.stringPersonnage(2));
-        j.addChaine(ennemi.stringPersonnage(2), 30);
+    public void drawCombat(Jeu j){
+        j.addChaine("--- COMBAT ---");
+        j.addChaine(joueur.getNom() + " VS " + ennemi.getNom());
+        int i = j.getNextLigne();
+        joueur.drawPersonnage(j);
+        ennemi.drawPersonnage(j,i, 30);
     }
     
     public void doCombat(Jeu j){
         
-        drawCombat(j,0);
+        drawCombat(j);
         j.draw();
         boolean tourJ;
         int action;
@@ -62,8 +56,14 @@ public class Combat {
                 // L'ennemi auto attaque (super IA !!!)
                 joueur.infligerDegats(ennemi.attaquer(1));
             }
-            drawCombat(j,0);
-            j.draw();
+            drawCombat(j);
+            if(!tourJ) {
+                j.draw();
+            }
+            else
+            {
+                j.initEcran();
+            }
             tourJ = !tourJ;
         }
         

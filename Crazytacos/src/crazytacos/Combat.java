@@ -5,10 +5,12 @@ import java.util.Scanner;
 public class Combat {
     private Personnage joueur;
     private Personnage ennemi;
+    private Jeu j;
     
-    public Combat (Personnage joueur, Personnage ennemi) {
+    public Combat (Jeu j,Personnage joueur, Personnage ennemi) {
         this.joueur = joueur;
         this.ennemi = ennemi;
+        this.j = j;
     }
     
     public Personnage getJoueur(){
@@ -19,7 +21,7 @@ public class Combat {
         return ennemi;
     }
     
-    public void drawCombat(Jeu j){
+    public void drawCombat(){
         j.addChaine("--- COMBAT ---");
         j.addChaine(joueur.getNom() + " VS " + ennemi.getNom());
         int i = j.getNextLigne();
@@ -27,22 +29,21 @@ public class Combat {
         ennemi.drawPersonnage(j,i, 30);
     }
     
-    public void doCombat(Jeu j){
-        
-        drawCombat(j);
-        j.draw();
+    public void doCombat(){
+        drawCombat();
         boolean tourJ;
         int action;
         Scanner in = new Scanner(System.in);
-        System.out.print("Le plus intelligent et le plus agile commence : ");
+        j.addChaine("Le plus intelligent et le plus agile commence : ");
         if ((joueur.getDext() + joueur.getIntell()) >= (ennemi.getDext() + ennemi.getIntell())){
             tourJ = true;
-            System.out.println(joueur.getNom());
+            j.concatLasLigne(joueur.getNom());
         }
         else {
             tourJ = false;
-            System.out.println(ennemi.getNom());
+            j.concatLasLigne(ennemi.getNom());
         }
+        j.draw();
         
         while(joueur.getVie() != 0 && ennemi.getVie() !=0){
             if (tourJ){
@@ -56,7 +57,7 @@ public class Combat {
                 // L'ennemi auto attaque (super IA !!!)
                 joueur.infligerDegats(ennemi.attaquer(1));
             }
-            drawCombat(j);
+            drawCombat();
             if(!tourJ) {
                 j.draw();
             }
@@ -96,6 +97,10 @@ public class Combat {
             System.out.println("Vous avez perdu le combat face à " + ennemi.getNom());
             joueur.revivre();
         }
+        
+    }
+    
+    public void gagnerCombat(){
         
     }
 }

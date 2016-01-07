@@ -113,8 +113,8 @@ public class Crazytacos {
     public static void lancerAventure(Jeu jeu, Personnage player){
         Personnage ennemi = new Personnage("Rat", 1, 11, 50, 20, 10, 10, 10);
 
-        Combat combat = new Combat(player, ennemi);
-        combat.doCombat(jeu);
+        Combat combat = new Combat(jeu,player, ennemi);
+        combat.doCombat();
         
         player.drawPersonnage(jeu);
         jeu.draw();
@@ -122,8 +122,8 @@ public class Crazytacos {
         ennemi = new Personnage("Planche", 2, 15, 0, 10, 12, 12, 12);
         ennemi.equipeArme(new Arme("Clou", 2,10,5,2));
         
-        combat = new Combat(player, ennemi);
-        combat.doCombat(jeu);
+        combat = new Combat(jeu, player, ennemi);
+        combat.doCombat();
         
         player.drawPersonnage(jeu);
         jeu.draw();
@@ -134,8 +134,8 @@ public class Crazytacos {
         Personnage player = new Cuisinier("Tacos");
         Personnage ennemi = new Personnage("Rat", 1, 11, 50, 20, 10, 10, 10);
 
-        Combat combat = new Combat(player, ennemi);
-        combat.doCombat(jeu);
+        Combat combat = new Combat(jeu,player, ennemi);
+        combat.doCombat();
 
         player.drawPersonnage(jeu);
         jeu.draw();
@@ -143,8 +143,8 @@ public class Crazytacos {
         ennemi = new Personnage("Planche", 2, 15, 0, 10, 12, 12, 12);
         ennemi.equipeArme(new Arme("Clou", 2,10,5,2));
 
-        combat = new Combat(player, ennemi);
-        combat.doCombat(jeu);
+        combat = new Combat(jeu,player, ennemi);
+        combat.doCombat();
 
         player.drawPersonnage(jeu);
         jeu.draw();

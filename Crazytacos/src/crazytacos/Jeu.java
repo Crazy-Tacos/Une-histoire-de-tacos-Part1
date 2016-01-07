@@ -43,6 +43,13 @@ public class Jeu {
         }
     }
     
+    public void concatLasLigne(String str){
+        int i = getNextLigne() - 1;
+        if(i <20 && i >=0){
+            ecran[i] += str;
+        }
+    }
+    
     public int getNextLigne(){
         int i = 0;
         while(ecran[i] != null && i<20){

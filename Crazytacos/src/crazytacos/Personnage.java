@@ -101,9 +101,9 @@ public class Personnage {
         ligne += i;
     }
     
-    public void levelUp(){
+    public void levelUp(Jeu j){
         this.niveau++;
-        System.out.println("Vous êtes montés au niveau " + this.niveau + " !!!");
+        j.addChaine("Vous êtes montés au niveau " + this.niveau + " !!!");
         int vie;
         int force;
         int dext;
@@ -145,12 +145,12 @@ public class Personnage {
         revivre();
     }
     
-    public void gagnerXP(int xp){
+    public void gagnerXP(Jeu j,int xp){
         experience += xp;
-        System.out.println("Vous avez gagné " + xp + " points d'expérience !");
+        j.addChaine("Vous avez gagné " + xp + " points d'expérience !");
         while (experience >= 5 * pow(2,niveau)){
             experience -= 5 * pow(2,niveau);
-            levelUp();
+            levelUp(j);
         }
     }
     
@@ -220,7 +220,7 @@ public class Personnage {
         return c.getDmax() + c.getRatio() * car / 100;
     }
     
-    public int attaquer(int numCapacite){
+    public int attaquer(Jeu j,int numCapacite){
         numCapacite -= 1;
         if (numCapacite > 3 || numCapacite <0){
             return -1;
@@ -232,15 +232,16 @@ public class Personnage {
         Random rand = new Random();
         int dmin = getDmin(c);
         int dmax = getDmax(c);
+        j.addChaine(nom +" utilise " +c.getNom());
         return rand.nextInt(dmax - dmin + 1) + dmin;
     }
     
-    public void infligerDegats(int deg){
+    public void infligerDegats(Jeu j,int deg){
         vie -= deg;
         if (vie <0){
             vie = 0;
         }
-        System.out.println(nom + " a subit " + deg + " dégats.");
+        j.addChaine(nom + " a subit " + deg + " dégats.");
     }
     
     public void revivre(){
@@ -251,9 +252,9 @@ public class Personnage {
         return experience;
     }
     
-    public void gagnerArgent(int sous){
+    public void gagnerArgent(Jeu j,int sous){
         argent += sous;
-        System.out.println("Vous avz gagné " + sous + " euros !");
+        j.addChaine("Vous avez gagné " + sous + " euros !");
     }
     
     public int getArgent(){

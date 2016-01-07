@@ -53,4 +53,8 @@ public class Capacite {
     public int getCarac(){
         return carac;
     }
+    
+    public String getNom(){
+        return nom;
+    }
 }

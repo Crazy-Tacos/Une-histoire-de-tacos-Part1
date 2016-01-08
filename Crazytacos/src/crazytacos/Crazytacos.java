@@ -1,5 +1,6 @@
 package crazytacos;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class Crazytacos {
@@ -9,72 +10,78 @@ public class Crazytacos {
         Scanner scan=new Scanner(System.in);
     	int choix = 0;
         boolean arret = false;
+        
+        Jeu jeu  = new Jeu();
          
         while (!arret)
         {    
-            System.out.println("Aller sur le Menu : tapez 1");
-	    System.out.println("Tester un Combat : tapez 2");
-	    System.out.println("Quitter : tapez 3");
+            jeu.addChaine("Aller sur le Menu : tapez 1");
+	    jeu.addChaine("Tester un Combat : tapez 2");
+            jeu.addChaine("Tester lecture fichier : tapez 3");
+	    jeu.addChaine("Quitter : tapez 4");
+            jeu.draw();
             do{
                     choix = scan.nextInt();
-	        }while(choix<1 || choix>3);
+	        }while(choix<1 || choix>4);
             
             switch(choix)
 	    {
-                case 1 : menu();  break;
-	        case 2 : testCombat(); break;                
-	        case 3 : arret = true; break;
+                case 1 : menu(jeu);  break;
+	        case 2 : testCombat(jeu); break;
+                case 3 : testFichier(jeu); break;                
+	        case 4 : arret = true; break;
 	        default : System.out.println("\nFatal Error"); return ;
             }
         }
     }
 
-    public static void menu(){
+    public static void menu(Jeu jeu){
         Scanner scan=new Scanner(System.in);
     	int choix = 0;
         boolean arret = false;
         
         while (!arret)
         {
-	        System.out.println("-- CRAZY TACOS --");
-	        System.out.println("Nouvelle Partie : tapez 1");
-	        System.out.println("Charger Partie : tapez 2");
-	        System.out.println("Quitter : tapez 3");
-	        
+	        jeu.addChaine("-- CRAZY TACOS --");
+	        jeu.addChaine("Nouvelle Partie : tapez 1");
+	        jeu.addChaine("Charger Partie : tapez 2");
+	        jeu.addChaine("Quitter : tapez 3");
+	        jeu.draw();
 	        do{
                     choix = scan.nextInt();
 	        }while(choix<1 || choix>3);
 	         
 	        switch(choix)
 	        {
-	                case 1 :arret = nouvellePartie(); break;
-	                case 2 : arret = chargerPartie();  break;
+	                case 1 :arret = nouvellePartie(jeu); break;
+	                case 2 : arret = chargerPartie(jeu);  break;
 	                case 3 : arret = true; break;
 	                default : System.out.println("\nFatal Error"); return ;
 	        }
         }
     }
     
-    public static boolean chargerPartie() {
-    	System.out.println("Chargement ...");
+    public static boolean chargerPartie(Jeu jeu) {
+    	jeu.addChaine("Chargement ...");
+        jeu.draw();
         return true;
     }
     
-    public static boolean nouvellePartie(){        
+    public static boolean nouvellePartie(Jeu jeu){        
         Scanner scan=new Scanner(System.in);
     	int choix = 0;
         boolean arret = false;
         
         String nom;
         Personnage player = null;
-        Jeu jeu = new Jeu();
 
-        System.out.println("\n--- Choisi une classe ---");
-        System.out.println("Le Boulanger : tapez 1");
-        System.out.println("Le Cuisinier : tapez 2");
-        System.out.println("Le SaV : tapez 3");
-        System.out.println("Le Pharmacien : tapez 4");
-        System.out.println("Retour : tapez 5");
+        jeu.addChaine("\n--- Choisi une classe ---");
+        jeu.addChaine("Le Boulanger : tapez 1");
+        jeu.addChaine("Le Cuisinier : tapez 2");
+        jeu.addChaine("Le SaV : tapez 3");
+        jeu.addChaine("Le Pharmacien : tapez 4");
+        jeu.addChaine("Retour : tapez 5");
+        jeu.draw();
 
         do{
             choix = scan.nextInt();
@@ -91,19 +98,26 @@ public class Crazytacos {
         
         if(!arret)
         {
-            System.out.println("\n--- Choisi un nom ---");
+            jeu.addChaine("\n--- Choisi un nom ---");
+            jeu.draw();
             scan.nextLine();
             nom=scan.nextLine();
 
-            System.out.println("As-tu choisis le nom Tacos?");
-            System.out.println("oui : tapez 1");
-            System.out.println("non : tapez 2");
+            jeu.addChaine("As-tu choisis le nom Tacos?");
+            jeu.addChaine("oui : tapez 1");
+            jeu.addChaine("non : tapez 2");
+            jeu.draw();
 
             do{
                 choix = scan.nextInt();
             }while(choix<1 || choix>2);
 
-            System.out.println("Super tu seras dons Tacos!!");                                                
+            jeu.addChaine("Super tu seras dons Tacos!!");
+            jeu.addChaine("tapez sur une touche pour lancer l'aventure");
+            jeu.draw();            
+            scan.nextLine();
+            nom=scan.nextLine();
+            
             lancerAventure(jeu, player);
         }
         
@@ -113,41 +127,49 @@ public class Crazytacos {
     public static void lancerAventure(Jeu jeu, Personnage player){
         Personnage ennemi = new Personnage("Rat", 1, 11, 50, 20, 10, 10, 10);
 
-        Combat combat = new Combat(player, ennemi);
-        combat.doCombat(jeu);
+        Combat combat = new Combat(jeu,player, ennemi);
+        combat.doCombat();
         
-        player.drawPersonnage(jeu, 0);
+        player.drawPersonnage(jeu);
         jeu.draw();
         
         ennemi = new Personnage("Planche", 2, 15, 0, 10, 12, 12, 12);
         ennemi.equipeArme(new Arme("Clou", 2,10,5,2));
         
-        combat = new Combat(player, ennemi);
-        combat.doCombat(jeu);
+        combat = new Combat(jeu, player, ennemi);
+        combat.doCombat();
         
-        player.drawPersonnage(jeu, 0);
+        player.drawPersonnage(jeu);
         jeu.draw();
     }
     
-    public static void testCombat(){
-        Jeu jeu = new Jeu();
+    public static void testCombat(Jeu jeu){
         Personnage player = new Cuisinier("Tacos");
         Personnage ennemi = new Personnage("Rat", 1, 11, 50, 20, 10, 10, 10);
 
-        Combat combat = new Combat(player, ennemi);
-        combat.doCombat(jeu);
+        Combat combat = new Combat(jeu,player, ennemi);
+        combat.doCombat();
 
-        player.drawPersonnage(jeu, 0);
+        player.drawPersonnage(jeu);
         jeu.draw();
 
         ennemi = new Personnage("Planche", 2, 15, 0, 10, 12, 12, 12);
         ennemi.equipeArme(new Arme("Clou", 2,10,5,2));
 
-        combat = new Combat(player, ennemi);
-        combat.doCombat(jeu);
+        combat = new Combat(jeu,player, ennemi);
+        combat.doCombat();
 
-        player.drawPersonnage(jeu, 0);
+        player.drawPersonnage(jeu);
         jeu.draw();
     }
     
+    public static void testFichier(Jeu jeu){
+        File f = new File("test.txt");
+        
+        System.out.println("Chemin absolu du fichier : " + f.getAbsolutePath());
+        System.out.println("Nom du fichier : " + f.getName());
+        System.out.println("Est-ce qu'il existe ? " + f.exists());
+        System.out.println("Est-ce un répertoire ? " + f.isDirectory());
+        System.out.println("Est-ce un fichier ? " + f.isFile());
+    }
 }

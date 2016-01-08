@@ -57,36 +57,53 @@ public class Personnage {
         addCapacite(new Capacite());// main nue
     }
     
-    public String[] stringPersonnage(int ligne){
-        String[] str = new String[20];
-        for (int i = 0; i<20; i++){
-            str[i] = "";
-        }
-        if (ligne + 7 <20){
-            str[ligne + 0] = nom + " : " + classe;
-            str[ligne + 1] = "Niveau : " + niveau;
-            str[ligne + 2] = "XP : " + experience;
-            str[ligne + 3] = "Argent : " + argent;
-            str[ligne + 4] = "Vie : " + vie + "/" + carac.get(Caracteristique.VITALITE);
-            str[ligne + 5] = "Force : " + carac.get(Caracteristique.FORCE);
-            str[ligne + 6] = "Dexterite : " + carac.get(Caracteristique.DEXTERITE);
-            str[ligne + 7] = "Intelligence : " + carac.get(Caracteristique.INTELLIGENCE);
-            int j = 0;
-            while(capacites[j] != null && j < 4 && ligne + 8 + j <20){
-                str[ligne + 8 + j] = " " + (j + 1) + ". " + capacites[j].stringCapacite();
-                str[ligne + 8 + j] += " (" + getDmin(capacites[j]) + "," + getDmax(capacites[j]) + ")";
-                j++;
+    
+    public void drawPersonnage(Jeu j){
+        j.addChaine(nom);
+        j.addChaine("Niveau : " + niveau);
+        j.addChaine("XP : " + experience);
+        j.addChaine("Argent : " + argent);
+        j.addChaine("Vie : " + vie + "/" + carac.get(Caracteristique.VITALITE));
+        j.addChaine("Force : " + carac.get(Caracteristique.FORCE));
+        j.addChaine("Dexterite : " + carac.get(Caracteristique.DEXTERITE));
+        j.addChaine("Intelligence : " + carac.get(Caracteristique.INTELLIGENCE));
+        int i = 0;
+            while(capacites[i] != null && i < 4){
+                j.addChaine(" " + (i + 1) + ". " + capacites[i].stringCapacite()
+                + " (" + getDmin(capacites[i]) + "," + getDmax(capacites[i]) + ")");
+                i++;
             }
-        }
-        return str;
     }
     
-    public void drawPersonnage(Jeu j,int ligne){
-        j.addChaine(stringPersonnage(ligne));
+    public void drawPersonnage(Jeu j, int ligne, int decalage){
+        j.addChaine(nom, ligne, decalage);
+        ligne++;
+        j.addChaine("Niveau : " + niveau, ligne, decalage);
+        ligne++;
+        j.addChaine("XP : " + experience, ligne, decalage);
+        ligne++;
+        j.addChaine("Argent : " + argent, ligne, decalage);
+        ligne++;
+        j.addChaine("Vie : " + vie + "/" + carac.get(Caracteristique.VITALITE), ligne, decalage);
+        ligne++;
+        j.addChaine("Force : " + carac.get(Caracteristique.FORCE), ligne, decalage);
+        ligne++;
+        j.addChaine("Dexterite : " + carac.get(Caracteristique.DEXTERITE), ligne, decalage);
+        ligne++;
+        j.addChaine("Intelligence : " + carac.get(Caracteristique.INTELLIGENCE), ligne, decalage);
+        ligne++;
+        int i = 0;
+            while(capacites[i] != null && i < 4){
+                j.addChaine(" " + (i + 1) + ". " + capacites[i].stringCapacite()
+                + " (" + getDmin(capacites[i]) + "," + getDmax(capacites[i]) + ")", ligne + i, decalage);
+                i++;
+            }
+        ligne += i;
     }
     
-    public void levelUp(){
+    public void levelUp(Jeu j){
         this.niveau++;
+        j.addChaine("Vous êtes montés au niveau " + this.niveau + " !!!");
         int vie;
         int force;
         int dext;
@@ -121,18 +138,19 @@ public class Personnage {
             dext = 0;
             intel = 0;
         }
-        this.vie += vie; // Ou revivre() pour full life !
         carac.replace(Caracteristique.VITALITE, carac.get(Caracteristique.VITALITE) + vie);
         carac.replace(Caracteristique.FORCE, carac.get(Caracteristique.FORCE) + force);
         carac.replace(Caracteristique.DEXTERITE, carac.get(Caracteristique.DEXTERITE) + dext);
         carac.replace(Caracteristique.INTELLIGENCE, carac.get(Caracteristique.INTELLIGENCE) + intel);
+        revivre();
     }
     
-    public void gagnerXP(int xp){
+    public void gagnerXP(Jeu j,int xp){
         experience += xp;
+        j.addChaine("Vous avez gagné " + xp + " points d'expérience !");
         while (experience >= 5 * pow(2,niveau)){
             experience -= 5 * pow(2,niveau);
-            levelUp();
+            levelUp(j);
         }
     }
     
@@ -202,7 +220,7 @@ public class Personnage {
         return c.getDmax() + c.getRatio() * car / 100;
     }
     
-    public int attaquer(int numCapacite){
+    public int attaquer(Jeu j,int numCapacite){
         numCapacite -= 1;
         if (numCapacite > 3 || numCapacite <0){
             return -1;
@@ -214,15 +232,16 @@ public class Personnage {
         Random rand = new Random();
         int dmin = getDmin(c);
         int dmax = getDmax(c);
+        j.addChaine(nom +" utilise " +c.getNom());
         return rand.nextInt(dmax - dmin + 1) + dmin;
     }
     
-    public void infligerDegats(int deg){
+    public void infligerDegats(Jeu j,int deg){
         vie -= deg;
         if (vie <0){
             vie = 0;
         }
-        System.out.println(nom + " a subit " + deg + " dégats.");
+        j.addChaine(nom + " a subit " + deg + " dégats.");
     }
     
     public void revivre(){
@@ -233,8 +252,9 @@ public class Personnage {
         return experience;
     }
     
-    public void gagnerArgent(int sous){
+    public void gagnerArgent(Jeu j,int sous){
         argent += sous;
+        j.addChaine("Vous avez gagné " + sous + " euros !");
     }
     
     public int getArgent(){

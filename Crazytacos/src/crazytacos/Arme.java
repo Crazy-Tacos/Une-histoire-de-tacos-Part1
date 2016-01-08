@@ -39,16 +39,16 @@ public class Arme extends Item {
         System.out.print("Dégats : "+ dmin + "-" + dmax);
         String car = "";
         if (carac == 1){ // Vitalite
-            car = " de la VITALITE";
+            car = "% de la VITALITE";
         }
         else if (carac == 2){ // Force
-            car = " de la FORCE";
+            car = "% de la FORCE";
         }
         else if (carac == 3){ // Dexterite
-            car = " de la DEXTERITE";
+            car = "% de la DEXTERITE";
         }
         else if (carac == 4){ // Intelligence
-            car = " de l'INTELLIGENCE";
+            car = "% de l'INTELLIGENCE";
         }
         System.out.println(" + "+ ratio + car);
     }

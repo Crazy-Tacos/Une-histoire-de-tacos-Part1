@@ -1,12 +1,12 @@
 package crazytacos;
 
-import java.io.File;
+import java.io.*;
 import java.util.Scanner;
 
 public class Crazytacos {
     
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         Scanner scan=new Scanner(System.in);
     	int choix = 0;
         boolean arret = false;
@@ -163,13 +163,38 @@ public class Crazytacos {
         jeu.draw();
     }
     
-    public static void testFichier(Jeu jeu){
-        File f = new File("test.txt");
-        
-        System.out.println("Chemin absolu du fichier : " + f.getAbsolutePath());
-        System.out.println("Nom du fichier : " + f.getName());
-        System.out.println("Est-ce qu'il existe ? " + f.exists());
-        System.out.println("Est-ce un répertoire ? " + f.isDirectory());
-        System.out.println("Est-ce un fichier ? " + f.isFile());
+    public static void testFichier(Jeu jeu){      
+        String chaine="";
+        String fichier ="fichier.txt";
+        String fichier2="fichier2.txt";
+
+        //lecture du fichier texte	
+        try{
+                InputStream ips=new FileInputStream(fichier); 
+                InputStreamReader ipsr=new InputStreamReader(ips);
+                BufferedReader br=new BufferedReader(ipsr);
+                String ligne;
+                while ((ligne=br.readLine())!=null){
+                        System.out.println(ligne);
+                          chaine+=ligne+"\n";
+                }
+                br.close(); 
+        }		
+        catch (Exception e){
+                System.out.println(e.toString());
+        }
+
+        //création ou ajout dans le fichier texte
+        try{
+                FileWriter fw = new FileWriter (fichier2);
+                BufferedWriter bw = new BufferedWriter (fw);
+                PrintWriter fichierSortie = new PrintWriter (bw); 
+                fichierSortie.println (chaine+"\n test de lecture et écriture !!"); 
+                fichierSortie.close();
+                System.out.println("Le fichier " + fichier2 + " a été créé!"); 
+        }
+        catch (Exception e){
+                System.out.println(e.toString());
+        }
     }
 }

@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Crazytacos {
     
     
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args){
         Scanner scan=new Scanner(System.in);
     	int choix = 0;
         boolean arret = false;
@@ -163,8 +163,7 @@ public class Crazytacos {
         jeu.draw();
     }
     
-    public static void testFichier(Jeu jeu){      
-        String chaine="";
+    public static void testFichier(Jeu jeu){
         String fichier ="fichier.txt";
         String fichier2="fichier2.txt";
 
@@ -173,12 +172,13 @@ public class Crazytacos {
                 InputStream ips=new FileInputStream(fichier); 
                 InputStreamReader ipsr=new InputStreamReader(ips);
                 BufferedReader br=new BufferedReader(ipsr);
+                
                 String ligne;
                 while ((ligne=br.readLine())!=null){
-                        System.out.println(ligne);
-                          chaine+=ligne+"\n";
+                          jeu.addChaine(ligne);
                 }
                 br.close(); 
+                jeu.draw();
         }		
         catch (Exception e){
                 System.out.println(e.toString());
@@ -188,10 +188,11 @@ public class Crazytacos {
         try{
                 FileWriter fw = new FileWriter (fichier2);
                 BufferedWriter bw = new BufferedWriter (fw);
-                PrintWriter fichierSortie = new PrintWriter (bw); 
-                fichierSortie.println (chaine+"\n test de lecture et écriture !!"); 
+                PrintWriter fichierSortie = new PrintWriter (bw);
+                
+                fichierSortie.println ("Test écriture"); 
+                fichierSortie.println ("Test saut de ligne");
                 fichierSortie.close();
-                System.out.println("Le fichier " + fichier2 + " a été créé!"); 
         }
         catch (Exception e){
                 System.out.println(e.toString());

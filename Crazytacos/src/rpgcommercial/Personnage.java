@@ -153,7 +153,7 @@ public class Personnage {
         return carac.get(Caracteristique.INTELLIGENCE);
     }
     
-    public int getDmin(Arme c){
+    public int getDminArme(Arme c){
         int car = 0;
         if (c.getCarac() == 1){ // Vitalite
             car = carac.get(Caracteristique.VITALITE);
@@ -171,7 +171,7 @@ public class Personnage {
         return c.getDmin() + c.getRatio() * car / 100;
     }
     
-    public int getDmax(Arme c){
+    public int getDmaxArme(Arme c){
         int car = 0;
         if (c.getCarac() == 1){ // Vitalite
             car = carac.get(Caracteristique.VITALITE);
@@ -220,5 +220,25 @@ public class Personnage {
     
     public Inventaire getInventaire(){
         return inventaire;
+    }
+    
+    public int drawActions(Vue j){
+        int nb = 0;
+        String str;
+        if (inventaire.getArmePrincipale()!=null){
+            nb++;
+            str = " " + nb + ". " + inventaire.getArmePrincipale().getNom() + " : ";
+            str += inventaire.getArmePrincipale().getDmin() + "-";
+            str+= inventaire.getArmePrincipale().getDmax() + " dégats";
+            j.addChaine(str);
+        }
+        if (inventaire.getArmeSecondaire()!=null){
+            nb++;
+            str = " " + nb + ". " + inventaire.getArmeSecondaire().getNom() + " : ";
+            str += inventaire.getArmeSecondaire().getDmin() + "-";
+            str+= inventaire.getArmeSecondaire().getDmax() + " dégats";
+            j.addChaine(str);
+        }
+        return nb;
     }
 }

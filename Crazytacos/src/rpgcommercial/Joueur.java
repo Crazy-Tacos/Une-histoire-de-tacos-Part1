@@ -10,6 +10,10 @@ public class Joueur implements Controleur{
         in = new Scanner(System.in);
     }
     
+    public void Pause(){
+        in.nextLine();
+    }
+    
     public int lireEntier(){
         int choix = -1;
         String str;

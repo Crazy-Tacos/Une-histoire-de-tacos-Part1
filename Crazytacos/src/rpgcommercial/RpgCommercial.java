@@ -8,10 +8,28 @@ public class RpgCommercial {
     
     public static void main(String[] args){
         // Test
-        Joueur j = new Joueur();
-        int a = j.lireChoix(27);
-        System.out.print(a);
+        Joueur control = new Joueur();
+        Personnage player = new Boulanger("Fred");
+        Vue jeu = new Vue();
         
+        Personnage ennemi = new Personnage("Rat", 1, 11, 50, 20, 10, 10, 10);
+
+        Combat combat = new Combat(control,jeu,player, ennemi);
+        combat.doCombat();
+        
+        player.drawPersonnage(jeu);
+        jeu.draw();
+        
+        ennemi = new Personnage("Planche", 2, 15, 0, 10, 12, 12, 12);
+        ennemi.getInventaire().setArmePrincipale(new Arme("Clou", 2,10,5,2));
+        
+        combat = new Combat(control,jeu, player, ennemi);
+        combat.doCombat();
+        
+        player.drawPersonnage(jeu);
+        jeu.draw();
+        
+        /*
         Scanner scan=new Scanner(System.in);
     	int choix = 0;
         boolean arret = false;
@@ -38,8 +56,10 @@ public class RpgCommercial {
 	        default : System.out.println("\nFatal Error"); return ;
             }
         }
+        */
     }
-
+    
+    /*
     public static void menu(Vue jeu){
         Scanner scan=new Scanner(System.in);
     	int choix = 0;
@@ -203,4 +223,5 @@ public class RpgCommercial {
                 System.out.println(e.toString());
         }
     }
+    */
 }

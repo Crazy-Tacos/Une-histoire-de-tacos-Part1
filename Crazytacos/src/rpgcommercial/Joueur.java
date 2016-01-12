@@ -10,7 +10,7 @@ public class Joueur implements Controleur{
         in = new Scanner(System.in);
     }
     
-    public void Pause(){
+    public void pause(){
         in.nextLine();
     }
     
@@ -45,6 +45,10 @@ public class Joueur implements Controleur{
     }
     
     public String lireString(){
-        return in.nextLine();
+        String str;
+        do{
+            str = in.nextLine();
+        } while(str.length() == 0);
+        return str;
     }
 }

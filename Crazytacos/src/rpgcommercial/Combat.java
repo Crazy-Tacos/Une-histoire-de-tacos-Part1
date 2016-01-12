@@ -1,6 +1,37 @@
 package rpgcommercial;
 
 
+/*
+public int attaquer(Vue j, int choix){
+        int max, min;
+        Random rand = new Random();
+        if (choix == 1){
+            if(inventaire.getArmePrincipale() == null){
+                choix++;
+            }
+            else {
+                max = getDmaxArme(inventaire.getArmePrincipale());
+                min = getDminArme(inventaire.getArmePrincipale());
+                j.addChaine(nom + " utilise l'arme " + inventaire.getArmePrincipale().getNom());
+                return rand.nextInt(max - min + 1) + min;
+            }
+        }
+        if (choix == 2){
+            if(inventaire.getArmeSecondaire() == null){
+                choix++;
+            }
+            else {
+                max = getDmaxArme(inventaire.getArmeSecondaire());
+                min = getDminArme(inventaire.getArmeSecondaire());
+                j.addChaine(nom + " utilise l'arme " + inventaire.getArmeSecondaire().getNom());
+                return rand.nextInt(max - min + 1) + min;
+            }
+        }
+        
+        return 0;
+    }
+*/
+
 public class Combat {
     private Personnage joueur;
     private Personnage ennemi;
@@ -31,11 +62,10 @@ public class Combat {
     }
     
     public void doCombat(){
-        drawCombat();
         boolean tourJ;
-        int nbchoix;
-        int choix;
         int degats;
+        int nbchoix;
+        drawCombat();
         j.addChaine("Le plus intelligent et le plus agile commence : ");
         if ((joueur.getDext() + joueur.getIntell()) >= (ennemi.getDext() + ennemi.getIntell())){
             tourJ = true;
@@ -45,23 +75,26 @@ public class Combat {
             tourJ = false;
             j.concatLasLigne(ennemi.getNom());
         }
-        j.draw();
         
         while(joueur.getVie() != 0 && ennemi.getVie() !=0){
 
             if (tourJ){
+                //le joueur fait une action
+                nbchoix = joueur.drawActions(j);
                 j.draw();
-                choix = control.lireChoix(joueur.drawActions(j));
-                
+                degats =joueur.attaquer(j,control.lireChoix(nbchoix));
+                ennemi.infligerDegats(j, degats);
             }
             else{
                 // L'ennemi auto attaque (super IA !!!)
-
+                degats = ennemi.attaquer(j,1);
+                joueur.infligerDegats(j, degats);
+                j.draw();
+                control.pause();
             }
             
             if(!tourJ) {
                 drawCombat();
-                j.draw();
             }
             else
             {
@@ -85,7 +118,7 @@ public class Combat {
     public void gagnerRecompenses(){
         joueur.gagnerXP(j,ennemi.getXP());
         joueur.gagnerArgent(j,ennemi.getArgent());
-        if(ennemi.getInventaire().getArmePrincipale() != null){
+        if(ennemi.getInventaire().getArmePrincipale().getNom() != "Mains nues"){
             gagnerArmePrincipale(); 
         }
         if(ennemi.getInventaire().getArmeSecondaire() != null){

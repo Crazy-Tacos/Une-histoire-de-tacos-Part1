@@ -7,22 +7,44 @@ public class Inventaire {
     private Consommable consommable;
     
     public Inventaire(){
-        this.armePrincipale =null;
+        this.armePrincipale =new Arme("Mains nues", 1, 3, 5, 2);
         this.armeSecondaire = null;
         this.armure = null;
         this.consommable = null;
     }
     
-    public void drawInventaire(Vue v){
-        System.out.println("ooo");
+    public void setArmePrincipale(Arme a){
+        this.armePrincipale = a;
     }
     
-    public void drawInventaire(Vue v, int ligne, int decalage){
-        System.out.println("ooo");
+    public void setArmeSecondaire(Arme a){
+        this.armeSecondaire = a;
     }
-
-    public void drawInventaireCombat(Vue v){
-        System.out.println("ooo");
+    
+    public void setArmure(Armure a){
+        this.armure = a;
     }
-
+    
+    public void setConsommable(Consommable c){
+        this.consommable = c;
+    }
+    
+    public Arme getArmePrincipale(){
+        return armePrincipale;
+    }
+    
+    public Arme getArmeSecondaire(){
+        return armeSecondaire;
+    }
+    
+    public Armure getArmure(){
+        return armure;
+    }
+    
+    public Consommable getConsommable(){
+        return consommable;
+    }
+    
+    
+    
 }

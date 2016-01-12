@@ -7,6 +7,11 @@ public class RpgCommercial {
     
     
     public static void main(String[] args){
+        // Test
+        Joueur j = new Joueur();
+        int a = j.lireChoix(27);
+        System.out.print(a);
+        
         Scanner scan=new Scanner(System.in);
     	int choix = 0;
         boolean arret = false;
@@ -134,7 +139,7 @@ public class RpgCommercial {
         jeu.draw();
         
         ennemi = new Personnage("Planche", 2, 15, 0, 10, 12, 12, 12);
-        ennemi.equipeArme(new Arme("Clou", 2,10,5,2));
+        ennemi.getInventaire().setArmePrincipale(new Arme("Clou", 2,10,5,2));
         
         combat = new Combat(jeu, player, ennemi);
         combat.doCombat();
@@ -154,7 +159,7 @@ public class RpgCommercial {
         jeu.draw();
 
         ennemi = new Personnage("Planche", 2, 15, 0, 10, 12, 12, 12);
-        ennemi.equipeArme(new Arme("Clou", 2,10,5,2));
+        ennemi.getInventaire().setArmePrincipale(new Arme("Clou", 2,10,5,2));
 
         combat = new Combat(jeu,player, ennemi);
         combat.doCombat();

@@ -59,7 +59,6 @@ public class Personnage {
         j.addChaine("Force : " + carac.get(Caracteristique.FORCE));
         j.addChaine("Dexterite : " + carac.get(Caracteristique.DEXTERITE));
         j.addChaine("Intelligence : " + carac.get(Caracteristique.INTELLIGENCE));
-        this.inventaire.drawInventaire(j);
     }
     
     public void drawPersonnage(Vue j, int ligne, int decalage){
@@ -79,7 +78,6 @@ public class Personnage {
         ligne++;
         j.addChaine("Intelligence : " + carac.get(Caracteristique.INTELLIGENCE), ligne, decalage);
         ligne++;
-        this.inventaire.drawInventaire(j,ligne, decalage);
     }
     
     public void levelUp(Vue j){
@@ -155,7 +153,7 @@ public class Personnage {
         return carac.get(Caracteristique.INTELLIGENCE);
     }
     
-    public int getDmin(Capacite c){
+    public int getDmin(Arme c){
         int car = 0;
         if (c.getCarac() == 1){ // Vitalite
             car = carac.get(Caracteristique.VITALITE);
@@ -173,7 +171,7 @@ public class Personnage {
         return c.getDmin() + c.getRatio() * car / 100;
     }
     
-    public int getDmax(Capacite c){
+    public int getDmax(Arme c){
         int car = 0;
         if (c.getCarac() == 1){ // Vitalite
             car = carac.get(Caracteristique.VITALITE);
@@ -220,4 +218,7 @@ public class Personnage {
         return argent;
     }
     
+    public Inventaire getInventaire(){
+        return inventaire;
+    }
 }

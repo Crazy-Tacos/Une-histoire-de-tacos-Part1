@@ -6,6 +6,8 @@ public class Arme extends Item {
     private int ratio;
     private int carac;
     
+    // Carac : A = VITA, 2 = FORCE, 3 = DEXT, 4 = VITA
+    // Ratio : Pourcentage de la caractéristique
     public Arme(String nom, int dmin, int dmax, int ratio, int carac){
         super(nom);
         this.dmin = dmin;

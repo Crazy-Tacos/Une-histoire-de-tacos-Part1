@@ -1,6 +1,5 @@
 package rpgcommercial;
 
-import java.util.Scanner;
 
 public class Combat {
     private Personnage joueur;
@@ -33,7 +32,6 @@ public class Combat {
         drawCombat();
         boolean tourJ;
         int action;
-        Scanner in = new Scanner(System.in);
         j.addChaine("Le plus intelligent et le plus agile commence : ");
         if ((joueur.getDext() + joueur.getIntell()) >= (ennemi.getDext() + ennemi.getIntell())){
             tourJ = true;
@@ -49,15 +47,10 @@ public class Combat {
             int degats;
             if (tourJ){
                 // Le joueur choisi son action
-                do{
-                    action = in.nextInt();
-                    //degats = joueur.attaquer(j,action);
-                } while (degats == -1);
-                ennemi.infligerDegats(j,degats);
             }
             else{
                 // L'ennemi auto attaque (super IA !!!)
-                joueur.infligerDegats(j,ennemi.attaquer(j,1));
+
             }
             
             if(!tourJ) {
@@ -73,6 +66,7 @@ public class Combat {
         
         if (joueur.getVie()>0){
             j.addChaine("Vous avez battu " + ennemi.getNom() + " !");
+            /*
             joueur.gagnerXP(j,ennemi.getXP());
             joueur.gagnerArgent(j,ennemi.getArgent());
             if(ennemi.getArme() != null){
@@ -95,12 +89,13 @@ public class Combat {
                 if (action == 1){
                     joueur.equipeArme(ennemi.getArme());
                 }
-            }
+            }*/
         }
         else {
             j.addChaine("Vous avez perdu le combat face à " + ennemi.getNom());
             joueur.regen();
         }
+                   
         
     }
     

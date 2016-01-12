@@ -1,37 +1,6 @@
 package rpgcommercial;
 
 
-/*
-public int attaquer(Vue j, int choix){
-        int max, min;
-        Random rand = new Random();
-        if (choix == 1){
-            if(inventaire.getArmePrincipale() == null){
-                choix++;
-            }
-            else {
-                max = getDmaxArme(inventaire.getArmePrincipale());
-                min = getDminArme(inventaire.getArmePrincipale());
-                j.addChaine(nom + " utilise l'arme " + inventaire.getArmePrincipale().getNom());
-                return rand.nextInt(max - min + 1) + min;
-            }
-        }
-        if (choix == 2){
-            if(inventaire.getArmeSecondaire() == null){
-                choix++;
-            }
-            else {
-                max = getDmaxArme(inventaire.getArmeSecondaire());
-                min = getDminArme(inventaire.getArmeSecondaire());
-                j.addChaine(nom + " utilise l'arme " + inventaire.getArmeSecondaire().getNom());
-                return rand.nextInt(max - min + 1) + min;
-            }
-        }
-        
-        return 0;
-    }
-*/
-
 public class Combat {
     private Personnage joueur;
     private Personnage ennemi;

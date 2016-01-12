@@ -1,6 +1,8 @@
 package rpgcommercial;
 
 import java.*;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
 import static java.lang.Math.pow;
 import java.util.EnumMap;
 import java.util.Random;
@@ -49,6 +51,26 @@ public class Personnage {
         this.inventaire = new Inventaire();
     }
     
+    public Personnage(String nom, String ligne){
+        this.nom = nom;
+        
+        String lecture[];        
+        lecture=ligne.split(" ");
+        
+        this.classe = "";
+        this.niveau = Integer.parseInt(lecture[0]);
+        this.experience = Integer.parseInt(lecture[1]);
+        this.argent = Integer.parseInt(lecture[2]);
+        
+        this.carac = new EnumMap<>(Caracteristique.class);
+        
+        carac.put(Caracteristique.VITALITE, Integer.parseInt(lecture[3]));
+        this.vie = Integer.parseInt(lecture[4]);
+        carac.put(Caracteristique.FORCE, Integer.parseInt(lecture[5]));
+        carac.put(Caracteristique.DEXTERITE, Integer.parseInt(lecture[6]));
+        carac.put(Caracteristique.INTELLIGENCE, Integer.parseInt(lecture[7]));
+        this.inventaire = new Inventaire();
+    }
     
     public void drawPersonnage(Vue j){
         j.addChaine(nom);
@@ -189,7 +211,32 @@ public class Personnage {
         return c.getDmax() + c.getRatio() * car / 100;
     }
     
-    public int attaquer(Vue j){
+    public int attaquer(Vue j, int choix){
+        int max, min;
+        Random rand = new Random();
+        if (choix == 1){
+            if(inventaire.getArmePrincipale() == null){
+                choix++;
+            }
+            else {
+                max = getDmaxArme(inventaire.getArmePrincipale());
+                min = getDminArme(inventaire.getArmePrincipale());
+                j.addChaine(nom + " utilise l'arme " + inventaire.getArmePrincipale().getNom());
+                return rand.nextInt(max - min + 1) + min;
+            }
+        }
+        if (choix == 2){
+            if(inventaire.getArmeSecondaire() == null){
+                choix++;
+            }
+            else {
+                max = getDmaxArme(inventaire.getArmeSecondaire());
+                min = getDminArme(inventaire.getArmeSecondaire());
+                j.addChaine(nom + " utilise l'arme " + inventaire.getArmeSecondaire().getNom());
+                return rand.nextInt(max - min + 1) + min;
+            }
+        }
+        
         return 0;
     }
     
@@ -240,5 +287,19 @@ public class Personnage {
             j.addChaine(str);
         }
         return nb;
+    }
+      
+    public void sauvegarder(PrintWriter fichierSortie){
+        
+        fichierSortie.println ("classe=" + classe);
+        String personnage = "Personnage=" + nom + niveau + experience + argent;
+        personnage += carac.get(Caracteristique.VITALITE); 
+        personnage += carac.get(Caracteristique.FORCE);
+        personnage += carac.get(Caracteristique.DEXTERITE); 
+        personnage += carac.get(Caracteristique.INTELLIGENCE);
+        
+        fichierSortie.println (personnage);      
+        
+        inventaire.sauvegarder(fichierSortie);
     }
 }

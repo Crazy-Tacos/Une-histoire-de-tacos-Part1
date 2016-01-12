@@ -1,5 +1,7 @@
 package rpgcommercial;
 
+import java.io.PrintWriter;
+
 
 public class Consommable extends Item {
     
@@ -17,5 +19,8 @@ public class Consommable extends Item {
         this.dmax = Integer.parseInt(lecture[1]);
         this.ratio = Integer.parseInt(lecture[3]);
         this.carac = Integer.parseInt(lecture[4]); */       
+    }
+    public void sauvegarder(PrintWriter fichierSortie){
+        fichierSortie.println(this.getNom()+ "=");
     }
 }

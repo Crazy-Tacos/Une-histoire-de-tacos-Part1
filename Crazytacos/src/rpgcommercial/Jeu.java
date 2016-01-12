@@ -20,7 +20,42 @@ public class Jeu {
         this.joueur=new Joueur();
     }
     
-    public Personnage chargerEnnemi(Vue vue, int id){
+    public Personnage chargerPersonnage(BufferedReader br){
+        String lecture[];
+        try{           
+            String ligne=br.readLine();
+            lecture=ligne.split("=");                    
+            Personnage perso= new Personnage(lecture[0],lecture[1]);
+
+            ligne=br.readLine();
+            lecture=ligne.split("=");
+            if(lecture[1] != null)
+                perso.getInventaire().setArmePrincipale(new Arme(lecture[0],lecture[1]));
+
+            ligne=br.readLine();
+            lecture=ligne.split("=");
+            if(lecture[1] != null)                    
+                perso.getInventaire().setArmeSecondaire(new Arme(lecture[0],lecture[1]));
+
+            ligne=br.readLine();
+            lecture=ligne.split("=");
+            if(lecture[1] != null)                    
+                perso.getInventaire().setArmure(new Armure(lecture[0],lecture[1]));
+
+            ligne=br.readLine();
+            lecture=ligne.split("=");
+            if(lecture[1] != null)                    
+                perso.getInventaire().setConsommable(new Consommable(lecture[0],lecture[1]));                   
+
+            return perso;
+        }
+        catch (Exception e){
+                System.out.println(e.toString());
+        }
+        return null;
+    }
+    
+    public Personnage chargerPersonnage(int id){
         String fichier ="chapitre.txt" + avancement;
         
         try{
@@ -35,43 +70,17 @@ public class Jeu {
                     for(int i=0; i<=6; i++)
                         br.readLine();
                 }
-                Personnage ennemi;
+                Personnage perso;
                         
                 if(ligne != "fin"){                    
-                    String lecture[];
-                    
-                    ligne=br.readLine();
-                    lecture=ligne.split("=");                    
-                    ennemi= new Personnage(lecture[0],lecture[1]);
-                    
-                    ligne=br.readLine();
-                    lecture=ligne.split("=");
-                    if(lecture[1] != null)
-                        ennemi.getInventaire().setArmePrincipale(new Arme(lecture[0],lecture[1]));
-                    
-                    ligne=br.readLine();
-                    lecture=ligne.split("=");
-                    if(lecture[1] != null)                    
-                        ennemi.getInventaire().setArmeSecondaire(new Arme(lecture[0],lecture[1]));
-                    
-                    ligne=br.readLine();
-                    lecture=ligne.split("=");
-                    if(lecture[1] != null)                    
-                        ennemi.getInventaire().setArmure(new Armure(lecture[0],lecture[1]));
-                    
-                    ligne=br.readLine();
-                    lecture=ligne.split("=");
-                    if(lecture[1] != null)                    
-                        ennemi.getInventaire().setConsommable(new Consommable(lecture[0],lecture[1]));
-                    
-                    
+                    perso=chargerPersonnage(br);
                 }
                 else
                 {
-                    ennemi=null;
+                    perso=null;
                 }
                 br.close();
-                return ennemi;
+                return perso;
         }		
         catch (Exception e){
                 System.out.println(e.toString());
@@ -112,7 +121,8 @@ public class Jeu {
             
             this.avancement=Integer.parseInt(lecture[1]);
             
-            this.personnage.charger();
+            //Chargement Personnage
+            chargerPersonnage(br);
         }		
         catch (Exception e){
                 System.out.println(e.toString());
@@ -123,14 +133,16 @@ public class Jeu {
          vue.addChaine("-- CRAZY TACOS --");
                 vue.addChaine("Chapitre 1 : tapez 1");
 	        vue.addChaine("Chapitre 2 : tapez 2");
-	        vue.addChaine("Quitter : tapez 3");
+                vue.addChaine("Sauvegarder la partie : tapez 1");
+	        vue.addChaine("Quitter : tapez 4");
 	        vue.draw();
                 
 	        switch(joueur.lireChoix(3))
 	        {
 	                case 1 : lancerChapitre(vue,1); break;
 	                case 2 : lancerChapitre(vue,2);  break;
-	                case 3 : break;
+                        case 3 : sauvegarder(vue); break;
+	                case 4 : break;
 	                default : System.out.println("\nFatal Error"); return true ;
 	        }
         
@@ -139,18 +151,21 @@ public class Jeu {
     
     public boolean lancerChapitre(Vue vue, int avancement){
         //blablbal ici
-        int id;
+        
+        int id=0;
         Personnage ennemi=null;
-        while((ennemi= chargerEnnemi(Vue vue, id)) != null)
+        
+        while((ennemi= chargerPersonnage(id)) != null)
         {
             vue.addChaine("un mechant est là!");
             vue.draw();
-            joueur.Pause();
+            joueur.pause();
                                    
             Combat combat =new Combat(joueur,vue, personnage, ennemi);
             combat.doCombat();
         }
         
+        this.avancement++;
         return true;
     }    
     

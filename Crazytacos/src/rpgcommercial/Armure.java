@@ -1,5 +1,6 @@
 package rpgcommercial;//Test
 
+import java.io.PrintWriter;
 import java.util.EnumMap;
 
 public class Armure extends Item {
@@ -24,5 +25,8 @@ public class Armure extends Item {
         carac.put(Caracteristique.FORCE, Integer.parseInt(lecture[1]));
         carac.put(Caracteristique.DEXTERITE, Integer.parseInt(lecture[2]));
         carac.put(Caracteristique.INTELLIGENCE, Integer.parseInt(lecture[3]));        
+    }
+    public void sauvegarder(PrintWriter fichierSortie){
+        fichierSortie.println(this.getNom()+ "="+ carac.get(Caracteristique.VITALITE) + carac.get(Caracteristique.FORCE) + carac.get(Caracteristique.DEXTERITE) + carac.get(Caracteristique.INTELLIGENCE));        
     }
 }

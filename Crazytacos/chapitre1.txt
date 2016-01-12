@@ -1,18 +1,18 @@
-id=1
+id=0
 mob=planche=2 15 0 10 12 12 12
 armePrincipale=Clou= 2 10 5 2
 armeSecondaire= 
 armure= 
 consommable= 
 
-id=2
+id=1
 mob=planche 2 15 0 10 12 12 12
 armePrincipale=Clou 2 10 5 2
 armeSecondaire=
 armure=
 consommable=
 
-id=3
+id=2
 mob=planche 2 15 0 10 12 12 12
 armePrincipale=Clou 2 10 5 2
 armeSecondaire=

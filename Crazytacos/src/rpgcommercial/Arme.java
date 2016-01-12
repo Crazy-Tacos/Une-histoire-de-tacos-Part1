@@ -1,5 +1,7 @@
 package rpgcommercial;
 
+import java.io.PrintWriter;
+
 public class Arme extends Item {
     private int dmin;
     private int dmax;
@@ -57,5 +59,9 @@ public class Arme extends Item {
             car = "% de l'INTELLIGENCE";
         }
         System.out.println(" + "+ ratio + car);
+    }
+    
+    public void sauvegarder(PrintWriter fichierSortie){
+        fichierSortie.print(this.getNom()+ "=" + dmin + dmax + ratio + carac);
     }
 }

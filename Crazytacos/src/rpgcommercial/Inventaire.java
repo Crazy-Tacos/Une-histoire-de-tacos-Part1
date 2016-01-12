@@ -1,5 +1,7 @@
 package rpgcommercial;
 
+import java.io.PrintWriter;
+
 public class Inventaire {
     private Arme armePrincipale;
     private Arme armeSecondaire;
@@ -45,6 +47,18 @@ public class Inventaire {
         return consommable;
     }
     
-    
+    public void sauvegarder(PrintWriter fichierSortie){
+        fichierSortie.println("armePrincipale=");
+        armePrincipale.sauvegarder(fichierSortie);
+        
+        fichierSortie.println("armeSecondaire=");
+        armeSecondaire.sauvegarder(fichierSortie);
+        
+        fichierSortie.println("armure=");
+        armure.sauvegarder(fichierSortie);
+        
+        fichierSortie.println("consommable=");
+        consommable.sauvegarder(fichierSortie);
+    }
     
 }

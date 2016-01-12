@@ -14,5 +14,15 @@ public class Armure extends Item {
         carac.put(Caracteristique.INTELLIGENCE, intell);
     }
     
-    
+    public Armure(String nom, String ligne){
+        super(nom);
+        
+        String lecture[];        
+        lecture=ligne.split(" ");
+        
+        carac.put(Caracteristique.VITALITE, Integer.parseInt(lecture[0]));
+        carac.put(Caracteristique.FORCE, Integer.parseInt(lecture[1]));
+        carac.put(Caracteristique.DEXTERITE, Integer.parseInt(lecture[2]));
+        carac.put(Caracteristique.INTELLIGENCE, Integer.parseInt(lecture[3]));        
+    }
 }

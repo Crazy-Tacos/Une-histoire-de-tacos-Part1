@@ -16,6 +16,18 @@ public class Arme extends Item {
         this.carac = carac;
     }
     
+    public Arme(String nom, String ligne){
+        super(nom);
+        
+        String lecture[];        
+        lecture=ligne.split(" ");
+        
+        this.dmin = Integer.parseInt(lecture[0]);
+        this.dmax = Integer.parseInt(lecture[1]);
+        this.ratio = Integer.parseInt(lecture[3]);
+        this.carac = Integer.parseInt(lecture[4]);        
+    }
+    
     public int getDmin() {
         return dmin;
     }

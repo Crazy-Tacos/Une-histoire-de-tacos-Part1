@@ -20,7 +20,7 @@ public class Jeu {
         this.joueur=new Joueur();
     }
     
-    public void chargerEnnemi(Vue vue, int id){
+    public Personnage chargerEnnemi(Vue vue, int id){
         String fichier ="chapitre.txt" + avancement;
         
         try{
@@ -35,11 +35,48 @@ public class Jeu {
                     for(int i=0; i<=6; i++)
                         br.readLine();
                 }
+                Personnage ennemi;
+                        
+                if(ligne != "fin"){                    
+                    String lecture[];
+                    
+                    ligne=br.readLine();
+                    lecture=ligne.split("=");                    
+                    ennemi= new Personnage(lecture[0],lecture[1]);
+                    
+                    ligne=br.readLine();
+                    lecture=ligne.split("=");
+                    if(lecture[1] != null)
+                        ennemi.getInventaire().setArmePrincipale(new Arme(lecture[0],lecture[1]));
+                    
+                    ligne=br.readLine();
+                    lecture=ligne.split("=");
+                    if(lecture[1] != null)                    
+                        ennemi.getInventaire().setArmeSecondaire(new Arme(lecture[0],lecture[1]));
+                    
+                    ligne=br.readLine();
+                    lecture=ligne.split("=");
+                    if(lecture[1] != null)                    
+                        ennemi.getInventaire().setArmure(new Armure(lecture[0],lecture[1]));
+                    
+                    ligne=br.readLine();
+                    lecture=ligne.split("=");
+                    if(lecture[1] != null)                    
+                        ennemi.getInventaire().setConsommable(new Consommable(lecture[0],lecture[1]));
+                    
+                    
+                }
+                else
+                {
+                    ennemi=null;
+                }
                 br.close();
+                return ennemi;
         }		
         catch (Exception e){
                 System.out.println(e.toString());
         }
+        return null;
     }
     
     public void sauvegarder(Vue vue){
@@ -91,17 +128,30 @@ public class Jeu {
                 
 	        switch(joueur.lireChoix(3))
 	        {
-	                case 1 : return lancerChapitre(vue,1); break;
-	                case 2 : return lancerChapitre(vue,2);  break;
-	                case 3 : return true; break;
-	                default : System.out.println("\nFatal Error"); return ;
+	                case 1 : lancerChapitre(vue,1); break;
+	                case 2 : lancerChapitre(vue,2);  break;
+	                case 3 : break;
+	                default : System.out.println("\nFatal Error"); return true ;
 	        }
         
         return true;
     }
     
     public boolean lancerChapitre(Vue vue, int avancement){
+        //blablbal ici
+        int id;
+        Personnage ennemi=null;
+        while((ennemi= chargerEnnemi(Vue vue, id)) != null)
+        {
+            vue.addChaine("un mechant est là!");
+            vue.draw();
+            joueur.Pause();
+                                   
+            Combat combat =new Combat(joueur,vue, personnage, ennemi);
+            combat.doCombat();
+        }
         
+        return true;
     }    
     
 }

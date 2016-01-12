@@ -81,16 +81,13 @@ public class Personnage {
         j.addChaine("Force : " + carac.get(Caracteristique.FORCE));
         j.addChaine("Dexterite : " + carac.get(Caracteristique.DEXTERITE));
         j.addChaine("Intelligence : " + carac.get(Caracteristique.INTELLIGENCE));
+        inventaire.drawInventaire(j);
     }
     
-    public void drawPersonnage(Vue j, int ligne, int decalage){
+    public void drawPersonnageCombat(Vue j, int ligne, int decalage){
         j.addChaine(nom, ligne, decalage);
         ligne++;
         j.addChaine("Niveau : " + niveau, ligne, decalage);
-        ligne++;
-        j.addChaine("XP : " + experience, ligne, decalage);
-        ligne++;
-        j.addChaine("Argent : " + argent, ligne, decalage);
         ligne++;
         j.addChaine("Vie : " + vie + "/" + carac.get(Caracteristique.VITALITE), ligne, decalage);
         ligne++;
@@ -100,6 +97,15 @@ public class Personnage {
         ligne++;
         j.addChaine("Intelligence : " + carac.get(Caracteristique.INTELLIGENCE), ligne, decalage);
         ligne++;
+    }
+    
+    public void drawPersonnageCombat(Vue j){
+        j.addChaine(nom);
+        j.addChaine("Niveau : " + niveau);
+        j.addChaine("Vie : " + vie + "/" + carac.get(Caracteristique.VITALITE));
+        j.addChaine("Force : " + carac.get(Caracteristique.FORCE));
+        j.addChaine("Dexterite : " + carac.get(Caracteristique.DEXTERITE));
+        j.addChaine("Intelligence : " + carac.get(Caracteristique.INTELLIGENCE));
     }
     
     public void levelUp(Vue j){

@@ -42,9 +42,9 @@ public class Arme extends Item {
     public int getCarac() {
         return carac;
     }
-    public void drawArme(){
-        System.out.println(getNom());
-        System.out.print("Dégats : "+ dmin + "-" + dmax);
+    public void drawArme(Vue v){
+        v.addChaine(getNom());
+        v.addChaine("  Dégats : "+ dmin + "-" + dmax);
         String car = "";
         if (carac == 1){ // Vitalite
             car = "% de la VITALITE";
@@ -58,7 +58,7 @@ public class Arme extends Item {
         else if (carac == 4){ // Intelligence
             car = "% de l'INTELLIGENCE";
         }
-        System.out.println(" + "+ ratio + car);
+        v.concatLastLigne(" + "+ ratio + car);
     }
     
     public void sauvegarder(PrintWriter fichierSortie){

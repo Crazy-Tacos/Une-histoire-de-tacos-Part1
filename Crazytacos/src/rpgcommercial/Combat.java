@@ -26,8 +26,8 @@ public class Combat {
         j.addChaine("--- COMBAT ---");
         j.addChaine(joueur.getNom() + " VS " + ennemi.getNom());
         int i = j.getNextLigne();
-        joueur.drawPersonnage(j);
-        ennemi.drawPersonnage(j,i, 30);
+        joueur.drawPersonnageCombat(j);
+        ennemi.drawPersonnageCombat(j,i, 30);
     }
     
     public void doCombat(){
@@ -35,39 +35,33 @@ public class Combat {
         int degats;
         int nbchoix;
         drawCombat();
+        j.addChaine("");
         j.addChaine("Le plus intelligent et le plus agile commence : ");
         if ((joueur.getDext() + joueur.getIntell()) >= (ennemi.getDext() + ennemi.getIntell())){
             tourJ = true;
-            j.concatLasLigne(joueur.getNom());
+            j.concatLastLigne(joueur.getNom());
         }
         else {
             tourJ = false;
-            j.concatLasLigne(ennemi.getNom());
+            j.concatLastLigne(ennemi.getNom());
         }
+        j.drawPause(control);
         
         while(joueur.getVie() != 0 && ennemi.getVie() !=0){
 
             if (tourJ){
                 //le joueur fait une action
+                drawCombat();
+                j.addChaine("");
                 nbchoix = joueur.drawActions(j);
-                j.draw();
-                degats =joueur.attaquer(j,control.lireChoix(nbchoix));
+                degats =joueur.attaquer(j,control.lireChoix(j,nbchoix));
                 ennemi.infligerDegats(j, degats);
             }
             else{
                 // L'ennemi auto attaque (super IA !!!)
                 degats = ennemi.attaquer(j,1);
                 joueur.infligerDegats(j, degats);
-                j.draw();
-                control.pause();
-            }
-            
-            if(!tourJ) {
-                drawCombat();
-            }
-            else
-            {
-                
+                control.pause(j);
             }
             tourJ = !tourJ;
         }
@@ -87,6 +81,7 @@ public class Combat {
     public void gagnerRecompenses(){
         joueur.gagnerXP(j,ennemi.getXP());
         joueur.gagnerArgent(j,ennemi.getArgent());
+        j.drawPause(control);
         if(ennemi.getInventaire().getArmePrincipale().getNom() != "Mains nues"){
             gagnerArmePrincipale(); 
         }
@@ -100,18 +95,18 @@ public class Combat {
         int choix;
         j.addChaine("Vous possèdez : ");
         if(joueur.getInventaire().getArmePrincipale() != null){
-            joueur.getInventaire().getArmePrincipale().drawArme();
+            joueur.getInventaire().getArmePrincipale().drawArme(j);
         }
         else {
             j.addChaine("Aucune arme principale");
         }
         j.addChaine("");
         j.addChaine("Remplacer par l'arme de " + ennemi.getNom() + " :");
-        ennemi.getInventaire().getArmePrincipale().drawArme();
+        ennemi.getInventaire().getArmePrincipale().drawArme(j);
+        j.addChaine("");
         j.addChaine(" 1.Oui");
         j.addChaine(" 2.Non");
-        j.draw();
-        choix = control.lireChoix(2);
+        choix = control.lireChoix(j,2);
         if (choix == 1){
             joueur.getInventaire().setArmePrincipale((ennemi.getInventaire().getArmePrincipale()));
         }
@@ -121,18 +116,18 @@ public class Combat {
         int choix;
         j.addChaine("Vous possèdez : ");
         if(joueur.getInventaire().getArmeSecondaire() != null){
-            joueur.getInventaire().getArmeSecondaire().drawArme();
+            joueur.getInventaire().getArmeSecondaire().drawArme(j);
         }
         else {
             j.addChaine("Aucune arme secondaire");
         }
         j.addChaine("");
         j.addChaine("Remplacer par l'arme de " + ennemi.getNom() + " :");
-        ennemi.getInventaire().getArmeSecondaire().drawArme();
+        ennemi.getInventaire().getArmeSecondaire().drawArme(j);
+        j.addChaine("");
         j.addChaine(" 1.Oui");
         j.addChaine(" 2.Non");
-        j.draw();
-        choix = control.lireChoix(2);
+        choix = control.lireChoix(j,2);
         if (choix == 1){
             joueur.getInventaire().setArmeSecondaire((ennemi.getInventaire().getArmeSecondaire()));
         }

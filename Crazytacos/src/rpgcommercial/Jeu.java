@@ -135,9 +135,8 @@ public class Jeu {
 	        vue.addChaine("Chapitre 2 : tapez 2");
                 vue.addChaine("Sauvegarder la partie : tapez 1");
 	        vue.addChaine("Quitter : tapez 4");
-	        vue.draw();
                 
-	        switch(joueur.lireChoix(3))
+	        switch(joueur.lireChoix(vue,3))
 	        {
 	                case 1 : lancerChapitre(vue,1); break;
 	                case 2 : lancerChapitre(vue,2);  break;
@@ -158,8 +157,7 @@ public class Jeu {
         while((ennemi= chargerPersonnage(id)) != null)
         {
             vue.addChaine("un mechant est là!");
-            vue.draw();
-            joueur.pause();
+            joueur.pause(vue);
                                    
             Combat combat =new Combat(joueur,vue, personnage, ennemi);
             combat.doCombat();

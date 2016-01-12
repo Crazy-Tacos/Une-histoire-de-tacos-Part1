@@ -11,6 +11,7 @@ public class RpgCommercial {
         Joueur control = new Joueur();
         Personnage player = new Boulanger("Fred");
         Vue jeu = new Vue();
+        jeu.drawCalibrate(control);
         
         Personnage ennemi = new Personnage("Rat", 1, 11, 50, 20, 10, 10, 10);
 
@@ -18,7 +19,7 @@ public class RpgCommercial {
         combat.doCombat();
         
         player.drawPersonnage(jeu);
-        jeu.draw();
+        control.pause(jeu);
         
         ennemi = new Personnage("Planche", 2, 15, 0, 10, 12, 12, 12);
         ennemi.getInventaire().setArmePrincipale(new Arme("Clou", 2,10,5,2));
@@ -27,7 +28,7 @@ public class RpgCommercial {
         combat.doCombat();
         
         player.drawPersonnage(jeu);
-        jeu.draw();
+        jeu.drawPause(control);
         
         /*
         Scanner scan=new Scanner(System.in);

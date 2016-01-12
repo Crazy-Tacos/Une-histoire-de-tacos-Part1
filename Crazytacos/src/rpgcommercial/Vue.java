@@ -27,6 +27,18 @@ public class Vue {
         initEcran();
     }
     
+    public void drawCalibrate(Joueur control){
+        control.tailleFenetre(this);
+    }
+    
+    public void drawPause(Joueur control){
+        control.pause(this);
+    }
+    
+    public void drawChoix(Joueur control, int max){
+        control.lireChoix(this,max);
+    }
+    
     public void addChaine(String str, int ligne, int decalage){
         if(ligne <20){
             while(ecran[ligne].length()<decalage){
@@ -43,11 +55,22 @@ public class Vue {
         }
     }
     
-    public void concatLasLigne(String str){
+    public void concatLastLigne(String str){
         int i = getNextLigne() - 1;
         if(i <20 && i >=0){
             ecran[i] += str;
         }
+    }
+    
+    public void addChaineFin(String str){
+        int i = 19;
+        while(ecran[i] != null && i>0){
+            i--;
+        }
+        for (int j= i; j<19; j++){
+            ecran[j] = ecran[j+1];
+        }
+        ecran[19]=str;
     }
     
     public int getNextLigne(){

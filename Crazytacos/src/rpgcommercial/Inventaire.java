@@ -47,6 +47,26 @@ public class Inventaire {
         return consommable;
     }
     
+    public void drawInventaire(Vue v){
+        if(armePrincipale != null){
+            v.addChaine("Arme principale :");
+            armePrincipale.drawArme(v);
+        }
+        
+        if(armeSecondaire != null){
+            v.addChaine("Arme secondaire :");
+            armeSecondaire.drawArme(v);
+        }
+        if(armure != null){
+            v.addChaine("Armure :");
+            
+        }
+        if(consommable != null){
+            v.addChaine("Consommable :");
+            
+        }
+    }
+    
     public void sauvegarder(PrintWriter fichierSortie){
         fichierSortie.println("armePrincipale=");
         armePrincipale.sauvegarder(fichierSortie);

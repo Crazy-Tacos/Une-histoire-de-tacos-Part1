@@ -35,8 +35,8 @@ public class Vue {
         control.pause(this);
     }
     
-    public void drawChoix(Joueur control, int max){
-        control.lireChoix(this,max);
+    public int drawChoix(Joueur control, int max){
+        return control.lireChoix(this,max);
     }
     
     public void addChaine(String str, int ligne, int decalage){

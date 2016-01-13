@@ -3,15 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/04%20-%20Documents/01%20-%20Polytech/Semestre_05/Java/Une-histoire-de-tacos-Part1/Crazytacos/src/rpgcommercial/Jeu.java</file>
-            <file>file:/D:/04%20-%20Documents/01%20-%20Polytech/Semestre_05/Java/Une-histoire-de-tacos-Part1/Crazytacos/src/rpgcommercial/Personnage.java</file>
-            <file>file:/D:/04%20-%20Documents/01%20-%20Polytech/Semestre_05/Java/Une-histoire-de-tacos-Part1/Crazytacos/src/rpgcommercial/Item.java</file>
-            <file>file:/D:/04%20-%20Documents/01%20-%20Polytech/Semestre_05/Java/Une-histoire-de-tacos-Part1/Crazytacos/src/rpgcommercial/RpgCommercial.java</file>
-            <file>file:/D:/04%20-%20Documents/01%20-%20Polytech/Semestre_05/Java/Une-histoire-de-tacos-Part1/Crazytacos/src/rpgcommercial/Consommable.java</file>
-            <file>file:/D:/04%20-%20Documents/01%20-%20Polytech/Semestre_05/Java/Une-histoire-de-tacos-Part1/Crazytacos/src/rpgcommercial/Combat.java</file>
-            <file>file:/D:/04%20-%20Documents/01%20-%20Polytech/Semestre_05/Java/Une-histoire-de-tacos-Part1/Crazytacos/src/rpgcommercial/Arme.java</file>
-            <file>file:/D:/04%20-%20Documents/01%20-%20Polytech/Semestre_05/Java/Une-histoire-de-tacos-Part1/Crazytacos/src/rpgcommercial/Armure.java</file>
-            <file>file:/D:/04%20-%20Documents/01%20-%20Polytech/Semestre_05/Java/Une-histoire-de-tacos-Part1/Crazytacos/src/rpgcommercial/Inventaire.java</file>
+            <file>file:/C:/Documents%20and%20Settings/Lilian%20Varrel/Mes%20documents/projets/Une-histoire-de-tacos-Part1/Crazytacos/src/rpgcommercial/Jeu.java</file>
+            <file>file:/C:/Documents%20and%20Settings/Lilian%20Varrel/Mes%20documents/projets/Une-histoire-de-tacos-Part1/Crazytacos/src/rpgcommercial/Vue.java</file>
+            <file>file:/C:/Documents%20and%20Settings/Lilian%20Varrel/Mes%20documents/projets/Une-histoire-de-tacos-Part1/Crazytacos/src/rpgcommercial/Joueur.java</file>
+            <file>file:/C:/Documents%20and%20Settings/Lilian%20Varrel/Mes%20documents/projets/Une-histoire-de-tacos-Part1/Crazytacos/src/rpgcommercial/RpgCommercial.java</file>
+            <file>file:/C:/Documents%20and%20Settings/Lilian%20Varrel/Mes%20documents/projets/Une-histoire-de-tacos-Part1/Crazytacos/src/rpgcommercial/Arme.java</file>
+            <file>file:/C:/Documents%20and%20Settings/Lilian%20Varrel/Mes%20documents/projets/Une-histoire-de-tacos-Part1/Crazytacos/src/rpgcommercial/Inventaire.java</file>
+            <file>file:/C:/Documents%20and%20Settings/Lilian%20Varrel/Mes%20documents/projets/Une-histoire-de-tacos-Part1/Crazytacos/src/rpgcommercial/Combat.java</file>
+            <file>file:/C:/Documents%20and%20Settings/Lilian%20Varrel/Mes%20documents/projets/Une-histoire-de-tacos-Part1/Crazytacos/src/rpgcommercial/Personnage.java</file>
         </group>
     </open-files>
 </project-private>

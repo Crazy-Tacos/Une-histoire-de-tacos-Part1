@@ -58,7 +58,7 @@ public class Personnage {
             lecture=ligne.split("=");
             lecture=lecture[1].split(" ");
             
-            this.nom = lecture[0];
+            this.nom = lecture[0].replace("_", " ");
 
             this.classe = "";
             this.niveau = Integer.parseInt(lecture[1]);
@@ -303,8 +303,9 @@ public class Personnage {
     }
       
     public void sauvegarder(PrintWriter fichierSortie){        
-        fichierSortie.println ("classe=" + classe);
-        String personnage = "Personnage=" + nom + " " + niveau + " "+ experience+ " " + argent+ " ";
+        fichierSortie.println ("classe=" + classe.replace(" ", "_"));
+        
+        String personnage = "Personnage=" + nom.replace(" ", "_") + " " + niveau + " "+ experience+ " " + argent+ " ";
         personnage += carac.get(Caracteristique.VITALITE)+ " "; 
         personnage += carac.get(Caracteristique.FORCE)+ " ";
         personnage += carac.get(Caracteristique.DEXTERITE)+ " "; 

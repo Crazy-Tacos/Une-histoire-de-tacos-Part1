@@ -19,7 +19,7 @@ public class Arme extends Item {
     }
     
     public Arme(String[] lecture){
-        super(lecture[0]);
+        super(lecture[0].replace("_", " "));
         
         this.dmin = Integer.parseInt(lecture[1]);
         this.dmax = Integer.parseInt(lecture[2]);
@@ -60,7 +60,7 @@ public class Arme extends Item {
     
     public void sauvegarder(PrintWriter fichierSortie){
         if (this != null){
-            fichierSortie.println(this.getNom()+ " " + dmin + " "+ dmax+ " " + ratio+ " " + carac);
+            fichierSortie.println(this.getNom().replace(" ", "_") + " " + dmin + " "+ dmax+ " " + ratio+ " " + carac);
         }
         else{
             fichierSortie.println();

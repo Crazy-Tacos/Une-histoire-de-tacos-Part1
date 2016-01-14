@@ -1,5 +1,6 @@
 package rpgcommercial;
 
+import java.io.BufferedReader;
 import java.io.PrintWriter;
 
 public class Inventaire {
@@ -13,6 +14,51 @@ public class Inventaire {
         this.armeSecondaire = null;
         this.armure = null;
         this.consommable = null;
+    }
+    
+    public Inventaire(BufferedReader br){
+        String lecture[];
+        try{
+            String ligne=br.readLine();
+            lecture=ligne.split("=");
+            lecture=lecture[1].split(" ");
+            this.armePrincipale =new Arme(lecture);
+            
+            ligne=br.readLine();
+            lecture=ligne.split("=");
+            if(lecture.length >1){
+                lecture=lecture[1].split(" ");
+                this.armeSecondaire =new Arme(lecture);
+            }
+            else{
+                this.armeSecondaire = null;
+            }
+            
+            ligne=br.readLine();
+            lecture=ligne.split("=");
+            if(lecture.length >1){
+                lecture=lecture[1].split(" ");
+                this.armure =null;
+            }
+            else{
+                this.armure = null;
+            }
+            
+            ligne=br.readLine();
+            lecture=ligne.split("=");
+            if(lecture.length >1){
+                lecture=lecture[1].split(" ");
+                this.consommable = null;
+            }
+            else{
+                this.consommable = null;
+            }
+        }
+        catch (Exception e){
+                System.out.println(e.toString());
+        }
+        
+        
     }
     
     public void setArmePrincipale(Arme a){

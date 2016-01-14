@@ -51,25 +51,32 @@ public class Personnage {
         this.inventaire = new Inventaire();
     }
     
-    public Personnage(String nom, String ligne){
-        this.nom = nom;
-        
-        String lecture[];        
-        lecture=ligne.split(" ");
-        
-        this.classe = "";
-        this.niveau = Integer.parseInt(lecture[0]);
-        this.experience = Integer.parseInt(lecture[1]);
-        this.argent = Integer.parseInt(lecture[2]);
-        
-        this.carac = new EnumMap<>(Caracteristique.class);
-        
-        carac.put(Caracteristique.VITALITE, Integer.parseInt(lecture[3]));
-        this.vie = Integer.parseInt(lecture[4]);
-        carac.put(Caracteristique.FORCE, Integer.parseInt(lecture[5]));
-        carac.put(Caracteristique.DEXTERITE, Integer.parseInt(lecture[6]));
-        carac.put(Caracteristique.INTELLIGENCE, Integer.parseInt(lecture[7]));
-        this.inventaire = new Inventaire();
+    public Personnage(BufferedReader br){
+        String lecture[];
+        try{
+            String ligne=br.readLine();
+            lecture=ligne.split("=");
+            lecture=lecture[1].split(" ");
+            
+            this.nom = lecture[0];
+
+            this.classe = "";
+            this.niveau = Integer.parseInt(lecture[1]);
+            this.experience = Integer.parseInt(lecture[2]);
+            this.argent = Integer.parseInt(lecture[3]);
+
+            this.carac = new EnumMap<>(Caracteristique.class);
+
+            carac.put(Caracteristique.VITALITE, Integer.parseInt(lecture[4]));
+            this.vie = Integer.parseInt(lecture[4]);
+            carac.put(Caracteristique.FORCE, Integer.parseInt(lecture[5]));
+            carac.put(Caracteristique.DEXTERITE, Integer.parseInt(lecture[6]));
+            carac.put(Caracteristique.INTELLIGENCE, Integer.parseInt(lecture[7]));
+            this.inventaire = new Inventaire(br);
+        }
+        catch (Exception e){
+                System.out.println(e.toString());
+        }
     }
     
     public void drawPersonnage(Vue j){

@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -25,29 +26,26 @@ public class Jeu {
         String lecture[];
         try{           
             String ligne=br.readLine();
-            lecture=ligne.split("=");                    
-            Personnage perso= new Personnage(lecture[0],lecture[1]);
-
-            ligne=br.readLine();
             lecture=ligne.split("=");
-            if(lecture[1] != null)
-                perso.getInventaire().setArmePrincipale(new Arme(lecture[0],lecture[1]));
-
-            ligne=br.readLine();
-            lecture=ligne.split("=");
-            if(lecture[1] != null)                    
-                perso.getInventaire().setArmeSecondaire(new Arme(lecture[0],lecture[1]));
-
-            ligne=br.readLine();
-            lecture=ligne.split("=");
-            if(lecture[1] != null)                    
-                perso.getInventaire().setArmure(new Armure(lecture[0],lecture[1]));
-
-            ligne=br.readLine();
-            lecture=ligne.split("=");
-            if(lecture[1] != null)                    
-                perso.getInventaire().setConsommable(new Consommable(lecture[0],lecture[1]));                   
-
+            
+            Personnage perso = null;
+            
+            if (null != lecture[1])switch (lecture[1]) {
+                case "Boulanger":
+                    perso= new Boulanger(br);
+                    break;
+                case "Cuisinier":
+                    perso= new Cuisinier(br);
+                    break;
+                case "Pharmacien":
+                    perso= new Pharmacien(br);
+                    break;
+                case "SAV":
+                    perso = new Sav(br);
+                    break;
+                default:
+                    perso = null;
+            }
             return perso;
         }
         catch (Exception e){
@@ -109,13 +107,13 @@ public class Jeu {
     }
     
     public void charger(Vue vue){
-        String fichier="sauvegarde.txt";
+        String fichier="Sauvegarder.txt";
 
         try{
             InputStream ips=new FileInputStream(fichier); 
             InputStreamReader ipsr=new InputStreamReader(ips);
             BufferedReader br=new BufferedReader(ipsr);
-
+            
             String ligne=br.readLine();
             String lecture[];
             lecture=ligne.split("=");
@@ -123,11 +121,13 @@ public class Jeu {
             this.avancement=Integer.parseInt(lecture[1]);
             
             //Chargement Personnage
-            chargerPersonnage(br);
+            this.personnage = chargerPersonnage(br);
         }		
-        catch (Exception e){
+        catch (IOException | NumberFormatException e){
                 System.out.println(e.toString());
         }
+        personnage.drawPersonnage(vue);
+        vue.draw();
     }
     
     public boolean lancerAventure(Vue vue){

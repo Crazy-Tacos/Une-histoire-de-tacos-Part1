@@ -18,14 +18,11 @@ public class Arme extends Item {
         this.carac = carac;
     }
     
-    public Arme(String nom, String ligne){
-        super(nom);
+    public Arme(String[] lecture){
+        super(lecture[0]);
         
-        String lecture[];        
-        lecture=ligne.split(" ");
-        
-        this.dmin = Integer.parseInt(lecture[0]);
-        this.dmax = Integer.parseInt(lecture[1]);
+        this.dmin = Integer.parseInt(lecture[1]);
+        this.dmax = Integer.parseInt(lecture[2]);
         this.ratio = Integer.parseInt(lecture[3]);
         this.carac = Integer.parseInt(lecture[4]);        
     }
@@ -63,7 +60,7 @@ public class Arme extends Item {
     
     public void sauvegarder(PrintWriter fichierSortie){
         if (this != null){
-            fichierSortie.println(this.getNom()+ "=" + dmin + " "+ dmax+ " " + ratio+ " " + carac);
+            fichierSortie.println(this.getNom()+ " " + dmin + " "+ dmax+ " " + ratio+ " " + carac);
         }
         else{
             fichierSortie.println();

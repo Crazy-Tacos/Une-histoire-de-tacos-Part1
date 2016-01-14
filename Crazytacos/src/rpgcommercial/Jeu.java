@@ -130,21 +130,26 @@ public class Jeu {
     }
     
     public boolean lancerAventure(Vue vue){
-         vue.addChaine("-- CRAZY TACOS --");
-                vue.addChaine("Chapitre 1 : tapez 1");
-	        vue.addChaine("Chapitre 2 : tapez 2");
-                vue.addChaine("Sauvegarder la partie : tapez 1");
-	        vue.addChaine("Quitter : tapez 4");
-                
-	        switch(joueur.lireChoix(vue,3))
-	        {
-	                case 1 : lancerChapitre(vue,1); break;
-	                case 2 : lancerChapitre(vue,2);  break;
-                        case 3 : sauvegarder(vue); break;
-	                case 4 : break;
-	                default : System.out.println("\nFatal Error"); return true ;
-	        }
         
+        boolean arret=false;
+        
+        while (!arret)
+        {
+            vue.addChaine("-- CRAZY TACOS --");
+            vue.addChaine("Chapitre 1 : tapez 1");
+            vue.addChaine("Chapitre 2 : tapez 2");
+            vue.addChaine("Sauvegarder la partie : tapez 3");
+            vue.addChaine("Quitter : tapez 4");
+
+            switch(joueur.lireChoix(vue,4))
+            {
+                    case 1 : lancerChapitre(vue,1); break;
+                    case 2 : lancerChapitre(vue,1);  break;
+                    case 3 : sauvegarder(vue); break;
+                    case 4 : arret = true; break;
+                    default : System.out.println("\nFatal Error"); return true ;
+            }
+        }        
         return true;
     }
     
@@ -167,4 +172,11 @@ public class Jeu {
         return true;
     }    
     
+    public void setPersonnage(Personnage perso){
+        this.personnage=perso;
+    }
+    
+    public Joueur getJoueur(){
+        return this.joueur;
+    }
 }

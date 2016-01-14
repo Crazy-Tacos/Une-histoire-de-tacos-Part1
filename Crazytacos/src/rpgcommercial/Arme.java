@@ -62,6 +62,11 @@ public class Arme extends Item {
     }
     
     public void sauvegarder(PrintWriter fichierSortie){
-        fichierSortie.print(this.getNom()+ "=" + dmin + dmax + ratio + carac);
+        if (this != null){
+            fichierSortie.println(this.getNom()+ "=" + dmin + " "+ dmax+ " " + ratio+ " " + carac);
+        }
+        else{
+            fichierSortie.println();
+        }
     }
 }

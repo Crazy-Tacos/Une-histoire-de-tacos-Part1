@@ -68,17 +68,37 @@ public class Inventaire {
     }
     
     public void sauvegarder(PrintWriter fichierSortie){
-        fichierSortie.println("armePrincipale=");
-        armePrincipale.sauvegarder(fichierSortie);
+        fichierSortie.print("armePrincipale=");
+        if (armePrincipale != null){
+            armePrincipale.sauvegarder(fichierSortie);
+        }
+        else{
+            fichierSortie.println();
+        }
         
-        fichierSortie.println("armeSecondaire=");
-        armeSecondaire.sauvegarder(fichierSortie);
-        
-        fichierSortie.println("armure=");
-        armure.sauvegarder(fichierSortie);
-        
-        fichierSortie.println("consommable=");
-        consommable.sauvegarder(fichierSortie);
+        fichierSortie.print("armeSecondaire=");
+        if (armeSecondaire != null){
+            armeSecondaire.sauvegarder(fichierSortie);
+        }
+        else{
+            fichierSortie.println();
+        }
+
+        fichierSortie.print("armure=");
+        if (armure != null){
+            armure.sauvegarder(fichierSortie);
+        }
+        else{
+            fichierSortie.println();
+        }
+
+        fichierSortie.print("consommable=");
+        if (consommable != null){
+            consommable.sauvegarder(fichierSortie);
+        }
+        else{
+            fichierSortie.println();
+        }
     }
     
 }

@@ -2,6 +2,7 @@ package rpgcommercial;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStream;
@@ -92,15 +93,15 @@ public class Jeu {
         String fichier ="Sauvegarder.txt";
         
         try{
-                FileWriter fw = new FileWriter (fichier);
-                BufferedWriter bw = new BufferedWriter (fw);
-                PrintWriter fichierSortie = new PrintWriter (bw);
-                
-                fichierSortie.println ("Avacncement="+avancement);
-                personnage.sauvegarder(fichierSortie);
+            FileWriter fw = new FileWriter(fichier);
+            BufferedWriter bw = new BufferedWriter(fw);
+            try (PrintWriter fichierSortie = new PrintWriter(bw)) {
+                fichierSortie.println("Avancement="+avancement);
+                if (personnage != null){
+                    personnage.sauvegarder(fichierSortie);
+                }
                 fichierSortie.println("fin");
-                
-                fichierSortie.close();
+            }
         }
         catch (Exception e){
                 System.out.println(e.toString());

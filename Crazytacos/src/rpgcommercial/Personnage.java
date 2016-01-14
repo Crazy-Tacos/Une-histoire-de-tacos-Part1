@@ -295,17 +295,17 @@ public class Personnage {
         return nb;
     }
       
-    public void sauvegarder(PrintWriter fichierSortie){
-        
+    public void sauvegarder(PrintWriter fichierSortie){        
         fichierSortie.println ("classe=" + classe);
-        String personnage = "Personnage=" + nom + niveau + experience + argent;
-        personnage += carac.get(Caracteristique.VITALITE); 
-        personnage += carac.get(Caracteristique.FORCE);
-        personnage += carac.get(Caracteristique.DEXTERITE); 
+        String personnage = "Personnage=" + nom + " " + niveau + " "+ experience+ " " + argent+ " ";
+        personnage += carac.get(Caracteristique.VITALITE)+ " "; 
+        personnage += carac.get(Caracteristique.FORCE)+ " ";
+        personnage += carac.get(Caracteristique.DEXTERITE)+ " "; 
         personnage += carac.get(Caracteristique.INTELLIGENCE);
-        
+
         fichierSortie.println (personnage);      
-        
-        inventaire.sauvegarder(fichierSortie);
+        if (inventaire != null){
+            inventaire.sauvegarder(fichierSortie); 
+        } 
     }
 }

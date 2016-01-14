@@ -6,6 +6,21 @@ public class RpgCommercial {
     
     
     public static void main(String[] args){
+        Vue jeu  = new Vue();
+        Joueur control = new Joueur();
+        Personnage player = new Boulanger("Fred");
+        player.getInventaire().setArmePrincipale(new Arme("Clou", 2,10,5,2));
+        player.drawPersonnage(jeu);
+        jeu.drawPause(control);
+        
+        Jeu testjeu = new Jeu();
+        testjeu.setPersonnage(player);
+        testjeu.sauvegarder(jeu);
+        
+        
+        jeu.drawPause(control);
+        
+        
         Scanner scan=new Scanner(System.in);
     	int choix = 0;
         boolean arret = false;

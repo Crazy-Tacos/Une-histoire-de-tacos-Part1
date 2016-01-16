@@ -96,13 +96,13 @@ public class Personnage {
         ligne++;
         j.addChaine("Niveau : " + niveau, ligne, decalage);
         ligne++;
-        j.addChaine("Vie : " + vie + "/" + carac.get(Caracteristique.VITALITE), ligne, decalage);
+        j.addChaine("Vie : " + vie + "/" + getVitaliteTotale(), ligne, decalage);
         ligne++;
-        j.addChaine("Force : " + carac.get(Caracteristique.FORCE), ligne, decalage);
+        j.addChaine("Force : " + getForceTotale(), ligne, decalage);
         ligne++;
-        j.addChaine("Dexterite : " + carac.get(Caracteristique.DEXTERITE), ligne, decalage);
+        j.addChaine("Dexterite : " + getDextTotale(), ligne, decalage);
         ligne++;
-        j.addChaine("Intelligence : " + carac.get(Caracteristique.INTELLIGENCE), ligne, decalage);
+        j.addChaine("Intelligence : " + getIntellTotale(), ligne, decalage);
         ligne++;
     }
     
@@ -180,12 +180,36 @@ public class Personnage {
         return vie;
     }
     
-    public int getDext(){
-        return carac.get(Caracteristique.DEXTERITE);
+    public int getDextTotale(){
+        int val = carac.get(Caracteristique.DEXTERITE);
+        if (inventaire.getArmure() != null){
+            val += inventaire.getArmure().getDexterite();
+        }
+        return val;
     }
     
-    public int getIntell(){
-        return carac.get(Caracteristique.INTELLIGENCE);
+    public int getIntellTotale(){
+        int val =carac.get(Caracteristique.INTELLIGENCE);
+        if (inventaire.getArmure() != null){
+            val += inventaire.getArmure().getIntell();
+        }
+        return val;
+    }
+    
+    public int getVitaliteTotale(){
+        int val =carac.get(Caracteristique.VITALITE);
+        if (inventaire.getArmure() != null){
+            val += inventaire.getArmure().getVitalite();
+        }
+        return val;
+    }
+    
+    public int getForceTotale(){
+        int val =carac.get(Caracteristique.FORCE);
+        if (inventaire.getArmure() != null){
+            val += inventaire.getArmure().getForce();
+        }
+        return val;
     }
     
     public int getDminArme(Arme c){
@@ -209,16 +233,16 @@ public class Personnage {
     public int getDmaxArme(Arme c){
         int car = 0;
         if (c.getCarac() == 1){ // Vitalite
-            car = carac.get(Caracteristique.VITALITE);
+            car = getVitaliteTotale();
         }
         else if (c.getCarac() == 2){ // Force
-            car = carac.get(Caracteristique.FORCE);
+            car = getForceTotale();
         }
         else if (c.getCarac() == 3){ // Dexterite
-            car = carac.get(Caracteristique.DEXTERITE);
+            car = getDextTotale();
         }
         else if (c.getCarac() == 4){ // Intelligence
-            car = carac.get(Caracteristique.INTELLIGENCE);
+            car = getIntellTotale();
         }
         
         return c.getDmax() + c.getRatio() * car / 100;
@@ -246,6 +270,10 @@ public class Personnage {
                 max = getDmaxArme(inventaire.getArmeSecondaire());
                 min = getDminArme(inventaire.getArmeSecondaire());
                 j.addChaine(nom + " utilise l'arme " + inventaire.getArmeSecondaire().getNom());
+                if (inventaire.getArmeSecondaire().utiliserMunition()){
+                    j.addChaine("L'arme "+inventaire.getArmeSecondaire().getNom() + " n'a plus de munitions");
+                    inventaire.setArmeSecondaire(null);
+                }
                 return rand.nextInt(max - min + 1) + min;
             }
         }
@@ -259,10 +287,17 @@ public class Personnage {
             vie = 0;
         }
         j.addChaine(nom + " a subit " + deg + " dégats.");
+        if (inventaire.getArmure() != null && inventaire.getArmure().endommagerArmure(deg)){
+            j.addChaine("L'armure "+inventaire.getArmure().getNom() + " est cassée");
+            inventaire.setArmure(null);
+            if (vie > getVitaliteTotale()){
+                regen();
+            }
+        }
     }
     
     public void regen(){
-        vie = carac.get(Caracteristique.VITALITE);
+        vie = getVitaliteTotale();
     }
     
     public int getXP(){

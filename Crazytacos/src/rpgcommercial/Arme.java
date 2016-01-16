@@ -39,8 +39,9 @@ public class Arme extends Item {
     public int getCarac() {
         return carac;
     }
+    
     public void drawArme(Vue v){
-        v.addChaine(getNom());
+        v.addChaine("  " +getNom());
         v.addChaine("  Dégats : "+ dmin + "-" + dmax);
         String car = "";
         if (carac == 1){ // Vitalite

@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 
 public class Inventaire {
     private Arme armePrincipale;
-    private Arme armeSecondaire;
+    private ArmeSecondaire armeSecondaire;
     private Armure armure;
     private Consommable consommable;
     
@@ -28,7 +28,7 @@ public class Inventaire {
             lecture=ligne.split("=");
             if(lecture.length >1){
                 lecture=lecture[1].split(" ");
-                this.armeSecondaire =new Arme(lecture);
+                this.armeSecondaire =new ArmeSecondaire(lecture);
             }
             else{
                 this.armeSecondaire = null;
@@ -38,7 +38,7 @@ public class Inventaire {
             lecture=ligne.split("=");
             if(lecture.length >1){
                 lecture=lecture[1].split(" ");
-                this.armure =null;
+                this.armure =new Armure(lecture);
             }
             else{
                 this.armure = null;
@@ -65,7 +65,7 @@ public class Inventaire {
         this.armePrincipale = a;
     }
     
-    public void setArmeSecondaire(Arme a){
+    public void setArmeSecondaire(ArmeSecondaire a){
         this.armeSecondaire = a;
     }
     
@@ -81,7 +81,7 @@ public class Inventaire {
         return armePrincipale;
     }
     
-    public Arme getArmeSecondaire(){
+    public ArmeSecondaire getArmeSecondaire(){
         return armeSecondaire;
     }
     
@@ -95,20 +95,17 @@ public class Inventaire {
     
     public void drawInventaire(Vue v){
         if(armePrincipale != null){
-            v.addChaine("Arme principale :");
-            armePrincipale.drawArme(v);
+            v.addChaine("Arme principale : "+ armePrincipale.getNom());
         }
         
         if(armeSecondaire != null){
-            v.addChaine("Arme secondaire :");
-            armeSecondaire.drawArme(v);
+            v.addChaine("Arme secondaire : " + armeSecondaire.getNom());
         }
         if(armure != null){
-            v.addChaine("Armure :");
-            
+            v.addChaine("Armure : " + armure.getNom());
         }
         if(consommable != null){
-            v.addChaine("Consommable :");
+            v.addChaine("Consommable : ");
             
         }
     }

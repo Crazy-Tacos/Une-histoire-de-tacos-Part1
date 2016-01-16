@@ -37,7 +37,7 @@ public class Combat {
         drawCombat();
         j.addChaine("");
         j.addChaine("Le plus intelligent et le plus agile commence : ");
-        if ((joueur.getDext() + joueur.getIntell()) >= (ennemi.getDext() + ennemi.getIntell())){
+        if ((joueur.getDextTotale() + joueur.getIntellTotale()) >= (ennemi.getDextTotale() + ennemi.getIntellTotale())){
             tourJ = true;
             j.concatLastLigne(joueur.getNom());
         }
@@ -80,13 +80,15 @@ public class Combat {
         joueur.gagnerXP(j,ennemi.getXP());
         joueur.gagnerArgent(j,ennemi.getArgent());
         j.drawPause(control);
-        if(ennemi.getInventaire().getArmePrincipale().getNom() != "Mains nues"){
+        if(!"Mains nues".equals(ennemi.getInventaire().getArmePrincipale().getNom())){
             gagnerArmePrincipale(); 
         }
         if(ennemi.getInventaire().getArmeSecondaire() != null){
             gagnerArmeSecondaire();
         }
-        
+        if(ennemi.getInventaire().getArmure() != null){
+            gagnerArmure();
+        }
     }
     
     public void gagnerArmePrincipale(){
@@ -131,4 +133,24 @@ public class Combat {
         }
     }
     
+    public void gagnerArmure(){
+        int choix;
+        j.addChaine("Vous possèdez : ");
+        if(joueur.getInventaire().getArmure() != null){
+            joueur.getInventaire().getArmure().drawArmure(j);
+        }
+        else {
+            j.addChaine("Aucune armure");
+        }
+        j.addChaine("");
+        j.addChaine("Remplacer par l'armure de " + ennemi.getNom() + " :");
+        ennemi.getInventaire().getArmure().drawArmure(j);
+        j.addChaine("");
+        j.addChaine(" 1.Oui");
+        j.addChaine(" 2.Non");
+        choix = control.lireChoix(j,2);
+        if (choix == 1){
+            joueur.getInventaire().setArmure((ennemi.getInventaire().getArmure()));
+        }
+    }
 }

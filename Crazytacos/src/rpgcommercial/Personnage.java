@@ -196,6 +196,13 @@ public class Personnage {
         return val;
     }
     
+    public void soigner(int vie){
+        this.vie += vie;
+        if (this.vie > getVitaliteTotale()){
+            regen();
+        }
+    }
+    
     public int getVitaliteTotale(){
         int val =carac.get(Caracteristique.VITALITE);
         if (inventaire.getArmure() != null){
@@ -332,7 +339,8 @@ public class Personnage {
             nb++;
             str = " " + nb + ". " + inventaire.getArmeSecondaire().getNom() + " : ";
             str += inventaire.getArmeSecondaire().getDmin() + "-";
-            str+= inventaire.getArmeSecondaire().getDmax() + " dégats";
+            str += inventaire.getArmeSecondaire().getDmax() + " dégats et ";
+            str += inventaire.getArmeSecondaire().getMunitions() + " munitions";
             j.addChaine(str);
         }
         return nb;

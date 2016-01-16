@@ -151,6 +151,7 @@ public class Combat {
         choix = control.lireChoix(j,2);
         if (choix == 1){
             joueur.getInventaire().setArmure((ennemi.getInventaire().getArmure()));
+            joueur.soigner(joueur.getInventaire().getArmure().getVitalite());
         }
     }
 }

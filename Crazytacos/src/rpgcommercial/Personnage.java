@@ -28,11 +28,11 @@ public class Personnage {
         this.argent = 0;
         this.carac = new EnumMap<>(Caracteristique.class);
         carac.put(Caracteristique.VITALITE, 50);
-        this.vie = 50;
         carac.put(Caracteristique.FORCE, 10);
         carac.put(Caracteristique.DEXTERITE, 10);
         carac.put(Caracteristique.INTELLIGENCE, 10);
         this.inventaire = new Inventaire();
+        regen();
     }
     
     // Constructeur d'un ennemi
@@ -44,11 +44,11 @@ public class Personnage {
         this.argent = arg;
         this.carac = new EnumMap<>(Caracteristique.class);
         carac.put(Caracteristique.VITALITE, vie);
-        this.vie = vie;
         carac.put(Caracteristique.FORCE, force);
         carac.put(Caracteristique.DEXTERITE, dext);
         carac.put(Caracteristique.INTELLIGENCE, intell);
         this.inventaire = new Inventaire();
+        regen();
     }
     
     public Personnage(BufferedReader br){
@@ -68,11 +68,11 @@ public class Personnage {
             this.carac = new EnumMap<>(Caracteristique.class);
 
             carac.put(Caracteristique.VITALITE, Integer.parseInt(lecture[4]));
-            this.vie = Integer.parseInt(lecture[4]);
             carac.put(Caracteristique.FORCE, Integer.parseInt(lecture[5]));
             carac.put(Caracteristique.DEXTERITE, Integer.parseInt(lecture[6]));
             carac.put(Caracteristique.INTELLIGENCE, Integer.parseInt(lecture[7]));
             this.inventaire = new Inventaire(br);
+            regen();
         }
         catch (Exception e){
                 System.out.println(e.toString());
@@ -294,6 +294,7 @@ public class Personnage {
                 regen();
             }
         }
+        j.addChaine("");
     }
     
     public void regen(){

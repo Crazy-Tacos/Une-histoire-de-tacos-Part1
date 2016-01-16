@@ -58,8 +58,23 @@ public class Joueur implements Controleur{
         pause(v);
     }
     
-    public String lireString(){
+    public String lireString(Vue vue){
+        
         String str;
+        
+        vue.addChaineFin("Votre choix :");
+        vue.draw();
+        
+        do{
+            str = in.nextLine();
+        } while(str.length() == 0);
+        return str;
+    }
+    
+    public String lireString(){
+        
+        String str;
+        
         do{
             str = in.nextLine();
         } while(str.length() == 0);

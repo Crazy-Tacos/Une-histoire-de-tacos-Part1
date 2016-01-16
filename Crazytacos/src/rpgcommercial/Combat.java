@@ -30,7 +30,7 @@ public class Combat {
         ennemi.drawPersonnageCombat(j,i, 30);
     }
     
-    public void doCombat(){
+    public boolean doCombat(){
         boolean tourJ;
         int degats;
         int nbchoix;
@@ -67,12 +67,10 @@ public class Combat {
         }
         
         if (joueur.getVie()>0){
-            j.addChaine("Vous avez battu " + ennemi.getNom() + " !");
-            gagnerRecompenses();
+            return true;
         }
         else {
-            j.addChaine("Vous avez perdu le combat face à " + ennemi.getNom());
-            joueur.regen();
+            return false;
         }
                    
         

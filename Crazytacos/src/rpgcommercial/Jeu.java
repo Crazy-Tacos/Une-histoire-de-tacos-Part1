@@ -2,7 +2,6 @@ package rpgcommercial;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -22,6 +21,59 @@ public class Jeu {
         this.joueur=new Joueur();
     }
     
+    public Joueur getJoueur(){
+        return this.joueur;
+    }  
+    
+    public boolean chargerPartie(Vue vue) {        
+        vue.addChaine("Chargement ...");
+        vue.draw();
+        
+        this.charger(vue);
+        this.lancerAventure(vue);        
+        return true;
+    }   
+    
+     public boolean nouvellePartie(Vue vue){ 
+        
+        boolean arret = false;
+
+        vue.addChaine("\n--- Choisi une classe ---");
+        vue.addChaine("Le Boulanger : tapez 1");
+        vue.addChaine("Le Cuisinier : tapez 2");
+        vue.addChaine("Le SaV : tapez 3");
+        vue.addChaine("Le Pharmacien : tapez 4");
+        vue.addChaine("Retour : tapez 5");
+        
+        
+        switch(this.joueur.lireChoix(vue, 5)){
+                case 1 : this.personnage=new Boulanger("Connard"); break;
+                case 2 : this.personnage=new Cuisinier("Connard"); break;
+                case 3 : this.personnage=new Sav("Connard"); break;
+                case 4 : this.personnage=new Pharmacien("Connard"); break;
+                case 9 : arret = true; break;
+                default : System.out.println("Fatal Error"); return true ;
+        }
+        
+        if(!arret)
+        {
+            vue.addChaine("\n--- Choisi un nom ---");
+            this.joueur.lireString(vue);
+
+            vue.addChaine("As-tu choisis le nom Connard?");
+            vue.addChaine("oui : tapez 1");
+            vue.addChaine("non : tapez 2");
+            this.joueur.lireChoix(vue, 2);
+
+            vue.addChaine("Super tu seras donc Connard!!");
+            this.joueur.pause(vue);
+            
+            this.lancerAventure(vue);
+        }
+        
+        return true;
+    }
+     
     public Personnage chargerPersonnage(BufferedReader br){
         String lecture[];
         try{           
@@ -54,29 +106,33 @@ public class Jeu {
         return null;
     }
     
-    public Personnage chargerPersonnage(int id){
-        String fichier ="chapitre.txt" + avancement;
+    public Personnage chargerEnnemi(int id, int avancement){
+        String fichier ="chapitre" + avancement + ".txt";        
+        Personnage perso;        
         
-        try{
+        try{                
                 InputStream ips=new FileInputStream(fichier); 
                 InputStreamReader ipsr=new InputStreamReader(ips);
                 BufferedReader br=new BufferedReader(ipsr);
-                
+                                                   
                 String ligne;
-                String recherche="id="+id;
-                
-                while ((ligne=br.readLine())!=recherche || ligne!="fin"){
-                    for(int i=0; i<=6; i++)
+                String recherche="id=" + id;
+                ligne=br.readLine();                
+                    
+                while (ligne.compareTo(recherche) !=0 && ligne.compareTo("fin") != 0){
+                                       
+                    for(int i=0; i<6; i++)
                         br.readLine();
+                    
+                    ligne=br.readLine();
                 }
-                Personnage perso;
-                        
-                if(ligne != "fin"){                    
-                    perso=chargerPersonnage(br);
+                    
+                if(ligne.equals("fin")){
+                    perso=null;
                 }
                 else
-                {
-                    perso=null;
+                {   
+                    perso=new Personnage(br);
                 }
                 br.close();
                 return perso;
@@ -103,7 +159,10 @@ public class Jeu {
         }
         catch (Exception e){
                 System.out.println(e.toString());
-        }        
+        }
+        
+        vue.addChaine("La Partie a étée enregistrée!!");
+        this.joueur.pause(vue);
     }
     
     public void charger(Vue vue){
@@ -133,18 +192,33 @@ public class Jeu {
     public boolean lancerAventure(Vue vue){
         
         boolean arret=false;
+        int choix;
         
         while (!arret)
-        {
+        {                
             vue.addChaine("-- CRAZY TACOS --");
-            vue.addChaine("Chapitre 1 : tapez 1");
-            vue.addChaine("Chapitre 2 : tapez 2");
+            vue.addChaine("Votre Boutique : tapez 1");
+            vue.addChaine("Magasin de chaussure : tapez 2");
             vue.addChaine("Sauvegarder la partie : tapez 3");
-            vue.addChaine("Quitter : tapez 4");
-
-            switch(joueur.lireChoix(vue,4))
+            vue.addChaine("Quitter : tapez 4");             
+            choix =joueur.lireChoix(vue,4);
+            
+            while(choix-1 > this.avancement && choix < 3){
+                vue.addChaine("Attention!!!");
+                vue.addChaine("Cette zone n'est pas encore débloquée.");
+                joueur.pause(vue);
+                
+                vue.addChaine("-- CRAZY TACOS --");
+                vue.addChaine("Votre Boutique : tapez 1");
+                vue.addChaine("Magasin de chaussure : tapez 2");
+                vue.addChaine("Sauvegarder la partie : tapez 3");
+                vue.addChaine("Quitter : tapez 4");            
+                choix =joueur.lireChoix(vue,4);
+            }
+            
+            switch(choix)
             {
-                    case 1 : lancerChapitre(vue,1); break;
+                    case 1 : lancerChapitre(vue,0); break;
                     case 2 : lancerChapitre(vue,1);  break;
                     case 3 : sauvegarder(vue); break;
                     case 4 : arret = true; break;
@@ -154,30 +228,69 @@ public class Jeu {
         return true;
     }
     
-    public boolean lancerChapitre(Vue vue, int avancement){
-        //blablbal ici
-        
+    public boolean lancerChapitre(Vue vue, int avancement){        
         int id=0;
-        Personnage ennemi=null;
+        boolean vivant=true;
+        Personnage ennemi = chargerEnnemi(id, avancement);        
         
-        while((ennemi= chargerPersonnage(id)) != null)
+        lireHistoire(vue, avancement);
+        
+        while(ennemi != null && vivant)
         {
-            vue.addChaine("un mechant est là!");
+            vue.addChaine("Un mechant sauvage apparait!!");
             joueur.pause(vue);
                                    
             Combat combat =new Combat(joueur,vue, personnage, ennemi);
-            combat.doCombat();
+            if(combat.doCombat()){                
+                vue.addChaine("Vous avez battu " + ennemi.getNom() + " !");
+                joueur.pause(vue);
+                
+                combat.gagnerRecompenses();
+                
+                id++;
+                ennemi = chargerEnnemi(id, avancement); 
+            }
+            else{                
+                vue.addChaine("Vous avez perdu le combat face à " + ennemi.getNom());
+                joueur.pause(vue);
+                
+                personnage.regen();
+                
+                vivant=false;
+            }
         }
         
-        this.avancement++;
+        if(vivant){            
+            vue.addChaine("Tout les méchants ont mouru!");
+            joueur.pause(vue);
+        }
+        
+        if(this.avancement==avancement){
+            this.avancement++;
+            vue.addChaine("Félicitation, vous avez débloquer le chapitre suivant!!");
+            joueur.pause(vue);
+        }
+        
         return true;
     }    
     
-    public void setPersonnage(Personnage perso){
-        this.personnage=perso;
-    }
-    
-    public Joueur getJoueur(){
-        return this.joueur;
+    public void lireHistoire(Vue vue, int avancement){
+        String fichier ="chapitre" + avancement + "_histoire.txt";
+        
+         try{                
+            InputStream ips=new FileInputStream(fichier); 
+            InputStreamReader ipsr=new InputStreamReader(ips);
+            BufferedReader br=new BufferedReader(ipsr);
+
+            String ligne;                
+
+            while ((ligne=br.readLine()) !=null){
+                vue.addChaine(ligne);
+            }
+            joueur.pause(vue); 
+         }
+        catch (Exception e){
+            System.out.println(e.toString());
+        }
     }
 }

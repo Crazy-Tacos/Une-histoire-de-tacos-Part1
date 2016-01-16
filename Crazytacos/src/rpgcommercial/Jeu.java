@@ -265,7 +265,7 @@ public class Jeu {
             joueur.pause(vue);
         }
         
-        if(this.avancement==avancement){
+        if(this.avancement==avancement && vivant){
             this.avancement++;
             vue.addChaine("Félicitation, vous avez débloquer le chapitre suivant!!");
             joueur.pause(vue);

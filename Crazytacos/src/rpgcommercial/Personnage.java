@@ -109,7 +109,7 @@ public class Personnage {
     public void drawPersonnageCombat(Vue j){
         j.addChaine(nom);
         j.addChaine("Niveau : " + niveau);
-        j.addChaine("Vie : " + vie + "/" + carac.get(Caracteristique.VITALITE));
+        j.addChaine("Vie : " + vie + "/" + getVitaliteTotale());
         j.addChaine("Force : " + carac.get(Caracteristique.FORCE));
         j.addChaine("Dexterite : " + carac.get(Caracteristique.DEXTERITE));
         j.addChaine("Intelligence : " + carac.get(Caracteristique.INTELLIGENCE));

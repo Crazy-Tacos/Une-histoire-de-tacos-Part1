@@ -2,11 +2,11 @@ package rpgcommercial;
 
 
 public class Combat {
-    private Personnage joueur;
-    private Personnage ennemi;
-    private Vue j;
-    private Joueur control;
-    private Ia iaControl;
+    protected Personnage joueur;
+    protected Personnage ennemi;
+    protected Vue j;
+    protected Joueur control;
+    protected Ia iaControl;
     
     public Combat (Joueur control, Vue j,Personnage joueur, Personnage ennemi) {
         this.joueur = joueur;

@@ -1,6 +1,5 @@
 package rpgcommercial;
 
-import java.*;
 import java.io.BufferedReader;
 import java.io.PrintWriter;
 import static java.lang.Math.pow;
@@ -80,25 +79,14 @@ public class Personnage {
     }
     
     public void drawPersonnage(Vue j){
-        boolean armure = false;
-        if (inventaire.getArmure() !=null)
-            armure = true;
         j.addChaine(nom);
         j.addChaine("Niveau : " + niveau);
         j.addChaine("XP : " + experience);
         j.addChaine("Argent : " + argent);
-        j.addChaine("Vie : " + vie + " /" + carac.get(Caracteristique.VITALITE));
-        if (armure)
-            j.concatLastLigne("+"+ inventaire.getArmure().getVitalite());
+        j.addChaine("Vie : " + vie + "/" + carac.get(Caracteristique.VITALITE));
         j.addChaine("Force : " + carac.get(Caracteristique.FORCE));
-        if (armure)
-            j.concatLastLigne(" + "+ inventaire.getArmure().getForce());
         j.addChaine("Dexterite : " + carac.get(Caracteristique.DEXTERITE));
-        if (armure)
-            j.concatLastLigne(" + "+ inventaire.getArmure().getDexterite());
         j.addChaine("Intelligence : " + carac.get(Caracteristique.INTELLIGENCE));
-        if (armure)
-            j.concatLastLigne(" + "+ inventaire.getArmure().getIntell());
     }
     
     public void drawPersonnageCombat(Vue j, int ligne, int decalage){

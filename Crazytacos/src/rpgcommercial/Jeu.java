@@ -37,36 +37,54 @@ public class Jeu {
      public boolean nouvellePartie(Vue vue){ 
         
         boolean arret = false;
-
-        vue.addChaine("\n--- Choisi une classe ---");
+        vue.addChaine("Blablabla");
+        vue.addChaine("AHHHHHHHHHHH");
+        vue.addChaine("");
+        vue.addChaine("Encore une coupure de courant...");
+        vue.addChaine("EDF ça devient pire que la SNCF");
+        vue.addChaine("");
+        vue.addChaine("En fait, dans quel magasin travailles-tu déjà?");
+        vue.addChaine("");
+        vue.addChaine("");
+        
+        vue.addChaine("--- Choisi ta profession ---");
         vue.addChaine("Le Boulanger : tapez 1");
         vue.addChaine("Le Cuisinier : tapez 2");
-        vue.addChaine("Le SaV : tapez 3");
+        vue.addChaine("Le relou du SaV de Darty : tapez 3");
         vue.addChaine("Le Pharmacien : tapez 4");
         vue.addChaine("Retour : tapez 5");
+        int classe = this.joueur.lireChoix(vue, 5);
         
-        
-        switch(this.joueur.lireChoix(vue, 5)){
-                case 1 : this.personnage=new Boulanger("Connard"); break;
-                case 2 : this.personnage=new Cuisinier("Connard"); break;
-                case 3 : this.personnage=new Sav("Connard"); break;
-                case 4 : this.personnage=new Pharmacien("Connard"); break;
-                case 9 : arret = true; break;
-                default : System.out.println("Fatal Error"); return true ;
+        if (classe == 5){
+            arret = true;
         }
         
         if(!arret)
         {
-            vue.addChaine("\n--- Choisi un nom ---");
-            this.joueur.lireString(vue);
+            vue.addChaine("Et quel est ton nom?");
+            String nom;
+            do{
+                vue.addChaine("--- Choisi un nom ---");
+                nom =this.joueur.lireString(vue);
 
-            vue.addChaine("As-tu choisis le nom Connard?");
-            vue.addChaine("oui : tapez 1");
-            vue.addChaine("non : tapez 2");
-            this.joueur.lireChoix(vue, 2);
-
-            vue.addChaine("Super tu seras donc Connard!!");
+                vue.addChaine("As-tu choisis le nom " + nom + " ?");
+                vue.addChaine("oui : tapez 1");
+                vue.addChaine("non : tapez 2");
+            } while(this.joueur.lireChoix(vue, 2) != 1);
+            
+            switch(classe){
+                case 1 : this.personnage=new Boulanger(nom); break;
+                case 2 : this.personnage=new Cuisinier(nom); break;
+                case 3 : this.personnage=new Sav(nom); break;
+                case 4 : this.personnage=new Pharmacien(nom); break;
+                default : System.out.println("Fatal Error"); return true ;
+            }
+            
+            vue.addChaine("Enchanté " + nom);
+            vue.addChaine("Notre aventure peut enfin commencer !");
             this.joueur.pause(vue);
+            
+            sauvegarder(vue);
             
             this.lancerAventure(vue);
         }
@@ -173,7 +191,7 @@ public class Jeu {
                 System.out.println(e.toString());
         }
         
-        vue.addChaine("La Partie a étée enregistrée!!");
+        vue.addChaine("La Partie a été enregistrée!!");
         this.joueur.pause(vue);
     }
     

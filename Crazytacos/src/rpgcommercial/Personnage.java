@@ -206,6 +206,12 @@ public class Personnage {
         return val;
     }
     
+    public void utiliserSoin(Vue j,int val){
+        soigner(val);
+        j.addChaine(nom + " a récupéré " + val + " points de vie.");
+        j.addChaine("");
+    }
+    
     public void soigner(int vie){
         this.vie += vie;
         if (this.vie > getVitaliteTotale()){
@@ -294,6 +300,21 @@ public class Personnage {
                 return rand.nextInt(max - min + 1) + min;
             }
         }
+        if (choix == 3){
+            if(inventaire.getConsommable()== null){
+                choix++;
+            }
+            else {
+                max = getDmaxArme(inventaire.getConsommable());
+                min = getDminArme(inventaire.getConsommable());
+                j.addChaine(nom + " utilise la compétence " + inventaire.getConsommable().getNom());
+                int val = rand.nextInt(max - min + 1) + min;
+                if (inventaire.getConsommable().isSoin()){
+                    val = -val;
+                }
+                return val;
+            }
+        }
         
         return 0;
     }
@@ -351,6 +372,19 @@ public class Personnage {
             str += inventaire.getArmeSecondaire().getDmin() + "-";
             str += inventaire.getArmeSecondaire().getDmax() + " dégats et ";
             str += inventaire.getArmeSecondaire().getMunitions() + " munitions";
+            j.addChaine(str);
+        }
+        if (inventaire.getConsommable()!=null){
+            nb++;
+            str = " " + nb + ". " + inventaire.getConsommable().getNom() + " : ";
+            str += inventaire.getConsommable().getDmin() + "-";
+            str += inventaire.getConsommable().getDmax();
+            if (inventaire.getConsommable().isSoin()){
+                str += " soins";
+            }
+            else {
+                str += " dégats";
+            }
             j.addChaine(str);
         }
         return nb;

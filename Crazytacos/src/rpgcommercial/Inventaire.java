@@ -143,7 +143,7 @@ public class Inventaire {
                 v.addChaine("Durabilité : " + armure.getDurabilite());
             }break;
 
-            case 4 : v.addChaine("Consommable :");
+            case 4 : v.addChaine("Compétence :");
                 if(consommable != null){//TODO
                 v.addChaine("Nom : " + consommable.getNom());
             }break;
@@ -175,7 +175,7 @@ public class Inventaire {
             fichierSortie.println();
         }
 
-        fichierSortie.print("consommable=");
+        fichierSortie.print("competence=");
         if (consommable != null){
             consommable.sauvegarder(fichierSortie);
         }

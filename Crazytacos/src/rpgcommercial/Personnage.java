@@ -1,6 +1,5 @@
 package rpgcommercial;
 
-import java.*;
 import java.io.BufferedReader;
 import java.io.PrintWriter;
 import static java.lang.Math.pow;

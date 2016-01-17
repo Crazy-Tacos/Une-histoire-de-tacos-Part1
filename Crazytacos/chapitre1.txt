@@ -1,22 +1,25 @@
 id=0
-mob=planche=2 15 0 10 12 12 12
-armePrincipale=Clou= 2 10 5 2
-armeSecondaire= 
-armure= 
-consommable= 
+Personnage=SuperRat 2 15 0 10 12 12 12
+armePrincipale=Mains_nues 1 3 5 2
+armeSecondaire=Fusil 2 5 20 3 2
+armure=Carapace_de_tortue 10 1 1 1 12
+consommable=
+nbTour=-1
 
 id=1
-mob=planche 2 15 0 10 12 12 12
+mob=Planche 2 15 0 10 12 12 12
 armePrincipale=Clou 2 10 5 2
-armeSecondaire=
+armeSecondaire=Lance_clou 10 12 5 2 3
 armure=
 consommable=
+nbTour=12
 
 id=2
-mob=planche 2 15 0 10 12 12 12
+mob=Planche 2 15 0 10 12 12 12
 armePrincipale=Clou 2 10 5 2
 armeSecondaire=
-armure=
+armure=Bois 12 2 2 2 50
 consommable=
+nbTour=0
 
 fin

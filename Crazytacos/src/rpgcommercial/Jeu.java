@@ -106,8 +106,9 @@ public class Jeu {
         return null;
     }
     
-    public Personnage chargerEnnemi(int id, int avancement){
-        String fichier ="chapitre" + avancement + ".txt";        
+    public Combat chargerCombat(int id, int avancement, Vue vue){
+        String fichier ="chapitre" + avancement + ".txt";
+        Combat combat;
         Personnage perso;        
         
         try{                
@@ -117,25 +118,37 @@ public class Jeu {
                                                    
                 String ligne;
                 String recherche="id=" + id;
-                ligne=br.readLine();                
+                ligne=br.readLine();
                     
                 while (ligne.compareTo(recherche) !=0 && ligne.compareTo("fin") != 0){
-                                       
-                    for(int i=0; i<6; i++)
+                
+                    for(int i=0; i<7; i++)
                         br.readLine();
                     
                     ligne=br.readLine();
                 }
                     
                 if(ligne.equals("fin")){
-                    perso=null;
+                    combat=null;
                 }
                 else
-                {   
+                {                       
                     perso=new Personnage(br);
+                    ligne=br.readLine();
+                    String lecture[];
+                    lecture=ligne.split("=");
+                    int nbTour=Integer.parseInt(lecture[1]);
+                    
+                    vue.addChaine("Constru" + ligne + "--> " + nbTour);
+                    joueur.pause(vue);
+                
+                    if(nbTour<=0)
+                        combat= new Combat(joueur, vue, personnage, perso);
+                    else
+                        combat= new CombatLimite(joueur, vue, personnage, perso,nbTour);
                 }
                 br.close();
-                return perso;
+                return combat;
         }		
         catch (Exception e){
                 System.out.println(e.toString());
@@ -247,6 +260,7 @@ public class Jeu {
         }        
         return true;
     }
+    
     public void afficherInfo(Vue vue){
         personnage.drawPersonnage(vue);
         joueur.pause(vue);
@@ -273,27 +287,27 @@ public class Jeu {
     public boolean lancerChapitre(Vue vue, int avancement){        
         int id=0;
         boolean vivant=true;
-        Personnage ennemi = chargerEnnemi(id, avancement);        
+        Combat combat;         
         
         lireHistoire(vue, avancement);
+        combat = chargerCombat(id, avancement, vue);
         
-        while(ennemi != null && vivant)
+        while(combat != null && vivant)
         {
             vue.addChaine("Un mechant sauvage apparait!!");
             joueur.pause(vue);
-                                   
-            Combat combat =new Combat(joueur,vue, personnage, ennemi);
+            
             if(combat.doCombat()){                
-                vue.addChaine("Vous avez battu " + ennemi.getNom() + " !");
+                vue.addChaine("Vous avez battu " + combat.getEnnemi().getNom() + " !");
                 joueur.pause(vue);
                 
                 combat.gagnerRecompenses();
                 
                 id++;
-                ennemi = chargerEnnemi(id, avancement); 
+                combat = chargerCombat(id, avancement, vue); 
             }
             else{                
-                vue.addChaine("Vous avez perdu le combat face à " + ennemi.getNom());
+                vue.addChaine("Vous avez perdu le combat face à " + combat.getEnnemi().getNom());
                 joueur.pause(vue);
                 
                 personnage.regen();

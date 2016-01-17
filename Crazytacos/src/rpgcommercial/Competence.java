@@ -3,10 +3,10 @@ package rpgcommercial;
 import java.io.PrintWriter;
 
 
-public class Consommable extends Arme {
+public class Competence extends Arme {
     private boolean soin;
     
-    public Consommable(String[] lecture){
+    public Competence(String[] lecture){
         super(lecture);
         
         if (lecture.length >5 && "soin".equals(lecture[5])){

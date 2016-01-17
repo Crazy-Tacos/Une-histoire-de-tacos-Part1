@@ -7,13 +7,13 @@ public class Inventaire {
     private Arme armePrincipale;
     private ArmeSecondaire armeSecondaire;
     private Armure armure;
-    private Consommable consommable;
+    private Competence competence;
     
     public Inventaire(){
         this.armePrincipale =new Arme("Mains nues", 1, 3, 5, 2);
         this.armeSecondaire = null;
         this.armure = null;
-        this.consommable = null;
+        this.competence = null;
     }
     
     public Inventaire(BufferedReader br){
@@ -48,10 +48,10 @@ public class Inventaire {
             lecture=ligne.split("=");
             if(lecture.length >1){
                 lecture=lecture[1].split(" ");
-                this.consommable = null;
+                this.competence = null;
             }
             else{
-                this.consommable = null;
+                this.competence = null;
             }
         }
         catch (Exception e){
@@ -73,8 +73,8 @@ public class Inventaire {
         this.armure = a;
     }
     
-    public void setConsommable(Consommable c){
-        this.consommable = c;
+    public void setCompetence(Competence c){
+        this.competence = c;
     }
     
     public Arme getArmePrincipale(){
@@ -89,8 +89,8 @@ public class Inventaire {
         return armure;
     }
     
-    public Consommable getConsommable(){
-        return consommable;
+    public Competence getCompetence(){
+        return competence;
     }
     
     public void drawInventaire(Vue v, int affiche){
@@ -144,8 +144,8 @@ public class Inventaire {
             }break;
 
             case 4 : v.addChaine("Compétence :");
-                if(consommable != null){//TODO
-                v.addChaine("Nom : " + consommable.getNom());
+                if(competence != null){//TODO
+                v.addChaine("Nom : " + competence.getNom());
             }break;
         }
     }
@@ -176,8 +176,8 @@ public class Inventaire {
         }
 
         fichierSortie.print("competence=");
-        if (consommable != null){
-            consommable.sauvegarder(fichierSortie);
+        if (competence != null){
+            competence.sauvegarder(fichierSortie);
         }
         else{
             fichierSortie.println();

@@ -14,7 +14,7 @@ public class Ia implements Controleur{
         Inventaire inventaire = monstre.getInventaire();
         Arme armeSecondaire = inventaire.getArmeSecondaire();
         Arme armePrincipale = inventaire.getArmePrincipale();
-        Consommable conso = inventaire.getConsommable();
+        Competence conso = inventaire.getCompetence();
         
         if (armeSecondaire == null)
         {

@@ -144,8 +144,26 @@ public class Inventaire {
             }break;
 
             case 4 : v.addChaine("Compétence :");
-                if(competence != null){//TODO
+                if(competence != null){
                 v.addChaine("Nom : " + competence.getNom());
+                if (competence.isSoin()){
+                    v.addChaine("Soins : ");
+                }
+                else{
+                    v.addChaine("Dégats : ");
+                }
+                v.concatLastLigne(competence.getDmin() + " - " + competence.getDmax());
+                v.addChaine("Ratio : ");
+
+                switch(competence.getCarac())
+                {
+                        case 1 : car = "% de la VITALITE"; break;
+                        case 2 : car = "% de la FORCE";  break;
+                        case 3 : car = "% de la DEXTERITE"; break;
+                        case 4 : car = "% de l'INTELLIGENCE"; break;
+                        default : car = "Error";
+                }
+                v.concatLastLigne(" + "+ competence.getRatio() + car);
             }break;
         }
     }

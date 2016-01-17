@@ -155,6 +155,73 @@ public class Personnage {
         carac.replace(Caracteristique.DEXTERITE, carac.get(Caracteristique.DEXTERITE) + dext);
         carac.replace(Caracteristique.INTELLIGENCE, carac.get(Caracteristique.INTELLIGENCE) + intel);
         regen();
+        if (niveau%5 ==0){
+            apprendreCompetence(j);
+        }
+    }
+    
+    public void apprendreCompetence(Vue v){
+        Competence c = null;
+        if ("Boulanger".equals(classe)){
+            if (niveau/5 == 1){
+                c = new Competence("Lancer de croissant", 3,5, 10,2, false);
+            }
+            else if (niveau/5 ==2){
+                c = new Competence("Fougasse", 6,10, 20,2, false);
+            }
+            else if (niveau/5 == 3){
+                c = new Competence("Baguette magique", 9,15, 25,2, false);
+            }
+            else if (niveau/5 ==4){
+                c = new Competence("Chausson aux pommes", 12,20, 30,2, false);
+            }
+        }
+        else if ("Cuisinier".equals(classe)){
+            if (niveau/5 == 1){
+                c = new Competence("Frite bouillante", 3,5, 10,3, false);
+            }
+            else if (niveau/5 ==2){
+                c = new Competence("Viande de kebab", 6,10, 20,3, false);
+            }
+            else if (niveau/5 == 3){
+                c = new Competence("Menu tacos", 9,15, 25,3, false);
+            }
+            else if (niveau/5 ==4){
+                c = new Competence("Jambon", 1000,1000, 30,3, false);
+            }
+        }
+        else if ("SAV".equals(classe)){
+            if (niveau/5 == 1){
+                c = new Competence("Pause café", 3,5, 5,1, false);
+            }
+            else if (niveau/5 ==2){
+                c = new Competence("Tournevis", 6,10, 10,1, false);
+            }
+            else if (niveau/5 == 3){
+                c = new Competence("Tuto youtube", 9,15, 15,1, false);
+            }
+            else if (niveau/5 ==4){
+                c = new Competence("Extension de garantie", 12,20, 20,1, false);
+            }
+        }
+        else if ("Pharmacien".equals(classe)){
+            if (niveau/5 == 1){
+                c = new Competence("Antibiotique", 3,5, 10,4, true);
+            }
+            else if (niveau/5 ==2){
+                c = new Competence("Sirop", 6,10, 20,4, true);
+            }
+            else if (niveau/5 == 3){
+                c = new Competence("Bandage", 9,15, 25,4, true);
+            }
+            else if (niveau/5 ==4){
+                c = new Competence("Ebola", 1000,1000, 30,4, false);
+            }
+        }
+        if (c != null){
+            inventaire.setCompetence(c);
+            v.addChaine("Vous avez appris la compétence " + c.getNom());
+        }
     }
     
     public void gagnerXP(Vue j,int xp){

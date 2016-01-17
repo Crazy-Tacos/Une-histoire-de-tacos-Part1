@@ -6,6 +6,11 @@ import java.io.PrintWriter;
 public class Competence extends Arme {
     private boolean soin;
     
+    public Competence(String nom, int dmin, int dmax, int ratio, int carac, boolean soin){
+        super(nom,dmin,dmax,ratio,carac);
+        this. soin = soin;
+    }
+    
     public Competence(String[] lecture){
         super(lecture);
         

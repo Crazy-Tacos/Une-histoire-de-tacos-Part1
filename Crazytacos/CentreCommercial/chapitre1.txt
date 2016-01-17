@@ -1,8 +1,8 @@
 id=0
-Personnage=SuperRat 2 15 0 10 12 12 12
+Personnage=Caisse_enregistreuse 4 10 782 30 10 10 10
 armePrincipale=Mains_nues 1 3 5 2
-armeSecondaire=Fusil 2 5 20 3 2
-armure=Carapace_de_tortue 10 1 1 1 12
+armeSecondaire=Revolver 6 10 20 2 8
+armure=
 consommable=
 nbTour=-1
 

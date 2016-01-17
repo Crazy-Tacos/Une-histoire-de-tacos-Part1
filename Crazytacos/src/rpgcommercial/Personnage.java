@@ -227,8 +227,8 @@ public class Personnage {
     public void gagnerXP(Vue j,int xp){
         experience += xp;
         j.addChaine("Vous avez gagné " + xp + " points d'expérience !");
-        while (experience >= 5 * pow(2,niveau)){
-            experience -= 5 * pow(2,niveau);
+        while (experience >= pow(2,niveau)){
+            experience -= pow(2,niveau);
             levelUp(j);
         }
     }

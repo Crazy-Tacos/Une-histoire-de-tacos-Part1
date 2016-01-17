@@ -48,12 +48,22 @@ public class CombatLimite extends Combat{
                 j.addChaine("");
                 nbchoix = joueur.drawActions(j);
                 degats =joueur.attaquer(j,control.lireChoix(j,nbchoix));
-                ennemi.infligerDegats(j, degats);
+                if (degats >= 0){
+                    ennemi.infligerDegats(j, degats);
+                }
+                else{
+                    joueur.utiliserSoin(j, -degats);
+                }
             }
             else{
                 // L'ennemi attaque avec son IA 
                 degats = ennemi.attaquer(j,iaControl.choixAttaque(ennemi, joueur));
-                joueur.infligerDegats(j, degats);
+                if (degats >= 0){
+                    joueur.infligerDegats(j, degats);
+                }
+                else{
+                    ennemi.utiliserSoin(j, -degats);
+                }
                 control.pause(j);
             }
             tourJ = !tourJ;

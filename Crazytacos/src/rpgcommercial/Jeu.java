@@ -43,11 +43,11 @@ public class Jeu {
         vue.addChaine("Encore une coupure de courant...");
         vue.addChaine("EDF ça devient pire que la SNCF");
         vue.addChaine("");
-        vue.addChaine("En fait, dans quel magasin travailles-tu déjà?");
+        vue.addChaine("En fait, dans quel magasin je travaille déjà?");
         vue.addChaine("");
         vue.addChaine("");
         
-        vue.addChaine("--- Choisi ta profession ---");
+        vue.addChaine("--- Choisi ma profession ---");
         vue.addChaine("Le Boulanger : tapez 1");
         vue.addChaine("Le Cuisinier : tapez 2");
         vue.addChaine("Le relou du SaV de Darty : tapez 3");
@@ -61,7 +61,7 @@ public class Jeu {
         
         if(!arret)
         {
-            vue.addChaine("Et quel est ton nom?");
+            vue.addChaine("Et quel est mon nom?");
             String nom;
             do{
                 vue.addChaine("--- Choisi un nom ---");
@@ -80,7 +80,7 @@ public class Jeu {
                 default : System.out.println("Fatal Error"); return true ;
             }
             
-            vue.addChaine("Enchanté " + nom);
+            vue.addChaine("Je suis " +nom+ ", ravi de faire ta connaissance");
             vue.addChaine("Notre aventure peut enfin commencer !");
             this.joueur.pause(vue);
             
@@ -306,7 +306,10 @@ public class Jeu {
         boolean vivant=true;
         Combat combat;         
         
-        lireHistoire(vue, avancement);
+        if (avancement == this.avancement){
+            lireHistoire(vue, avancement);
+        }
+        
         combat = chargerCombat(id, avancement, vue);
         
         while(combat != null && vivant)
@@ -366,7 +369,6 @@ public class Jeu {
                 }
                
             }
-            joueur.pause(vue); 
          }
         catch (Exception e){
             System.out.println(e.toString());

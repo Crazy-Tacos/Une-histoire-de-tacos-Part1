@@ -230,7 +230,7 @@ public class Jeu {
         vue.addChaine("Retour : tapez 4");             
         choix =joueur.lireChoix(vue,4);
 
-        while(choix-1 > this.avancement && choix < 3){
+        while(choix-1 > this.avancement && choix <= 3){
             vue.addChaine("Attention!!!");
             vue.addChaine("Cette zone n'est pas encore débloquée.");
             joueur.pause(vue);
@@ -358,7 +358,13 @@ public class Jeu {
             String ligne;                
 
             while ((ligne=br.readLine()) !=null){
-                vue.addChaine(ligne);
+                if("[PAUSE]".equals(ligne)){
+                    joueur.pause(vue); 
+                } 
+                else {
+                    vue.addChaine(ligne);
+                }
+               
             }
             joueur.pause(vue); 
          }

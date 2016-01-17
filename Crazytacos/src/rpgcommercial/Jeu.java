@@ -144,7 +144,7 @@ public class Jeu {
     }
     
     public void sauvegarder(Vue vue){
-        String fichier ="Sauvegarder.txt";
+        String fichier ="sauvegarde.txt";
         
         try{
             FileWriter fw = new FileWriter(fichier);
@@ -166,7 +166,7 @@ public class Jeu {
     }
     
     public void charger(Vue vue){
-        String fichier="Sauvegarder.txt";
+        String fichier="sauvegarde.txt";
 
         try{
             InputStream ips=new FileInputStream(fichier); 

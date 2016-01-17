@@ -1,0 +1,8 @@
+Avancement=1
+classe=Boulanger
+Personnage=Connard 4 65 0 59 19 13 13
+armePrincipale=Clou 2 10 5 2
+armeSecondaire=Lance_clou 10 12 5 2 1
+armure=Bois 12 2 2 2 25
+consommable=
+fin

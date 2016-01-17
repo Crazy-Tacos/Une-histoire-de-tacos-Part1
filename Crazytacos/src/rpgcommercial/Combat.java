@@ -6,12 +6,14 @@ public class Combat {
     private Personnage ennemi;
     private Vue j;
     private Joueur control;
+    private Ia iaControl;
     
     public Combat (Joueur control, Vue j,Personnage joueur, Personnage ennemi) {
         this.joueur = joueur;
         this.ennemi = ennemi;
         this.j = j;
         this.control = control;
+        this.iaControl=new Ia();
     }
     
     public Personnage getJoueur(){
@@ -58,8 +60,8 @@ public class Combat {
                 ennemi.infligerDegats(j, degats);
             }
             else{
-                // L'ennemi auto attaque (super IA !!!)
-                degats = ennemi.attaquer(j,1);
+                // L'ennemi attaque avec son IA 
+                degats = ennemi.attaquer(j,iaControl.choixAttaque(ennemi, joueur));
                 joueur.infligerDegats(j, degats);
                 control.pause(j);
             }

@@ -139,7 +139,6 @@ public class Jeu {
                     lecture=ligne.split("=");
                     int nbTour=Integer.parseInt(lecture[1]);
                     
-                    vue.addChaine("Constru" + ligne + "--> " + nbTour);
                     joueur.pause(vue);
                 
                     if(nbTour<=0)

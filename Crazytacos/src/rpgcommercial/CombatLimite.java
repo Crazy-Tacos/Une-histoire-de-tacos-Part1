@@ -14,57 +14,53 @@ public class CombatLimite extends Combat{
     }
     
     public void drawCombat(){
-        Vue vue =new Vue();
-        
-        vue.addChaine("--- COMBAT LIMITE ---");
-        vue.addChaine("Nombre de Tour : " + nbTour);
-        vue.addChaine(joueur.getNom() + " VS " + ennemi.getNom());        
-        int i = vue.getNextLigne();
-        joueur.drawPersonnageCombat(vue);
-        ennemi.drawPersonnageCombat(vue,i, 30);
+        j.addChaine("--- COMBAT LIMITE ---");
+        j.addChaine("Nombre de Tour restants : " + (nbTour - 1));
+        j.addChaine(joueur.getNom() + " VS " + ennemi.getNom());        
+        int i = j.getNextLigne();
+        joueur.drawPersonnageCombat(j);
+        ennemi.drawPersonnageCombat(j,i, 30);
     }
     
-    public boolean doCombat(){
-        Vue vue =new Vue();
-        
+    public boolean doCombat(){        
         boolean tourJ;
         int degats;
         int nbchoix;
         this.drawCombat();
-        vue.addChaine("");
-        vue.addChaine("Le plus intelligent et le plus agile commence : Combat limite - - - ");
+        j.addChaine("");
+        j.addChaine("Le plus intelligent et le plus agile commence : ");
         
         if ((joueur.getDextTotale() + joueur.getIntellTotale()) >= (ennemi.getDextTotale() + ennemi.getIntellTotale())){
             tourJ = true;
-            vue.concatLastLigne(joueur.getNom());
+            j.concatLastLigne(joueur.getNom());
         }
         else {
             tourJ = false;
-            vue.concatLastLigne(ennemi.getNom());
+            j.concatLastLigne(ennemi.getNom());
         }
-        vue.drawPause(control);
+        j.drawPause(control);
         
-        while(joueur.getVie() != 0 && ennemi.getVie() !=0 && nbTour != 0){
+        while(joueur.getVie() > 0 && ennemi.getVie() > 0 && nbTour > 0){
 
             if (tourJ){
                 //le joueur fait une action
                 drawCombat();
-                vue.addChaine("");
-                nbchoix = joueur.drawActions(vue);
-                degats =joueur.attaquer(vue,control.lireChoix(j,nbchoix));
-                ennemi.infligerDegats(vue, degats);
+                j.addChaine("");
+                nbchoix = joueur.drawActions(j);
+                degats =joueur.attaquer(j,control.lireChoix(j,nbchoix));
+                ennemi.infligerDegats(j, degats);
             }
             else{
                 // L'ennemi attaque avec son IA 
-                degats = ennemi.attaquer(vue,iaControl.choixAttaque(ennemi, joueur));
-                joueur.infligerDegats(vue, degats);
-                control.pause(vue);
+                degats = ennemi.attaquer(j,iaControl.choixAttaque(ennemi, joueur));
+                joueur.infligerDegats(j, degats);
+                control.pause(j);
             }
             tourJ = !tourJ;
             nbTour--;
         }
         
-        if (joueur.getVie()>0 || nbTour == 0){
+        if (joueur.getVie()>0 && nbTour > 0){
             return true;
         }
         else {

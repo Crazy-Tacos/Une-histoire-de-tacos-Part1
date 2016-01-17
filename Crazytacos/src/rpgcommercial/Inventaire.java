@@ -93,20 +93,60 @@ public class Inventaire {
         return consommable;
     }
     
-    public void drawInventaire(Vue v){
-        if(armePrincipale != null){
-            v.addChaine("Arme principale : "+ armePrincipale.getNom());
-        }
+    public void drawInventaire(Vue v, int affiche){
+        String car;
         
-        if(armeSecondaire != null){
-            v.addChaine("Arme secondaire : " + armeSecondaire.getNom());
-        }
-        if(armure != null){
-            v.addChaine("Armure : " + armure.getNom());
-        }
-        if(consommable != null){
-            v.addChaine("Consommable : ");
-            
+        switch(affiche)
+        {
+            case 1 : v.addChaine("Arme principale :");
+                if(armePrincipale != null){
+                v.addChaine("Nom : "+ armePrincipale.getNom());
+                v.addChaine("Dégats d'arme : " + armePrincipale.getDmin() + " - " + armePrincipale.getDmax());
+                v.addChaine("Ratio : ");
+
+                switch(armePrincipale.getCarac())
+                {
+                        case 1 : car = "% de la VITALITE"; break;
+                        case 2 : car = "% de la FORCE";  break;
+                        case 3 : car = "% de la DEXTERITE"; break;
+                        case 4 : car = "% de l'INTELLIGENCE"; break;
+                        default : car = "Error";
+                }
+                v.concatLastLigne(" + "+ armePrincipale.getRatio() + car);
+            }break;
+
+            case 2 : v.addChaine("Arme secondaire :");
+                if(armeSecondaire != null){
+                v.addChaine("Nom : " + armeSecondaire.getNom());
+                v.addChaine("Dégats d'arme : " + armeSecondaire.getDmin() + " - " + armeSecondaire.getDmax());
+                v.addChaine("Munitions restantes : " + armeSecondaire.getMunitions());
+                v.addChaine("Ratio : ");
+
+                switch(armeSecondaire.getCarac())
+                {
+                        case 1 : car = "% de la VITALITE"; break;
+                        case 2 : car = "% de la FORCE";  break;
+                        case 3 : car = "% de la DEXTERITE"; break;
+                        case 4 : car = "% de l'INTELLIGENCE"; break;
+                        default : car = "Error";
+                }
+                v.concatLastLigne(" + "+ armeSecondaire.getRatio() + car);
+            }break;
+
+            case 3 : v.addChaine("Armure :");
+                if(armure != null){
+                v.addChaine("Nom : " + armure.getNom());
+                v.addChaine("Vitalité : " + armure.getVitalite());
+                v.addChaine("Force : " + armure.getForce());
+                v.addChaine("Dexterité : " + armure.getDexterite());
+                v.addChaine("Intelligence : " + armure.getIntell());
+                v.addChaine("Durabilité : " + armure.getDurabilite());
+            }break;
+
+            case 4 : v.addChaine("Consommable :");
+                if(consommable != null){//TODO
+                v.addChaine("Nom : " + consommable.getNom());
+            }break;
         }
     }
     

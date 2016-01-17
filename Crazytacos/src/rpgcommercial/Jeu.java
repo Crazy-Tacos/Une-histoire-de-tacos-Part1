@@ -189,45 +189,87 @@ public class Jeu {
         vue.draw();
     }
     
+    public boolean choisirChapitre(Vue vue){
+        
+        int choix;
+        
+        vue.addChaine("-- CRAZY TACOS --");
+        vue.addChaine("Votre Boutique : tapez 1");
+        vue.addChaine("Magasin de chaussure : tapez 2");
+        vue.addChaine("McDonald's : tapez 3");
+        vue.addChaine("Retour : tapez 4");             
+        choix =joueur.lireChoix(vue,4);
+
+        while(choix-1 > this.avancement && choix < 3){
+            vue.addChaine("Attention!!!");
+            vue.addChaine("Cette zone n'est pas encore débloquée.");
+            joueur.pause(vue);
+
+            vue.addChaine("-- CRAZY TACOS --");
+            vue.addChaine("Votre Boutique : tapez 1");
+            vue.addChaine("Magasin de chaussure : tapez 2");
+            vue.addChaine("McDonald's : tapez 3");
+            vue.addChaine("Retour : tapez 4");            
+            choix =joueur.lireChoix(vue,4);
+        }
+
+        switch(choix)
+        {
+                case 1 : lancerChapitre(vue,0); break;
+                case 2 : lancerChapitre(vue,1);  break;
+                case 3 : lancerChapitre(vue,2); break;
+                case 4 : return true;
+                default : System.out.println("\nFatal Error"); return true ;
+        }     
+        return true;
+    }
+    
     public boolean lancerAventure(Vue vue){
         
         boolean arret=false;
-        int choix;
         
         while (!arret)
         {                
             vue.addChaine("-- CRAZY TACOS --");
-            vue.addChaine("Votre Boutique : tapez 1");
-            vue.addChaine("Magasin de chaussure : tapez 2");
+            vue.addChaine("Choisir un Chapitre : tapez 1");
+            vue.addChaine("Voir les informations du personnage : tapez 2");
             vue.addChaine("Sauvegarder la partie : tapez 3");
-            vue.addChaine("Quitter : tapez 4");             
-            choix =joueur.lireChoix(vue,4);
+            vue.addChaine("Retour au menu principale : tapez 4");
             
-            while(choix-1 > this.avancement && choix < 3){
-                vue.addChaine("Attention!!!");
-                vue.addChaine("Cette zone n'est pas encore débloquée.");
-                joueur.pause(vue);
-                
-                vue.addChaine("-- CRAZY TACOS --");
-                vue.addChaine("Votre Boutique : tapez 1");
-                vue.addChaine("Magasin de chaussure : tapez 2");
-                vue.addChaine("Sauvegarder la partie : tapez 3");
-                vue.addChaine("Quitter : tapez 4");            
-                choix =joueur.lireChoix(vue,4);
-            }
-            
-            switch(choix)
+            switch(joueur.lireChoix(vue,4))
             {
-                    case 1 : lancerChapitre(vue,0); break;
-                    case 2 : lancerChapitre(vue,1);  break;
+                    case 1 : choisirChapitre(vue); break;
+                    case 2 : afficherInfo(vue);  break;
                     case 3 : sauvegarder(vue); break;
-                    case 4 : arret = true; break;
+                    case 4 : arret = quitterPartie(vue); break;
                     default : System.out.println("\nFatal Error"); return true ;
             }
         }        
         return true;
     }
+    public void afficherInfo(Vue vue){
+        personnage.drawPersonnage(vue);
+        joueur.pause(vue);
+        for(int i=1; i<5; i++){            
+            personnage.getInventaire().drawInventaire(vue, i);
+            joueur.pause(vue);
+        }
+    }
     
+    public boolean quitterPartie(Vue vue){        
+        vue.addChaine("Tout avancement non sauvegardé sera perdu!!");
+        vue.addChaine("Vouez-vous vraiment quitter?");
+        vue.addChaine("oui : tapez 1");
+        vue.addChaine("non : tapez 2");
+        
+        switch(joueur.lireChoix(vue,2))
+        {
+            case 1 : return true;
+            case 2 : return false;
+            default : System.out.println("\nFatal Error"); return true ;
+        }
+    }
+            
     public boolean lancerChapitre(Vue vue, int avancement){        
         int id=0;
         boolean vivant=true;

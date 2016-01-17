@@ -88,7 +88,6 @@ public class Personnage {
         j.addChaine("Force : " + carac.get(Caracteristique.FORCE));
         j.addChaine("Dexterite : " + carac.get(Caracteristique.DEXTERITE));
         j.addChaine("Intelligence : " + carac.get(Caracteristique.INTELLIGENCE));
-        inventaire.drawInventaire(j);
     }
     
     public void drawPersonnageCombat(Vue j, int ligne, int decalage){

@@ -7,12 +7,14 @@ public class Cuisinier extends Personnage {
 
     public Cuisinier(String nom) {
         super(nom);
-        setClasse("Cuisinier");        
+        classe="Cuisinier";
+        carac.replace(Caracteristique.DEXTERITE, 20);
     }
     
     public Cuisinier(BufferedReader br) {
         super(br);
-        setClasse("Cuisinier");        
+        classe="Cuisinier";
+        carac.replace(Caracteristique.DEXTERITE, 20);
     }
 
 }

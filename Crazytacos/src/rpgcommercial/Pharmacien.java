@@ -7,12 +7,14 @@ public class Pharmacien extends Personnage {
 
     public Pharmacien(String nom) {
         super(nom);
-        setClasse("Pharmacien");
+        classe="Pharmacien";
+        carac.replace(Caracteristique.INTELLIGENCE, 20);
     }
     
     public Pharmacien(BufferedReader br) {
         super(br);
-        setClasse("Pharmacien");
+        classe="Pharmacien";
+        carac.replace(Caracteristique.INTELLIGENCE, 20);
     }
 
 }

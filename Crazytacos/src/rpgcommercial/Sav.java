@@ -7,12 +7,14 @@ public class Sav extends Personnage {
 
     public Sav(String nom) {
         super(nom);
-        setClasse("SAV");
+        classe="SAV";
+        carac.replace(Caracteristique.VITALITE, 65);
     }
     
     public Sav(BufferedReader br) {
         super(br);
-        setClasse("SAV");
+        classe="SAV";
+        carac.replace(Caracteristique.VITALITE, 65);
     }
 
 }

@@ -9,14 +9,14 @@ import java.util.Random;
 
 public class Personnage {
 
-    private String nom;
-    private String classe;
-    private int niveau;
-    private int experience;
-    private int argent;
-    private int vie;
-    private EnumMap<Caracteristique, Integer> carac;
-    private Inventaire inventaire;
+    protected String nom;
+    protected String classe;
+    protected int niveau;
+    protected int experience;
+    protected int argent;
+    protected int vie;
+    protected EnumMap<Caracteristique, Integer> carac;
+    protected Inventaire inventaire;
 
     // Constructeur du joueur
     public Personnage(String nom) {
@@ -121,28 +121,28 @@ public class Personnage {
         int dext;
         int intel;
         if (classe == "Boulanger"){
-            vie = 3;
-            force = 3; 
-            dext = 1;
-            intel = 1;
+            vie = 10;
+            force = 10; 
+            dext = 2;
+            intel = 2;
         }
         else if (classe == "Cuisinier"){
-            vie = 3;
-            force = 1; 
-            dext = 3;
-            intel = 1;
+            vie = 10;
+            force = 2; 
+            dext = 10;
+            intel = 2;
         }
         else if (classe == "SAV"){
-            vie = 5;
-            force = 1; 
-            dext = 1;
-            intel = 1;
+            vie = 15;
+            force = 4; 
+            dext = 4;
+            intel = 4;
         }
         else if (classe == "Pharmacien"){
-            vie = 3;
-            force = 1; 
-            dext = 1;
-            intel = 3;
+            vie = 10;
+            force = 2; 
+            dext = 2;
+            intel = 10;
         }
         else{
             vie = 0;
@@ -237,10 +237,7 @@ public class Personnage {
     public String getNom(){
         return nom;
     }
-    
-    public void setClasse(String c){
-        this.classe = c;
-    }
+
     
     public int getVie(){
         return vie;

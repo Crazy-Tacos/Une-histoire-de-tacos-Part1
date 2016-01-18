@@ -325,9 +325,8 @@ public class Jeu {
             }
             else{                
                 vue.addChaine("Vous avez perdu le combat face à " + combat.getEnnemi().getNom());
+                personnage.perdreCombat(vue);
                 joueur.pause(vue);
-                
-                personnage.regen();
                 
                 vivant=false;
             }

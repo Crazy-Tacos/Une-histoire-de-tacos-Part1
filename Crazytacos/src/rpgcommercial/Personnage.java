@@ -464,4 +464,12 @@ public class Personnage {
             inventaire.sauvegarder(fichierSortie); 
         } 
     }
+    
+    public void perdreCombat(Vue vue){
+        regen();
+        int perte = argent/2;
+        argent -= perte;
+        vue.addChaine("Vous parvenez à vous enfuir mais vous laissez");
+        vue.addChaine("derrière vous "+perte+" euros.....");
+    }
 }

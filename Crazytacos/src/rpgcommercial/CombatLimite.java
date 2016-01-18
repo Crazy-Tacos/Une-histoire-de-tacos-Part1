@@ -54,6 +54,7 @@ public class CombatLimite extends Combat{
                 else{
                     joueur.utiliserSoin(j, -degats);
                 }
+                nbTour--;
             }
             else{
                 // L'ennemi attaque avec son IA 
@@ -67,7 +68,7 @@ public class CombatLimite extends Combat{
                 control.pause(j);
             }
             tourJ = !tourJ;
-            nbTour--;
+            
         }
         
         if (joueur.getVie()>0 && nbTour > 0){

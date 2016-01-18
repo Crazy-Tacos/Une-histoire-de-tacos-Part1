@@ -335,6 +335,7 @@ public class Jeu {
         if(vivant){            
             vue.addChaine("Tout les méchants ont mouru!");
             vue.addChaine("");
+            personnage.regen();
             sauvegarder(vue);
         }
         

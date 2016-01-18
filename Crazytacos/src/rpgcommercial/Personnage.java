@@ -221,6 +221,7 @@ public class Personnage {
         if (c != null){
             inventaire.setCompetence(c);
             v.addChaine("Vous avez appris la compétence " + c.nom);
+            c.drawCompetence(v);
         }
     }
     
@@ -305,7 +306,7 @@ public class Personnage {
             car = carac.get(Caracteristique.INTELLIGENCE);
         }
         
-        return c.dmin + c.ratio * car / 100;
+        return c.dmin + (c.ratio * car) / 100;
     }
     
     public int getDmaxArme(Arme c){
@@ -322,8 +323,7 @@ public class Personnage {
         else if (c.carac == 4){ // Intelligence
             car = getIntellTotale();
         }
-        
-        return c.dmax + c.ratio * car / 100;
+        return c.dmax + (c.ratio * car) / 100;
     }
     
     public int attaquer(Vue j, int choix){
@@ -422,23 +422,23 @@ public class Personnage {
         if (inventaire.getArmePrincipale()!=null){
             nb++;
             str = " " + nb + ". " + inventaire.getArmePrincipale().nom + " : ";
-            str += inventaire.getArmePrincipale().dmin + "-";
-            str+= inventaire.getArmePrincipale().dmax + " dégats";
+            str += getDminArme(inventaire.getArmePrincipale()) + "-";
+            str+= getDmaxArme(inventaire.getArmePrincipale()) + " dégats";
             j.addChaine(str);
         }
         if (inventaire.getArmeSecondaire()!=null){
             nb++;
             str = " " + nb + ". " + inventaire.getArmeSecondaire().nom + " : ";
-            str += inventaire.getArmeSecondaire().dmin + "-";
-            str += inventaire.getArmeSecondaire().dmax + " dégats et ";
+            str += getDminArme(inventaire.getArmeSecondaire()) + "-";
+            str += getDmaxArme(inventaire.getArmeSecondaire()) + " dégats et ";
             str += inventaire.getArmeSecondaire().getMunitions() + " munitions";
             j.addChaine(str);
         }
         if (inventaire.getCompetence()!=null){
             nb++;
             str = " " + nb + ". " + inventaire.getCompetence().nom + " : ";
-            str += inventaire.getCompetence().dmin + "-";
-            str += inventaire.getCompetence().dmax;
+            str += getDminArme(inventaire.getCompetence()) + "-";
+            str += getDmaxArme(inventaire.getCompetence());
             if (inventaire.getCompetence().isSoin()){
                 str += " soins";
             }

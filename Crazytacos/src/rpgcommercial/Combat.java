@@ -61,6 +61,8 @@ public class Combat {
                     ennemi.infligerDegats(j, degats);
                 }
                 else{
+                    System.out.println("degats : " + degats);
+                    System.out.println("degats : " + degats);
                     joueur.utiliserSoin(j, -degats);
                 }
             }

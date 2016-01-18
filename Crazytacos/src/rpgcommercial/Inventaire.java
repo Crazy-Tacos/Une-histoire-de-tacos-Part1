@@ -48,7 +48,7 @@ public class Inventaire {
             lecture=ligne.split("=");
             if(lecture.length >1){
                 lecture=lecture[1].split(" ");
-                this.competence = null;
+                this.competence = new Competence(lecture);
             }
             else{
                 this.competence = null;

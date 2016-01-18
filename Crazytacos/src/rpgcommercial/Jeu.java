@@ -157,7 +157,6 @@ public class Jeu {
                     lecture=ligne.split("=");
                     int nbTour=Integer.parseInt(lecture[1]);
                     
-                    joueur.pause(vue);
                 
                     if(nbTour<=0)
                         combat= new Combat(joueur, vue, personnage, perso);
@@ -215,8 +214,6 @@ public class Jeu {
         catch (IOException | NumberFormatException e){
                 System.out.println(e.toString());
         }
-        personnage.drawPersonnage(vue);
-        vue.draw();
     }
     
     public boolean choisirChapitre(Vue vue){
@@ -338,7 +335,8 @@ public class Jeu {
         
         if(vivant){            
             vue.addChaine("Tout les méchants ont mouru!");
-            joueur.pause(vue);
+            vue.addChaine("");
+            sauvegarder(vue);
         }
         
         if(this.avancement==avancement && vivant){
@@ -367,8 +365,8 @@ public class Jeu {
                 else {
                     vue.addChaine(ligne);
                 }
-               
             }
+            joueur.pause(vue); 
          }
         catch (Exception e){
             System.out.println(e.toString());

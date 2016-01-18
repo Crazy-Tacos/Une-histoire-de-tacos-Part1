@@ -1,25 +1,40 @@
 id=0
-Personnage=Caisse_enregistreuse 4 10 782 30 10 10 10
-armePrincipale=Mains_nues 1 3 5 2
-armeSecondaire=Revolver 6 10 20 2 8
+mob=Etagere_de_chaussure 4 10 50 30 10 10 10
+armePrincipale=Talon_aiguille 3 12 4 3
+armeSecondaire=Sprai_d'entretien 6 10 20 2 50
 armure=
 consommable=
 nbTour=-1
 
 id=1
-mob=Planche 2 15 0 10 12 12 12
-armePrincipale=Clou 2 10 5 2
-armeSecondaire=Lance_clou 10 12 5 2 3
-armure=
+mob=Type_louche 6 20 70 40 20 20 20
+armePrincipale=Point_Americain 6 15 10 2
+armeSecondaire=
+armure=Kawé 10 0 40 -5 1000
 consommable=
-nbTour=12
+nbTour=-1
 
 id=2
-mob=Planche 2 15 0 10 12 12 12
-armePrincipale=Clou 2 10 5 2
+mob=Type_louche 6 20 70 40 20 20 20
+armePrincipale=Couteau_papillion 6 15 10 3
 armeSecondaire=
-armure=Bois 12 2 2 2 50
+armure=Lunette 10 -10 0 50 1000
 consommable=
-nbTour=0
+nbTour=-1
 
+id=3
+mob=Type_louche 6 20 70 40 20 20 20
+armePrincipale=Couteau_fauchon 4 12 5 1
+armeSecondaire=
+armure=Combinaison_spatiale 10 60 -15 00 1000
+consommable=
+nbTour=-1
+
+id=4
+mob=Type_louche 6 -20 70 40 20 20 20
+armePrincipale=Couteau_suisse 6 15 10 4
+armeSecondaire=
+armure=Kevlar 100 -10 -10 -10 1000
+consommable=
+nbTour=-1
 fin

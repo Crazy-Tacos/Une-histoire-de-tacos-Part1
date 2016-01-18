@@ -34,20 +34,18 @@ public class Jeu {
         return true;
     }   
     
-     public boolean nouvellePartie(Vue vue){ 
+      public boolean nouvellePartie(Vue vue){ 
         
         boolean arret = false;
-        vue.addChaine("Blablabla");
-        vue.addChaine("AHHHHHHHHHHH");
+        vue.addChaine("Je vais vous raconter mon histoire");
         vue.addChaine("");
-        vue.addChaine("Encore une coupure de courant...");
-        vue.addChaine("EDF ça devient pire que la SNCF");
-        vue.addChaine("");
-        vue.addChaine("En fait, dans quel magasin je travaille déjà?");
-        vue.addChaine("");
-        vue.addChaine("");
+        vue.addChaine("Tout à commencer un mardi matin, j'etais dans ma boutique de...");
+        vue.addChaine("heu...");
+        vue.addChaine("Quelle-etait mon metier de l'époque?");
         
-        vue.addChaine("--- Choisi ma profession ---");
+        joueur.pause(vue);
+        
+        vue.addChaine("--- Choisi une profession ---");
         vue.addChaine("Le Boulanger : tapez 1");
         vue.addChaine("Le Cuisinier : tapez 2");
         vue.addChaine("Le relou du SaV de Darty : tapez 3");
@@ -61,7 +59,9 @@ public class Jeu {
         
         if(!arret)
         {
-            vue.addChaine("Et quel est mon nom?");
+            vue.addChaine("Je vais vous avouer que j'ai quelques trous de mémoir depuis ce jour maudit.");
+            vue.addChaine("Pourriez-vous également me rappeler mon nom du coup?");
+            joueur.pause(vue);
             String nom;
             do{
                 vue.addChaine("--- Choisi un nom ---");
@@ -73,15 +73,18 @@ public class Jeu {
             } while(this.joueur.lireChoix(vue, 2) != 1);
             
             switch(classe){
-                case 1 : this.personnage=new Boulanger(nom); break;
-                case 2 : this.personnage=new Cuisinier(nom); break;
-                case 3 : this.personnage=new Sav(nom); break;
-                case 4 : this.personnage=new Pharmacien(nom); break;
+                case 1 :    vue.addChaine("Ha oui voila je suis " + nom + "et j'etais dans ma boulangerie.");
+                            this.personnage=new Boulanger(nom); break;
+                case 2 :    vue.addChaine("Ha oui voila je suis " + nom + "et j'etais dans ma cuisine.");
+                            this.personnage=new Cuisinier(nom); break;
+                case 3 :    vue.addChaine("Ha oui voila je suis " + nom + "et j'etais au SaV de Darty.");
+                            this.personnage=new Sav(nom); break;
+                case 4 :    vue.addChaine("Ha oui voila je suis " + nom + "et j'etais dans ma pharmacie.");
+                            this.personnage=new Pharmacien(nom); break;
                 default : System.out.println("Fatal Error"); return true ;
             }
             
-            vue.addChaine("Je suis " +nom+ ", ravi de faire ta connaissance");
-            vue.addChaine("Notre aventure peut enfin commencer !");
+            vue.addChaine("Quand soudainement j'entendis des hurlements venant du hall...");
             this.joueur.pause(vue);
             
             sauvegarder(vue);
@@ -220,7 +223,7 @@ public class Jeu {
         
         int choix;
         
-        vue.addChaine("-- CRAZY TACOS --");
+        vue.addChaine("-- Panique au Centre Commercial --");
         vue.addChaine("Votre Boutique : tapez 1");
         vue.addChaine("Magasin de chaussure : tapez 2");
         vue.addChaine("McDonald's : tapez 3");
@@ -232,7 +235,7 @@ public class Jeu {
             vue.addChaine("Cette zone n'est pas encore débloquée.");
             joueur.pause(vue);
 
-            vue.addChaine("-- CRAZY TACOS --");
+            vue.addChaine("-- Panique au Centre Commercial  --");
             vue.addChaine("Votre Boutique : tapez 1");
             vue.addChaine("Magasin de chaussure : tapez 2");
             vue.addChaine("McDonald's : tapez 3");
@@ -257,7 +260,7 @@ public class Jeu {
         
         while (!arret)
         {                
-            vue.addChaine("-- CRAZY TACOS --");
+            vue.addChaine("-- Panique au Centre Commercial  --");
             vue.addChaine("Choisir un Chapitre : tapez 1");
             vue.addChaine("Voir les informations du personnage : tapez 2");
             vue.addChaine("Sauvegarder la partie : tapez 3");

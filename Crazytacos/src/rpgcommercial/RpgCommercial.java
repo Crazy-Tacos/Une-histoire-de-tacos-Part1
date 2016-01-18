@@ -15,7 +15,7 @@ public class RpgCommercial {
                 
         while (!arret)
         {
-	        vue.addChaine("-- CRAZY TACOS --");
+	        vue.addChaine("-- Panique au Centre Commecial --");
 	        vue.addChaine("Nouvelle Partie : tapez 1");
 	        vue.addChaine("Charger Partie : tapez 2");
 	        vue.addChaine("Quitter : tapez 3");

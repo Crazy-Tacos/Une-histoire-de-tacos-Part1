@@ -120,35 +120,37 @@ public class Personnage {
         int force;
         int dext;
         int intel;
-        if (classe == "Boulanger"){
-            vie = 10;
-            force = 10; 
-            dext = 2;
-            intel = 2;
-        }
-        else if (classe == "Cuisinier"){
-            vie = 10;
-            force = 2; 
-            dext = 10;
-            intel = 2;
-        }
-        else if (classe == "SAV"){
-            vie = 15;
-            force = 4; 
-            dext = 4;
-            intel = 4;
-        }
-        else if (classe == "Pharmacien"){
-            vie = 10;
-            force = 2; 
-            dext = 2;
-            intel = 10;
-        }
-        else{
-            vie = 0;
-            force = 0; 
-            dext = 0;
-            intel = 0;
+        switch (classe) {
+            case "Boulanger":
+                vie = 10;
+                force = 10;
+                dext = 2;
+                intel = 2;
+                break;
+            case "Cuisinier":
+                vie = 10;
+                force = 2;
+                dext = 10;
+                intel = 2;
+                break;
+            case "SAV":
+                vie = 15;
+                force = 4;
+                dext = 4;
+                intel = 4;
+                break;
+            case "Pharmacien":
+                vie = 10;
+                force = 2;
+                dext = 2;
+                intel = 10;
+                break;
+            default:
+                vie = 0;
+                force = 0;
+                dext = 0;
+                intel = 0;
+                break;
         }
         carac.replace(Caracteristique.VITALITE, carac.get(Caracteristique.VITALITE) + vie);
         carac.replace(Caracteristique.FORCE, carac.get(Caracteristique.FORCE) + force);
@@ -162,61 +164,76 @@ public class Personnage {
     
     public void apprendreCompetence(Vue v){
         Competence c = null;
-        if ("Boulanger".equals(classe)){
-            if (niveau/5 == 1){
-                c = new Competence("Lancer de croissant", 3,5, 10,2, false);
-            }
-            else if (niveau/5 ==2){
-                c = new Competence("Fougasse", 6,10, 20,2, false);
-            }
-            else if (niveau/5 == 3){
-                c = new Competence("Baguette magique", 9,15, 25,2, false);
-            }
-            else if (niveau/5 ==4){
-                c = new Competence("Chausson aux pommes", 12,20, 30,2, false);
-            }
-        }
-        else if ("Cuisinier".equals(classe)){
-            if (niveau/5 == 1){
-                c = new Competence("Frite bouillante", 3,5, 10,3, false);
-            }
-            else if (niveau/5 ==2){
-                c = new Competence("Viande de kebab", 6,10, 20,3, false);
-            }
-            else if (niveau/5 == 3){
-                c = new Competence("Menu tacos", 9,15, 25,3, false);
-            }
-            else if (niveau/5 ==4){
-                c = new Competence("Jambon", 1000,1000, 30,3, false);
-            }
-        }
-        else if ("SAV".equals(classe)){
-            if (niveau/5 == 1){
-                c = new Competence("Pause café", 3,5, 5,1, false);
-            }
-            else if (niveau/5 ==2){
-                c = new Competence("Tournevis", 6,10, 10,1, false);
-            }
-            else if (niveau/5 == 3){
-                c = new Competence("Tuto youtube", 9,15, 15,1, false);
-            }
-            else if (niveau/5 ==4){
-                c = new Competence("Extension de garantie", 12,20, 20,1, false);
-            }
-        }
-        else if ("Pharmacien".equals(classe)){
-            if (niveau/5 == 1){
-                c = new Competence("Antibiotique", 3,5, 10,4, true);
-            }
-            else if (niveau/5 ==2){
-                c = new Competence("Sirop", 6,10, 20,4, true);
-            }
-            else if (niveau/5 == 3){
-                c = new Competence("Bandage", 9,15, 25,4, true);
-            }
-            else if (niveau/5 ==4){
-                c = new Competence("Ebola", 1000,1000, 30,4, false);
-            }
+        switch (classe) {
+            case "Boulanger":
+                    switch (niveau/5) {
+                        case 1:
+                            c = new Competence("Lancer de croissant", 3,5, 10,2, false);
+                            break;
+                        case 2:
+                            c = new Competence("Fougasse", 6,10, 20,2, false);
+                            break;
+                        case 3:
+                            c = new Competence("Baguette magique", 9,15, 25,2, false);
+                            break;
+                        case 4:
+                            c = new Competence("Chausson aux pommes", 12,20, 30,2, false);
+                            break;
+                        default:
+                            break;
+                    }break;
+            case "Cuisinier":
+                    switch (niveau/5) {
+                        case 1:
+                            c = new Competence("Frite bouillante", 3,5, 10,3, false);
+                            break;
+                        case 2:
+                            c = new Competence("Viande de kebab", 6,10, 20,3, false);
+                            break;
+                        case 3:
+                            c = new Competence("Menu tacos", 9,15, 25,3, false);
+                            break;
+                        case 4:
+                            c = new Competence("Jambon", 1000,1000, 30,3, false);
+                            break;
+                        default:
+                            break;
+                    }break;
+            case "SAV":
+                    switch (niveau/5) {
+                        case 1:
+                            c = new Competence("Pause café", 3,5, 5,1, false);
+                            break;
+                        case 2:
+                            c = new Competence("Tournevis", 6,10, 10,1, false);
+                            break;
+                        case 3:
+                            c = new Competence("Tuto youtube", 9,15, 15,1, false);
+                            break;
+                        case 4:
+                            c = new Competence("Extension de garantie", 12,20, 20,1, false);
+                            break;
+                        default:
+                            break;
+                    }break;
+            case "Pharmacien":
+                    switch (niveau/5) {
+                        case 1:
+                            c = new Competence("Antibiotique", 3,5, 10,4, true);
+                            break;
+                        case 2:
+                            c = new Competence("Sirop", 6,10, 20,4, true);
+                            break;
+                        case 3:
+                            c = new Competence("Bandage", 9,15, 25,4, true);
+                            break;
+                        case 4:
+                            c = new Competence("Ebola", 1000,1000, 30,4, false);
+                            break;
+                        default:
+                            break;
+                    }break;
+            default: break;
         }
         if (c != null){
             inventaire.setCompetence(c);
@@ -290,17 +307,12 @@ public class Personnage {
     
     public int getDminArme(Arme c){
         int car = 0;
-        if (c.carac == 1){ // Vitalite
-            car = carac.get(Caracteristique.VITALITE);
-        }
-        else if (c.carac == 2){ // Force
-            car = carac.get(Caracteristique.FORCE);
-        }
-        else if (c.carac == 3){ // Dexterite
-            car = carac.get(Caracteristique.DEXTERITE);
-        }
-        else if (c.carac == 4){ // Intelligence
-            car = carac.get(Caracteristique.INTELLIGENCE);
+        switch (c.carac) {
+            case 1: car = carac.get(Caracteristique.VITALITE); break; // Vitalite
+            case 2: car = carac.get(Caracteristique.FORCE); break;// Force
+            case 3: car = carac.get(Caracteristique.DEXTERITE); break;// Dexterite
+            case 4:car = carac.get(Caracteristique.INTELLIGENCE); break;// Intelligence
+            default: break;
         }
         
         return c.dmin + (c.ratio * car) / 100;
@@ -308,17 +320,12 @@ public class Personnage {
     
     public int getDmaxArme(Arme c){
         int car = 0;
-        if (c.carac == 1){ // Vitalite
-            car = getVitaliteTotale();
-        }
-        else if (c.carac == 2){ // Force
-            car = getForceTotale();
-        }
-        else if (c.carac == 3){ // Dexterite
-            car = getDextTotale();
-        }
-        else if (c.carac == 4){ // Intelligence
-            car = getIntellTotale();
+        switch (c.carac) {
+            case 1: car = getVitaliteTotale();break; // Vitalite
+            case 2:car = getForceTotale();break; // Force
+            case 3:car = getDextTotale();break; // Dexterite
+            case 4:car = getIntellTotale();break; // Intelligence
+            default: break;
         }
         return c.dmax + (c.ratio * car) / 100;
     }

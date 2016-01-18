@@ -1,9 +1,9 @@
-id=0
+﻿id=0
 Personnage=Bébé_rat 1 2 0 8 12 12 12
 armePrincipale=Mains_nues 1 3 0 0
 armeSecondaire=
 armure=
-consommable=
+competence=
 nbTour=-1
 
 id=1
@@ -11,15 +11,24 @@ mob=Planche 2 5 0 12 0 0 0
 armePrincipale=Clou 2 10 5 2
 armeSecondaire=
 armure=
-consommable=
+competence=
 nbTour=-1
 
 id=2
-mob=Tortue 2 15 5 25 10 10 10
-armePrincipale=Mains_nues 1 8 0 0
+mob=Palette 2 15 0 10 12 12 12
+armePrincipale=Clou 2 10 5 2
 armeSecondaire=
-armure=Carapace_de_tortue 10 0 0 0 75
-consommable=
-nbTour=14
+armure=Armure_en_bois 12 2 2 2 150
+competence=
+nbTour=0
+
+id=3
+Personnage=Caisse_enregistreuse 4 10 782 30 10 10 10
+armePrincipale=Mains_nues 1 3 5 2
+armeSecondaire=Revolver 6 10 20 2 20
+armure=
+competence=
+nbTour=-1
 
 fin
+

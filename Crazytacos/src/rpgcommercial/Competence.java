@@ -27,33 +27,33 @@ public class Competence extends Arme {
     }
     
     public void drawCompetence(Vue v){
-        v.addChaine("  " +getNom());
+        v.addChaine("  " +nom);
         if (soin){
             v.addChaine("  Soins : ");
         }
         else {
             v.addChaine("  Dégats : ");
         }
-        v.concatLastLigne(getDmin() + "-" + getDmax());
+        v.concatLastLigne(dmin + "-" + dmax);
         String car = "";
-        if (getCarac() == 1){ // Vitalite
+        if (carac == 1){ // Vitalite
             car = "% de la VITALITE";
         }
-        else if (getCarac() == 2){ // Force
+        else if (carac == 2){ // Force
             car = "% de la FORCE";
         }
-        else if (getCarac() == 3){ // Dexterite
+        else if (carac == 3){ // Dexterite
             car = "% de la DEXTERITE";
         }
-        else if (getCarac() == 4){ // Intelligence
+        else if (carac == 4){ // Intelligence
             car = "% de l'INTELLIGENCE";
         }
-        v.concatLastLigne(" + "+ getRatio() + car);
+        v.concatLastLigne(" + "+ ratio + car);
     }
     
     public void sauvegarder(PrintWriter fichierSortie){
         if (this != null){
-            String str = this.getNom().replace(" ", "_") + " " + getDmin() + " "+ getDmax()+ " " + getRatio()+ " " + getCarac();
+            String str = this.nom.replace(" ", "_") + " " + dmin + " "+ dmax+ " " + ratio+ " " + carac;
             if (soin){
                 str += " soin";
             }

@@ -32,7 +32,7 @@ public class ArmeSecondaire extends Arme {
     
     public void sauvegarder(PrintWriter fichierSortie){
         if (this != null){
-            fichierSortie.println(this.getNom().replace(" ", "_") + " " + getDmin() + " "+ getDmax() + " " + getRatio() + " " + getCarac() + " " + munitions );
+            fichierSortie.println(this.nom.replace(" ", "_") + " " + dmin + " "+ dmax + " " + ratio + " " + carac + " " + munitions );
         }
         else{
             fichierSortie.println();

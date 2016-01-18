@@ -92,7 +92,7 @@ public class Combat {
         joueur.gagnerXP(j,ennemi.getXP());
         joueur.gagnerArgent(j,ennemi.getArgent());
         j.drawPause(control);
-        if(!"Mains nues".equals(ennemi.getInventaire().getArmePrincipale().getNom())){
+        if(!"Mains nues".equals(ennemi.getInventaire().getArmePrincipale().nom)){
             gagnerArmePrincipale(); 
         }
         if(ennemi.getInventaire().getArmeSecondaire() != null){

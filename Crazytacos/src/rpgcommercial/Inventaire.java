@@ -100,11 +100,11 @@ public class Inventaire {
         {
             case 1 : v.addChaine("Arme principale :");
                 if(armePrincipale != null){
-                v.addChaine("Nom : "+ armePrincipale.getNom());
-                v.addChaine("Dégats d'arme : " + armePrincipale.getDmin() + " - " + armePrincipale.getDmax());
+                v.addChaine("Nom : "+ armePrincipale.nom);
+                v.addChaine("Dégats d'arme : " + armePrincipale.dmin + " - " + armePrincipale.dmax);
                 v.addChaine("Ratio : ");
 
-                switch(armePrincipale.getCarac())
+                switch(armePrincipale.carac)
                 {
                         case 1 : car = "% de la VITALITE"; break;
                         case 2 : car = "% de la FORCE";  break;
@@ -112,17 +112,17 @@ public class Inventaire {
                         case 4 : car = "% de l'INTELLIGENCE"; break;
                         default : car = "Error";
                 }
-                v.concatLastLigne(" + "+ armePrincipale.getRatio() + car);
+                v.concatLastLigne(" + "+ armePrincipale.ratio + car);
             }break;
 
             case 2 : v.addChaine("Arme secondaire :");
                 if(armeSecondaire != null){
-                v.addChaine("Nom : " + armeSecondaire.getNom());
-                v.addChaine("Dégats d'arme : " + armeSecondaire.getDmin() + " - " + armeSecondaire.getDmax());
+                v.addChaine("Nom : " + armeSecondaire.nom);
+                v.addChaine("Dégats d'arme : " + armeSecondaire.dmin + " - " + armeSecondaire.dmax);
                 v.addChaine("Munitions restantes : " + armeSecondaire.getMunitions());
                 v.addChaine("Ratio : ");
 
-                switch(armeSecondaire.getCarac())
+                switch(armeSecondaire.carac)
                 {
                         case 1 : car = "% de la VITALITE"; break;
                         case 2 : car = "% de la FORCE";  break;
@@ -130,12 +130,12 @@ public class Inventaire {
                         case 4 : car = "% de l'INTELLIGENCE"; break;
                         default : car = "Error";
                 }
-                v.concatLastLigne(" + "+ armeSecondaire.getRatio() + car);
+                v.concatLastLigne(" + "+ armeSecondaire.ratio + car);
             }break;
 
             case 3 : v.addChaine("Armure :");
                 if(armure != null){
-                v.addChaine("Nom : " + armure.getNom());
+                v.addChaine("Nom : " + armure.nom);
                 v.addChaine("Vitalité : " + armure.getVitalite());
                 v.addChaine("Force : " + armure.getForce());
                 v.addChaine("Dexterité : " + armure.getDexterite());
@@ -145,17 +145,17 @@ public class Inventaire {
 
             case 4 : v.addChaine("Compétence :");
                 if(competence != null){
-                v.addChaine("Nom : " + competence.getNom());
+                v.addChaine("Nom : " + competence.nom);
                 if (competence.isSoin()){
                     v.addChaine("Soins : ");
                 }
                 else{
                     v.addChaine("Dégats : ");
                 }
-                v.concatLastLigne(competence.getDmin() + " - " + competence.getDmax());
+                v.concatLastLigne(competence.dmin + " - " + competence.dmax);
                 v.addChaine("Ratio : ");
 
-                switch(competence.getCarac())
+                switch(competence.carac)
                 {
                         case 1 : car = "% de la VITALITE"; break;
                         case 2 : car = "% de la FORCE";  break;
@@ -163,7 +163,7 @@ public class Inventaire {
                         case 4 : car = "% de l'INTELLIGENCE"; break;
                         default : car = "Error";
                 }
-                v.concatLastLigne(" + "+ competence.getRatio() + car);
+                v.concatLastLigne(" + "+ competence.ratio + car);
             }break;
         }
     }

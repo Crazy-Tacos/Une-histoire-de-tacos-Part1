@@ -127,7 +127,7 @@ public class Jeu {
     public Combat chargerCombat(int id, int avancement, Vue vue){
         String fichier ="CentreCommercial/chapitre" + avancement + ".txt";
         Combat combat;
-        Personnage perso;        
+        Personnage perso;
         
         try{                
                 InputStream ips=new FileInputStream(fichier); 

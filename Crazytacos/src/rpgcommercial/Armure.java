@@ -44,7 +44,7 @@ public class Armure extends Item {
     }
     
     public void drawArmure(Vue v){
-        v.addChaine("  "+getNom());
+        v.addChaine("  "+nom);
         v.addChaine("  Vitalité : " +carac.get(Caracteristique.VITALITE));
         v.addChaine("  Force : " +carac.get(Caracteristique.FORCE));
         v.addChaine("  Dexterité : " +carac.get(Caracteristique.DEXTERITE));
@@ -65,7 +65,7 @@ public class Armure extends Item {
     
     public void sauvegarder(PrintWriter fichierSortie){
         if (this != null){
-            fichierSortie.println(this.getNom().replace(" ", "_") + " "+ carac.get(Caracteristique.VITALITE) + " "+carac.get(Caracteristique.FORCE) +" "+ carac.get(Caracteristique.DEXTERITE) + " "+carac.get(Caracteristique.INTELLIGENCE)+" "+durabilite);        
+            fichierSortie.println(this.nom.replace(" ", "_") + " "+ carac.get(Caracteristique.VITALITE) + " "+carac.get(Caracteristique.FORCE) +" "+ carac.get(Caracteristique.DEXTERITE) + " "+carac.get(Caracteristique.INTELLIGENCE)+" "+durabilite);        
         }
         else{
             fichierSortie.println();

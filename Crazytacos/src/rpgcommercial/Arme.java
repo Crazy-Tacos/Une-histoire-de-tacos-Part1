@@ -3,10 +3,10 @@ package rpgcommercial;
 import java.io.PrintWriter;
 
 public class Arme extends Item {
-    private int dmin;
-    private int dmax;
-    private int ratio;
-    private int carac;
+    protected int dmin;
+    protected int dmax;
+    protected int ratio;
+    protected int carac;
     
     // Carac : A = VITA, 2 = FORCE, 3 = DEXT, 4 = VITA
     // Ratio : Pourcentage de la caractéristique
@@ -27,21 +27,9 @@ public class Arme extends Item {
         this.carac = Integer.parseInt(lecture[4]);        
     }
     
-    public int getDmin() {
-        return dmin;
-    }
-    public int getDmax() {
-        return dmax;
-    }
-    public int getRatio() {
-        return ratio;
-    }
-    public int getCarac() {
-        return carac;
-    }
     
     public void drawArme(Vue v){
-        v.addChaine("  " +getNom());
+        v.addChaine("  " +nom);
         v.addChaine("  Dégats : "+ dmin + "-" + dmax);
         String car = "";
         if (carac == 1){ // Vitalite
@@ -61,7 +49,7 @@ public class Arme extends Item {
     
     public void sauvegarder(PrintWriter fichierSortie){
         if (this != null){
-            fichierSortie.println(this.getNom().replace(" ", "_") + " " + dmin + " "+ dmax+ " " + ratio+ " " + carac);
+            fichierSortie.println(this.nom.replace(" ", "_") + " " + dmin + " "+ dmax+ " " + ratio+ " " + carac);
         }
         else{
             fichierSortie.println();

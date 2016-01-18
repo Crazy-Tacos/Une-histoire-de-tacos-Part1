@@ -22,7 +22,7 @@ public class Ia implements Controleur{
         }
         else if(armeSecondaire != null)
         {
-            if(armePrincipale.getDmin() + armePrincipale.getDmax() > armeSecondaire.getDmin() + armeSecondaire.getDmax()){
+            if(armePrincipale.dmin + armePrincipale.dmax > armeSecondaire.dmin + armeSecondaire.dmax){
                 return 1;
             }
             else{

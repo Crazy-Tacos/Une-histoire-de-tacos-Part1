@@ -39,9 +39,9 @@ public class Jeu {
         boolean arret = false;
         vue.addChaine("Je vais vous raconter mon histoire");
         vue.addChaine("");
-        vue.addChaine("Tout à commencer un mardi matin, j'etais dans ma boutique de...");
+        vue.addChaine("Tout à commencer un mardi matin, j'étais dans ma boutique de...");
         vue.addChaine("heu...");
-        vue.addChaine("Quelle-etait mon metier de l'époque?");
+        vue.addChaine("Quel-était mon metier de l'époque?");
         
         joueur.pause(vue);
         
@@ -59,7 +59,7 @@ public class Jeu {
         
         if(!arret)
         {
-            vue.addChaine("Je vais vous avouer que j'ai quelques trous de mémoir depuis ce jour maudit.");
+            vue.addChaine("Je vais vous avouer que j'ai quelques trous de mémoire depuis ce jour maudit.");
             vue.addChaine("Pourriez-vous également me rappeler mon nom du coup?");
             joueur.pause(vue);
             String nom;
@@ -73,13 +73,13 @@ public class Jeu {
             } while(this.joueur.lireChoix(vue, 2) != 1);
             
             switch(classe){
-                case 1 :    vue.addChaine("Ha oui voila je suis " + nom + "et j'etais dans ma boulangerie.");
+                case 1 :    vue.addChaine("Ha oui voilà je suis " + nom + " et j'étais dans ma boulangerie.");
                             this.personnage=new Boulanger(nom); break;
-                case 2 :    vue.addChaine("Ha oui voila je suis " + nom + "et j'etais dans ma cuisine.");
+                case 2 :    vue.addChaine("Ha oui voilà je suis " + nom + "et j'étais dans ma cuisine.");
                             this.personnage=new Cuisinier(nom); break;
-                case 3 :    vue.addChaine("Ha oui voila je suis " + nom + "et j'etais au SaV de Darty.");
+                case 3 :    vue.addChaine("Ha oui voilà je suis " + nom + "et j'étais au SaV de Darty.");
                             this.personnage=new Sav(nom); break;
-                case 4 :    vue.addChaine("Ha oui voila je suis " + nom + "et j'etais dans ma pharmacie.");
+                case 4 :    vue.addChaine("Ha oui voilà je suis " + nom + "et j'étais dans ma pharmacie.");
                             this.personnage=new Pharmacien(nom); break;
                 default : System.out.println("Fatal Error"); return true ;
             }
@@ -132,7 +132,7 @@ public class Jeu {
         Combat combat;
         Personnage perso;
         
-        try{                
+        try{ 
                 InputStream ips=new FileInputStream(fichier); 
                 InputStreamReader ipsr=new InputStreamReader(ips);
                 BufferedReader br=new BufferedReader(ipsr);
@@ -142,7 +142,7 @@ public class Jeu {
                 ligne=br.readLine();
                     
                 while (ligne.compareTo(recherche) !=0 && ligne.compareTo("fin") != 0){
-                
+
                     for(int i=0; i<7; i++)
                         br.readLine();
                     
@@ -264,7 +264,7 @@ public class Jeu {
             vue.addChaine("Choisir un Chapitre : tapez 1");
             vue.addChaine("Voir les informations du personnage : tapez 2");
             vue.addChaine("Sauvegarder la partie : tapez 3");
-            vue.addChaine("Retour au menu principale : tapez 4");
+            vue.addChaine("Retour au menu principal : tapez 4");
             
             switch(joueur.lireChoix(vue,4))
             {

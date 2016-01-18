@@ -10,15 +10,15 @@ id=1
 mob=Type_louche 6 20 70 40 20 20 20
 armePrincipale=Point_Americain 6 15 10 2
 armeSecondaire=
-armure=Kawé 10 0 40 -5 1000
+armure=K-way 10 0 40 -5 1000
 consommable=
 nbTour=-1
 
 id=2
 mob=Type_louche 6 20 70 40 20 20 20
-armePrincipale=Couteau_papillion 6 15 10 3
+armePrincipale=Couteau_papillon 6 15 10 3
 armeSecondaire=
-armure=Lunette 10 -10 0 50 1000
+armure=Lunettes 10 -10 0 50 1000
 consommable=
 nbTour=-1
 
@@ -37,4 +37,5 @@ armeSecondaire=
 armure=Kevlar 100 -10 -10 -10 1000
 consommable=
 nbTour=-1
+
 fin

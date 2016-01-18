@@ -1,8 +1,8 @@
 Avancement=1
-classe=Pharmacien
-Personnage=E 6 6 2356 77 19 19 37
+classe=Cuisinier
+Personnage=Bob 13 1842 782 170 34 140 34
 armePrincipale=Clou 2 10 5 2
-armeSecondaire=
-armure=Bois 12 2 2 2 26
-competence=Antibiotique 3 5 10 4 soin
+armeSecondaire=Revolver 6 10 20 2 20
+armure=Armure_en_bois 12 2 2 2 115
+competence=Viande_de_kebab 6 10 20 3
 fin

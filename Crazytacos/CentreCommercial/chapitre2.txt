@@ -1,8 +1,8 @@
 id=0
 mob=Type_louche 6 30 70 50 20 20 20
-armePrincipale=Couteau_papillion 6 15 10 3   
+armePrincipale=Couteau_papillon 6 15 10 3   
 armeSecondaire=
-armure=Kawé 10 0 40 -5 1000
+armure=K-way 10 0 40 -5 1000
 competence=
 nbTour=10
 
@@ -10,7 +10,7 @@ id=1
 mob=Type_louche 6 30 70 50 20 20 20
 armePrincipale=Couteau_suisse 6 15 10 4   
 armeSecondaire=
-armure=Lunette 10 -10 0 50 1000
+armure=Lunettes 10 -10 0 50 1000
 competence=
 nbTour=10
 

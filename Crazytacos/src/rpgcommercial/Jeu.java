@@ -75,11 +75,11 @@ public class Jeu {
             switch(classe){
                 case 1 :    vue.addChaine("Ha oui voilà je suis " + nom + " et j'étais dans ma boulangerie.");
                             this.personnage=new Boulanger(nom); break;
-                case 2 :    vue.addChaine("Ha oui voilà je suis " + nom + "et j'étais dans ma cuisine.");
+                case 2 :    vue.addChaine("Ha oui voilà je suis " + nom + " et j'étais dans ma cuisine.");
                             this.personnage=new Cuisinier(nom); break;
-                case 3 :    vue.addChaine("Ha oui voilà je suis " + nom + "et j'étais au SaV de Darty.");
+                case 3 :    vue.addChaine("Ha oui voilà je suis " + nom + " et j'étais au SaV de Darty.");
                             this.personnage=new Sav(nom); break;
-                case 4 :    vue.addChaine("Ha oui voilà je suis " + nom + "et j'étais dans ma pharmacie.");
+                case 4 :    vue.addChaine("Ha oui voilà je suis " + nom + " et j'étais dans ma pharmacie.");
                             this.personnage=new Pharmacien(nom); break;
                 default : System.out.println("Fatal Error"); return true ;
             }

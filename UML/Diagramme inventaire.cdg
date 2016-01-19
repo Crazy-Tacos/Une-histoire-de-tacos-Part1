@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Multi-file class diagram">
+  <ClassDiagramComponents>
+    <Class name="Arme" package="rpgcommercial" visibility="public" xPosition="285.0" yPosition="81.0">
+      <Fields>
+        <Field name="dmin" type="int" visibility="protected"/>
+        <Field name="dmax" type="int" visibility="protected"/>
+        <Field name="ratio" type="int" visibility="protected"/>
+        <Field name="carac" type="int" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nom"/>
+          <Argument type="int" name="dmin"/>
+          <Argument type="int" name="dmax"/>
+          <Argument type="int" name="ratio"/>
+          <Argument type="int" name="carac"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String[]" name="lecture"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="drawArme" returnType="void" visibility="public">
+          <Argument type="Vue" name="v"/>
+        </Method>
+        <Method name="sauvegarder" returnType="void" visibility="public">
+          <Argument type="PrintWriter" name="fichierSortie"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ArmeSecondaire" package="rpgcommercial" visibility="public" xPosition="-33.0" yPosition="297.0">
+      <Fields>
+        <Field name="munitions" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String[]" name="lecture"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getMunitions" returnType="int" visibility="public"/>
+        <Method name="utiliserMunition" returnType="boolean" visibility="public"/>
+        <Method name="drawArme" returnType="void" visibility="public">
+          <Argument type="Vue" name="v"/>
+        </Method>
+        <Method name="sauvegarder" returnType="void" visibility="public">
+          <Argument type="PrintWriter" name="fichierSortie"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Armure" package="rpgcommercial" visibility="public" xPosition="249.0" yPosition="627.0">
+      <Fields>
+        <Field name="carac" type="EnumMap&lt;Caracteristique, Integer&gt;" visibility="private"/>
+        <Field name="durabilite" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nom"/>
+          <Argument type="int" name="vie"/>
+          <Argument type="int" name="force"/>
+          <Argument type="int" name="dext"/>
+          <Argument type="int" name="intell"/>
+          <Argument type="int" name="dura"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String[]" name="lecture"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getVitalite" returnType="int" visibility="public"/>
+        <Method name="getForce" returnType="int" visibility="public"/>
+        <Method name="getDexterite" returnType="int" visibility="public"/>
+        <Method name="getIntell" returnType="int" visibility="public"/>
+        <Method name="getDurabilite" returnType="int" visibility="public"/>
+        <Method name="drawArmure" returnType="void" visibility="public">
+          <Argument type="Vue" name="v"/>
+        </Method>
+        <Method name="endommagerArmure" returnType="boolean" visibility="public">
+          <Argument type="int" name="degats"/>
+        </Method>
+        <Method name="sauvegarder" returnType="void" visibility="public">
+          <Argument type="PrintWriter" name="fichierSortie"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Competence" package="rpgcommercial" visibility="public" xPosition="749.0" yPosition="37.0">
+      <Fields>
+        <Field name="soin" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nom"/>
+          <Argument type="int" name="dmin"/>
+          <Argument type="int" name="dmax"/>
+          <Argument type="int" name="ratio"/>
+          <Argument type="int" name="carac"/>
+          <Argument type="boolean" name="soin"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String[]" name="lecture"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="isSoin" returnType="boolean" visibility="public"/>
+        <Method name="drawCompetence" returnType="void" visibility="public">
+          <Argument type="Vue" name="v"/>
+        </Method>
+        <Method name="sauvegarder" returnType="void" visibility="public">
+          <Argument type="PrintWriter" name="fichierSortie"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Inventaire" package="rpgcommercial" visibility="public" xPosition="835.0" yPosition="402.0">
+      <Fields>
+        <Field name="armePrincipale" type="Arme" visibility="private"/>
+        <Field name="armeSecondaire" type="ArmeSecondaire" visibility="private"/>
+        <Field name="armure" type="Armure" visibility="private"/>
+        <Field name="competence" type="Competence" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="BufferedReader" name="br"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="setArmePrincipale" returnType="void" visibility="public">
+          <Argument type="Arme" name="a"/>
+        </Method>
+        <Method name="setArmeSecondaire" returnType="void" visibility="public">
+          <Argument type="ArmeSecondaire" name="a"/>
+        </Method>
+        <Method name="setArmure" returnType="void" visibility="public">
+          <Argument type="Armure" name="a"/>
+        </Method>
+        <Method name="setCompetence" returnType="void" visibility="public">
+          <Argument type="Competence" name="c"/>
+        </Method>
+        <Method name="getArmePrincipale" returnType="Arme" visibility="public"/>
+        <Method name="getArmeSecondaire" returnType="ArmeSecondaire" visibility="public"/>
+        <Method name="getArmure" returnType="Armure" visibility="public"/>
+        <Method name="getCompetence" returnType="Competence" visibility="public"/>
+        <Method name="drawInventaire" returnType="void" visibility="public">
+          <Argument type="Vue" name="v"/>
+          <Argument type="int" name="affiche"/>
+        </Method>
+        <Method name="sauvegarder" returnType="void" visibility="public">
+          <Argument type="PrintWriter" name="fichierSortie"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Item" package="rpgcommercial" visibility="public" xPosition="353.0" yPosition="402.0">
+      <Fields>
+        <Field name="nom" type="String" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nom"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Enum name="Caracteristique" package="rpgcommercial" visibility="public" xPosition="18.0" yPosition="627.0">
+      <Literals>
+        <Literal name="VITALITE"/>
+        <Literal name="FORCE"/>
+        <Literal name="DEXTERITE"/>
+        <Literal name="INTELLIGENCE"/>
+      </Literals>
+    </Enum>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation source="rpgcommercial.Inventaire" target="rpgcommercial.Arme" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="rpgcommercial.Competence" target="rpgcommercial.Arme"/>
+    <HasRelation name="carac" source="rpgcommercial.Armure" target="rpgcommercial.Caracteristique" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="EnumMap&lt;Caracteristique, Integer&gt;"/>
+    <UseRelation source="rpgcommercial.Inventaire" target="rpgcommercial.Competence" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="rpgcommercial.Inventaire" target="rpgcommercial.ArmeSecondaire" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="competence" source="rpgcommercial.Inventaire" target="rpgcommercial.Competence" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="armePrincipale" source="rpgcommercial.Inventaire" target="rpgcommercial.Arme" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="rpgcommercial.Arme" target="rpgcommercial.Item"/>
+    <IsRelation name="is" source="rpgcommercial.Armure" target="rpgcommercial.Item"/>
+    <HasRelation name="armure" source="rpgcommercial.Inventaire" target="rpgcommercial.Armure" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="rpgcommercial.Inventaire" target="rpgcommercial.Armure" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="armeSecondaire" source="rpgcommercial.Inventaire" target="rpgcommercial.ArmeSecondaire" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="rpgcommercial.ArmeSecondaire" target="rpgcommercial.Arme"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

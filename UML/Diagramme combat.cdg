@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Multi-file class diagram">
+  <ClassDiagramComponents>
+    <Class name="Combat" package="rpgcommercial" visibility="public" xPosition="518.0" yPosition="445.0">
+      <Fields>
+        <Field name="joueur" type="Personnage" visibility="protected"/>
+        <Field name="ennemi" type="Personnage" visibility="protected"/>
+        <Field name="j" type="Vue" visibility="protected"/>
+        <Field name="control" type="Joueur" visibility="protected"/>
+        <Field name="iaControl" type="Ia" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Joueur" name="control"/>
+          <Argument type="Vue" name="j"/>
+          <Argument type="Personnage" name="joueur"/>
+          <Argument type="Personnage" name="ennemi"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getJoueur" returnType="Personnage" visibility="public"/>
+        <Method name="getEnnemi" returnType="Personnage" visibility="public"/>
+        <Method name="drawCombat" returnType="void" visibility="public"/>
+        <Method name="doCombat" returnType="boolean" visibility="public"/>
+        <Method name="gagnerRecompenses" returnType="void" visibility="public"/>
+        <Method name="gagnerArmePrincipale" returnType="void" visibility="public"/>
+        <Method name="gagnerArmeSecondaire" returnType="void" visibility="public"/>
+        <Method name="gagnerArmure" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="CombatLimite" package="rpgcommercial" visibility="public" xPosition="471.0" yPosition="92.0">
+      <Fields>
+        <Field name="nbTour" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Joueur" name="control"/>
+          <Argument type="Vue" name="j"/>
+          <Argument type="Personnage" name="joueur"/>
+          <Argument type="Personnage" name="ennemi"/>
+          <Argument type="int" name="nbTour"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNbTour" returnType="int" visibility="public"/>
+        <Method name="drawCombat" returnType="void" visibility="public"/>
+        <Method name="doCombat" returnType="boolean" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Ia" package="rpgcommercial" visibility="public" xPosition="1066.0" yPosition="121.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="choixAttaque" returnType="int" visibility="public">
+          <Argument type="Personnage" name="monstre"/>
+          <Argument type="Personnage" name="player"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Joueur" package="rpgcommercial" visibility="public" xPosition="1460.0" yPosition="137.0">
+      <Fields>
+        <Field name="in" type="Scanner" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="pause" returnType="void" visibility="public">
+          <Argument type="Vue" name="v"/>
+        </Method>
+        <Method name="lireEntier" returnType="int" visibility="public"/>
+        <Method name="lireChoix" returnType="int" visibility="public">
+          <Argument type="Vue" name="v"/>
+          <Argument type="int" name="max"/>
+        </Method>
+        <Method name="tailleFenetre" returnType="void" visibility="public">
+          <Argument type="Vue" name="v"/>
+        </Method>
+        <Method name="lireString" returnType="String" visibility="public">
+          <Argument type="Vue" name="vue"/>
+        </Method>
+        <Method name="lireString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Personnage" package="rpgcommercial" visibility="public" xPosition="1152.0" yPosition="602.0">
+      <Fields>
+        <Field name="nom" type="String" visibility="protected"/>
+        <Field name="classe" type="String" visibility="protected"/>
+        <Field name="niveau" type="int" visibility="protected"/>
+        <Field name="experience" type="int" visibility="protected"/>
+        <Field name="argent" type="int" visibility="protected"/>
+        <Field name="vie" type="int" visibility="protected"/>
+        <Field name="carac" type="EnumMap&lt;Caracteristique, Integer&gt;" visibility="protected"/>
+        <Field name="inventaire" type="Inventaire" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nom"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="String" name="nom"/>
+          <Argument type="int" name="niv"/>
+          <Argument type="int" name="exp"/>
+          <Argument type="int" name="arg"/>
+          <Argument type="int" name="vie"/>
+          <Argument type="int" name="force"/>
+          <Argument type="int" name="dext"/>
+          <Argument type="int" name="intell"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="BufferedReader" name="br"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="drawPersonnage" returnType="void" visibility="public">
+          <Argument type="Vue" name="j"/>
+        </Method>
+        <Method name="drawPersonnageCombat" returnType="void" visibility="public">
+          <Argument type="Vue" name="j"/>
+          <Argument type="int" name="ligne"/>
+          <Argument type="int" name="decalage"/>
+        </Method>
+        <Method name="drawPersonnageCombat" returnType="void" visibility="public">
+          <Argument type="Vue" name="j"/>
+        </Method>
+        <Method name="levelUp" returnType="void" visibility="public">
+          <Argument type="Vue" name="j"/>
+        </Method>
+        <Method name="apprendreCompetence" returnType="void" visibility="public">
+          <Argument type="Vue" name="v"/>
+        </Method>
+        <Method name="gagnerXP" returnType="void" visibility="public">
+          <Argument type="Vue" name="j"/>
+          <Argument type="int" name="xp"/>
+        </Method>
+        <Method name="getNom" returnType="String" visibility="public"/>
+        <Method name="getVie" returnType="int" visibility="public"/>
+        <Method name="getDextTotale" returnType="int" visibility="public"/>
+        <Method name="getIntellTotale" returnType="int" visibility="public"/>
+        <Method name="utiliserSoin" returnType="void" visibility="public">
+          <Argument type="Vue" name="j"/>
+          <Argument type="int" name="val"/>
+        </Method>
+        <Method name="soigner" returnType="void" visibility="public">
+          <Argument type="int" name="vie"/>
+        </Method>
+        <Method name="getVitaliteTotale" returnType="int" visibility="public"/>
+        <Method name="getForceTotale" returnType="int" visibility="public"/>
+        <Method name="getDminArme" returnType="int" visibility="public">
+          <Argument type="Arme" name="c"/>
+        </Method>
+        <Method name="getDmaxArme" returnType="int" visibility="public">
+          <Argument type="Arme" name="c"/>
+        </Method>
+        <Method name="attaquer" returnType="int" visibility="public">
+          <Argument type="Vue" name="j"/>
+          <Argument type="int" name="choix"/>
+        </Method>
+        <Method name="infligerDegats" returnType="void" visibility="public">
+          <Argument type="Vue" name="j"/>
+          <Argument type="int" name="deg"/>
+        </Method>
+        <Method name="regen" returnType="void" visibility="public"/>
+        <Method name="getXP" returnType="int" visibility="public"/>
+        <Method name="gagnerArgent" returnType="void" visibility="public">
+          <Argument type="Vue" name="j"/>
+          <Argument type="int" name="sous"/>
+        </Method>
+        <Method name="getArgent" returnType="int" visibility="public"/>
+        <Method name="getInventaire" returnType="Inventaire" visibility="public"/>
+        <Method name="drawActions" returnType="int" visibility="public">
+          <Argument type="Vue" name="j"/>
+        </Method>
+        <Method name="sauvegarder" returnType="void" visibility="public">
+          <Argument type="PrintWriter" name="fichierSortie"/>
+        </Method>
+        <Method name="perdreCombat" returnType="void" visibility="public">
+          <Argument type="Vue" name="vue"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Interface name="Controleur" package="rpgcommercial" visibility="public" xPosition="1362.0" yPosition="20.0">
+      <Methods/>
+    </Interface>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="iaControl" source="rpgcommercial.Combat" target="rpgcommercial.Ia" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="rpgcommercial.Joueur" target="rpgcommercial.Controleur"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="rpgcommercial.Ia" target="rpgcommercial.Controleur"/>
+    <UseRelation source="rpgcommercial.Ia" target="rpgcommercial.Personnage" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="control" source="rpgcommercial.Combat" target="rpgcommercial.Joueur" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="j" source="rpgcommercial.Combat" target="rpgcommercial.Vue" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="joueur" source="rpgcommercial.Combat" target="rpgcommercial.Personnage" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="rpgcommercial.Vue" target="rpgcommercial.Joueur" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="ennemi" source="rpgcommercial.Combat" target="rpgcommercial.Personnage" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="rpgcommercial.Combat" target="rpgcommercial.Personnage" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="rpgcommercial.CombatLimite" target="rpgcommercial.Combat"/>
+    <UseRelation source="rpgcommercial.Joueur" target="rpgcommercial.Vue" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

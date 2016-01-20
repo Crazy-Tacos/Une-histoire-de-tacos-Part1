@@ -23,7 +23,7 @@ consommable=
 nbTour=-1
 
 id=3
-mob=Type_louche 6 20 70 40 20 20 20
+mob=Type_louche 6 30 70 40 20 20 20
 armePrincipale=Couteau_fauchon 4 12 5 1
 armeSecondaire=
 armure=Combinaison_spatiale 10 60 -15 00 1000
@@ -31,7 +31,7 @@ consommable=
 nbTour=-1
 
 id=4
-mob=Type_louche 6 -20 70 40 20 20 20
+mob=Type_louche 8 50 70 50 30 30 30
 armePrincipale=Couteau_suisse 6 15 10 4
 armeSecondaire=
 armure=Kevlar 100 -10 -10 -10 1000

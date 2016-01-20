@@ -108,9 +108,9 @@ public class Personnage {
         j.addChaine(nom);
         j.addChaine("Niveau : " + niveau);
         j.addChaine("Vie : " + vie + "/" + getVitaliteTotale());
-        j.addChaine("Force : " + carac.get(Caracteristique.FORCE));
-        j.addChaine("Dexterite : " + carac.get(Caracteristique.DEXTERITE));
-        j.addChaine("Intelligence : " + carac.get(Caracteristique.INTELLIGENCE));
+        j.addChaine("Force : " + getForceTotale());
+        j.addChaine("Dexterite : " + getDextTotale());
+        j.addChaine("Intelligence : " + getIntellTotale());
     }
     
     public void levelUp(Vue j){
@@ -473,7 +473,7 @@ public class Personnage {
         regen();
         int perte = argent/2;
         argent -= perte;
-        vue.addChaine("Vous parvenez à vous enfuir mais vous laissez");
-        vue.addChaine("derrière vous "+perte+" euros.....");
+        vue.addChaine("J'avais du m'enfuire.");
+        vue.addChaine("Durant ma course j'ai fait tomber "+perte+" euros.....");
     }
 }

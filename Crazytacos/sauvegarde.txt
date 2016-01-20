@@ -1,8 +1,8 @@
-Avancement=1
-classe=Cuisinier
-Personnage=Bob 13 1842 782 170 34 140 34
-armePrincipale=Clou 2 10 5 2
-armeSecondaire=Revolver 6 10 20 2 20
-armure=Armure_en_bois 12 2 2 2 115
-competence=Viande_de_kebab 6 10 20 3
+Avancement=2
+classe=Boulanger
+Personnage=Zinturo 7 76 696 110 30 22 22
+armePrincipale=Point_Americain 6 15 10 2
+armeSecondaire=Sprai_d'entretien 6 10 20 2 17
+armure=Combinaison_spatiale 10 60 -15 0 846
+competence=Lancer_de_croissant 3 5 10 2
 fin

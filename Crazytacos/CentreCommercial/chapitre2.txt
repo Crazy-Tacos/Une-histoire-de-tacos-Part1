@@ -1,5 +1,5 @@
 id=0
-mob=Type_louche 6 30 70 50 20 20 20
+mob=Soldat_solide 6 30 70 50 20 20 20
 armePrincipale=Couteau_papillon 6 15 10 3   
 armeSecondaire=
 armure=K-way 10 0 40 -5 1000
@@ -7,7 +7,7 @@ competence=
 nbTour=10
 
 id=1
-mob=Type_louche 6 30 70 50 20 20 20
+mob=Soldat_solide 6 30 70 50 20 20 20
 armePrincipale=Couteau_suisse 6 15 10 4   
 armeSecondaire=
 armure=Lunettes 10 -10 0 50 1000
@@ -15,7 +15,7 @@ competence=
 nbTour=10
 
 id=2
-mob=Type_louche 6 30 70 50 20 20 20
+mob=Soldat_solide 6 30 70 50 20 20 20
 armePrincipale=Point_Americain 6 15 10 2
 armeSecondaire=
 armure=Combinaison_spatiale 10 60 -15 00 1000
@@ -23,7 +23,7 @@ competence=
 nbTour=10
 
 id=3
-mob=Type_louche 6 30 70 20 20 20 20
+mob=Soldat_solide 6 30 70 20 20 20 20
 armePrincipale=Couteau_fauchon 4 12 5 1   
 armeSecondaire=
 armure=Kevlar 100 -10 -10 -10 1000

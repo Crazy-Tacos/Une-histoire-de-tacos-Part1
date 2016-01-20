@@ -318,7 +318,7 @@ public class Jeu {
             joueur.pause(vue);
             
             if(combat.doCombat()){                
-                vue.addChaine("Vous avez battu " + combat.getEnnemi().getNom() + " !");
+                vue.addChaine("J'ai réussi à battre " + combat.getEnnemi().getNom() + " !");
                 joueur.pause(vue);
                 
                 combat.gagnerRecompenses();
@@ -327,7 +327,7 @@ public class Jeu {
                 combat = chargerCombat(id, avancement, vue); 
             }
             else{                
-                vue.addChaine("Vous avez perdu le combat face à " + combat.getEnnemi().getNom());
+                vue.addChaine("J'ai pris une raclé par " + combat.getEnnemi().getNom());
                 personnage.perdreCombat(vue);
                 joueur.pause(vue);
                 

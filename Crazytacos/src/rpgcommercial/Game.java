@@ -219,7 +219,7 @@ public class Game {
         }
     }
     
-    public boolean chooseChapitre(View vue){
+    public boolean choseChapitre(View vue){
         
         int choix;
         
@@ -268,7 +268,7 @@ public class Game {
             
             switch(joueur.readChose(vue,4))
             {
-                    case 1 : chooseChapitre(vue); break;
+                    case 1 : choseChapitre(vue); break;
                     case 2 : drawInfo(vue);  break;
                     case 3 : save(vue); break;
                     case 4 : arret = leaveGame(vue); break;
@@ -280,11 +280,26 @@ public class Game {
     
     public void drawInfo(View vue){
         personnage.drawCaracter(vue);
-        joueur.pause(vue);
-        for(int i=1; i<5; i++){            
-            personnage.getInventory().drawInventory(vue, i);
-            joueur.pause(vue);
+        vue.addString("Armure :", 2, 20);
+        if(personnage.getInventory().getArmor()!= null){
+            vue.addString("");
+            vue.addString("Nom : " + personnage.getInventory().getArmor().nom, 3, 22);
+            vue.addString("+ " + personnage.getInventory().getArmor().getVitalite(), 4, 22);
+            vue.addString("+ " + personnage.getInventory().getArmor().getForce(), 5, 22);
+            vue.addString("+ " + personnage.getInventory().getArmor().getDexterite(), 6, 22);
+            vue.addString("+ " + personnage.getInventory().getArmor().getIntell(), 7, 22);
+            vue.addString("Durabilité : " + personnage.getInventory().getArmor().getDurabilite(), 8, 22);
         }
+        joueur.pause(vue);
+        vue.addString("Arme principale :");
+        personnage.getInventory().getMainWeapon().drawWeapon(vue);
+        vue.addString("");
+        vue.addString("Arme secondaire :");
+        personnage.getInventory().getSecondWeapon().drawWeapon(vue);
+        vue.addString("");
+        vue.addString("Compétence :");
+        personnage.getInventory().getSpell().drawWeapon(vue);
+        joueur.pause(vue);
     }
     
     public boolean leaveGame(View vue){        

@@ -2,6 +2,7 @@ package rpgcommercial;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -222,36 +223,26 @@ public class Game {
     public boolean choseChapitre(View vue){
         
         int choix;
-        
-        vue.addString("-- Panique au Centre Commercial --");
-        vue.addString("Votre Boutique : tapez 1");
-        vue.addString("Magasin de chaussure : tapez 2");
-        vue.addString("McDonald's : tapez 3");
-        vue.addString("Retour : tapez 4");             
-        choix =joueur.readChose(vue,4);
-
-        while(choix-1 > this.avancement && choix <= 3){
-            vue.addString("Attention!!!");
-            vue.addString("Cette zone n'est pas encore débloquée.");
-            joueur.pause(vue);
-
+        boolean jeufini = false;
+        do {
             vue.addString("-- Panique au Centre Commercial  --");
             vue.addString("Votre Boutique : tapez 1");
-            vue.addString("Magasin de chaussure : tapez 2");
-            vue.addString("McDonald's : tapez 3");
+            if(this.avancement >0){ vue.addString("Magasin de chaussure : tapez 2");}
+            if(this.avancement >1){ vue.addString("McDonald's : tapez 3");}
+            
             vue.addString("Retour : tapez 4");            
             choix =joueur.readChose(vue,4);
-        }
+        } while(choix-1 > this.avancement && choix <= 3);
 
         switch(choix)
         {
                 case 1 : lancerChapitre(vue,0); break;
                 case 2 : lancerChapitre(vue,1);  break;
-                case 3 : lancerChapitre(vue,2); break;
+                case 3 : jeufini = lancerChapitre(vue,2); break;
                 case 4 : return true;
                 default : System.out.println("\nFatal Error"); return true ;
         }     
-        return true;
+        return jeufini;
     }
     
     public boolean runAdventure(View vue){
@@ -268,7 +259,7 @@ public class Game {
             
             switch(joueur.readChose(vue,4))
             {
-                    case 1 : choseChapitre(vue); break;
+                    case 1 : arret = choseChapitre(vue); break;
                     case 2 : drawInfo(vue);  break;
                     case 3 : save(vue); break;
                     case 4 : arret = leaveGame(vue); break;
@@ -291,15 +282,21 @@ public class Game {
             vue.addString("Durabilité : " + personnage.getInventory().getArmor().getDurabilite(), 8, 22);
         }
         joueur.pause(vue);
-        vue.addString("Arme principale :");
-        personnage.getInventory().getMainWeapon().drawWeapon(vue);
-        vue.addString("");
-        vue.addString("Arme secondaire :");
-        personnage.getInventory().getSecondWeapon().drawWeapon(vue);
-        vue.addString("");
-        vue.addString("Compétence :");
-        personnage.getInventory().getSpell().drawWeapon(vue);
-        joueur.pause(vue);
+        if (personnage.getInventory().getMainWeapon() != null){
+            vue.addString("Arme principale :");
+            personnage.getInventory().getMainWeapon().drawWeapon(vue);
+            vue.addString("");
+        }
+        if(personnage.getInventory().getSecondWeapon() != null){
+            vue.addString("Arme secondaire :");
+            personnage.getInventory().getSecondWeapon().drawWeapon(vue);
+            vue.addString("");
+        }
+        if (personnage.getInventory().getSpell() !=null){ 
+            vue.addString("Compétence :");
+            personnage.getInventory().getSpell().drawWeapon(vue);
+            joueur.pause(vue);
+        }
     }
     
     public boolean leaveGame(View vue){        
@@ -322,7 +319,7 @@ public class Game {
         Fight combat;         
         
         if (avancement == this.avancement){
-            lireHistoire(vue, avancement);
+            readStory(vue, avancement);
         }
         
         combat = loadFight(id, avancement, vue);
@@ -361,12 +358,16 @@ public class Game {
             this.avancement++;
             vue.addString("Félicitation, vous avez débloquer le chapitre suivant!!");
             joueur.pause(vue);
+            if (this.avancement ==3){
+                endTheGame(vue);
+                return true;
+            }
         }
         
-        return true;
+        return false;
     }    
     
-    public void lireHistoire(View vue, int avancement){
+    public void readStory(View vue, int avancement){
         String fichier ="CentreCommercial/chapitre" + avancement + "_histoire.txt";
         
          try{                
@@ -390,4 +391,38 @@ public class Game {
             System.out.println(e.toString());
         }
     }
+    
+    public void endTheGame(View vue){
+        readStory(vue, 3);
+        writeScore(vue);
+        if (new File("sauvegarde.txt").delete()){
+            vue.addString("L'explosion vous a fait perdre la mémoire... Encore");
+        }
+        else{ vue.addString("Erreur lors de la suppression de la sauvergarde");}
+        
+        
+    }
+    
+    public void writeScore(View vue){
+        String fichier ="score.txt";
+        try{
+            FileWriter fw = new FileWriter(fichier, true);// écrira à la fin
+            BufferedWriter bw = new BufferedWriter(fw);
+            try (PrintWriter fichierSortie = new PrintWriter(bw)) {
+                if (personnage != null){
+                    fichierSortie.println("Nom="+ personnage.getName().replace(" ", "_" ));
+                    fichierSortie.println("Argent="+personnage.getMoney());
+                    fichierSortie.println();
+                }
+            }
+        }
+        catch (Exception e){
+                System.out.println(e.toString());
+        }
+        
+        vue.addString("Votre score de "+personnage.getMoney()+ " euros a été enregistré.");
+        vue.addString("");
+    }
+    
+    
 }

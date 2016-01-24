@@ -3,7 +3,7 @@ package rpgcommercial;
 import java.io.BufferedReader;
 
 
-public class Sav extends Personnage {
+public class Sav extends Caracter {
 
     public Sav(String nom) {
         super(nom);

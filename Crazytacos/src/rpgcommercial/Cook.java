@@ -3,15 +3,15 @@ package rpgcommercial;
 import java.io.BufferedReader;
 
 
-public class Cuisinier extends Personnage {
+public class Cook extends Caracter {
 
-    public Cuisinier(String nom) {
+    public Cook(String nom) {
         super(nom);
         classe="Cuisinier";
         carac.replace(Caracteristique.DEXTERITE, 20);
     }
     
-    public Cuisinier(BufferedReader br) {
+    public Cook(BufferedReader br) {
         super(br);
         classe="Cuisinier";
         carac.replace(Caracteristique.DEXTERITE, 20);

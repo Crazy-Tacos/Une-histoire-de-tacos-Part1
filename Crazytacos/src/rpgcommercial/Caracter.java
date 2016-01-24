@@ -7,7 +7,7 @@ import java.util.EnumMap;
 import java.util.Random;
 
 
-public class Personnage {
+public class Caracter {
 
     protected String nom;
     protected String classe;
@@ -16,10 +16,10 @@ public class Personnage {
     protected int argent;
     protected int vie;
     protected EnumMap<Caracteristique, Integer> carac;
-    protected Inventaire inventaire;
+    protected Inventory inventaire;
 
     // Constructeur du joueur
-    public Personnage(String nom) {
+    public Caracter(String nom) {
         this.nom = nom;
         this.classe = "";
         this.niveau = 1;
@@ -30,12 +30,12 @@ public class Personnage {
         carac.put(Caracteristique.FORCE, 10);
         carac.put(Caracteristique.DEXTERITE, 10);
         carac.put(Caracteristique.INTELLIGENCE, 10);
-        this.inventaire = new Inventaire();
+        this.inventaire = new Inventory();
         regen();
     }
     
     // Constructeur d'un ennemi
-    public Personnage(String nom, int niv, int exp, int arg, int vie, int force, int dext, int intell) {
+    public Caracter(String nom, int niv, int exp, int arg, int vie, int force, int dext, int intell) {
         this.nom = nom;
         this.classe = "";
         this.niveau = niv;
@@ -46,11 +46,11 @@ public class Personnage {
         carac.put(Caracteristique.FORCE, force);
         carac.put(Caracteristique.DEXTERITE, dext);
         carac.put(Caracteristique.INTELLIGENCE, intell);
-        this.inventaire = new Inventaire();
+        this.inventaire = new Inventory();
         regen();
     }
     
-    public Personnage(BufferedReader br){
+    public Caracter(BufferedReader br){
         String lecture[];
         try{
             String ligne=br.readLine();
@@ -70,7 +70,7 @@ public class Personnage {
             carac.put(Caracteristique.FORCE, Integer.parseInt(lecture[5]));
             carac.put(Caracteristique.DEXTERITE, Integer.parseInt(lecture[6]));
             carac.put(Caracteristique.INTELLIGENCE, Integer.parseInt(lecture[7]));
-            this.inventaire = new Inventaire(br);
+            this.inventaire = new Inventory(br);
             regen();
         }
         catch (Exception e){
@@ -78,44 +78,44 @@ public class Personnage {
         }
     }
     
-    public void drawPersonnage(Vue j){
-        j.addChaine(nom);
-        j.addChaine("Niveau : " + niveau);
-        j.addChaine("XP : " + experience);
-        j.addChaine("Argent : " + argent);
-        j.addChaine("Vie : " + vie + "/" + carac.get(Caracteristique.VITALITE));
-        j.addChaine("Force : " + carac.get(Caracteristique.FORCE));
-        j.addChaine("Dexterite : " + carac.get(Caracteristique.DEXTERITE));
-        j.addChaine("Intelligence : " + carac.get(Caracteristique.INTELLIGENCE));
+    public void drawCaracter(View j){
+        j.addString(nom);
+        j.addString("Niveau : " + niveau);
+        j.addString("XP : " + experience);
+        j.addString("Argent : " + argent);
+        j.addString("Vie : " + vie + "/" + carac.get(Caracteristique.VITALITE));
+        j.addString("Force : " + carac.get(Caracteristique.FORCE));
+        j.addString("Dexterite : " + carac.get(Caracteristique.DEXTERITE));
+        j.addString("Intelligence : " + carac.get(Caracteristique.INTELLIGENCE));
     }
     
-    public void drawPersonnageCombat(Vue j, int ligne, int decalage){
-        j.addChaine(nom, ligne, decalage);
+    public void drawCaracterFight(View j, int ligne, int decalage){
+        j.addString(nom, ligne, decalage);
         ligne++;
-        j.addChaine("Niveau : " + niveau, ligne, decalage);
+        j.addString("Niveau : " + niveau, ligne, decalage);
         ligne++;
-        j.addChaine("Vie : " + vie + "/" + getVitaliteTotale(), ligne, decalage);
+        j.addString("Vie : " + vie + "/" + getVitaliteTotale(), ligne, decalage);
         ligne++;
-        j.addChaine("Force : " + getForceTotale(), ligne, decalage);
+        j.addString("Force : " + getForceTotale(), ligne, decalage);
         ligne++;
-        j.addChaine("Dexterite : " + getDextTotale(), ligne, decalage);
+        j.addString("Dexterite : " + getDextTotale(), ligne, decalage);
         ligne++;
-        j.addChaine("Intelligence : " + getIntellTotale(), ligne, decalage);
+        j.addString("Intelligence : " + getIntellTotale(), ligne, decalage);
         ligne++;
     }
     
-    public void drawPersonnageCombat(Vue j){
-        j.addChaine(nom);
-        j.addChaine("Niveau : " + niveau);
-        j.addChaine("Vie : " + vie + "/" + getVitaliteTotale());
-        j.addChaine("Force : " + getForceTotale());
-        j.addChaine("Dexterite : " + getDextTotale());
-        j.addChaine("Intelligence : " + getIntellTotale());
+    public void drawCaracterFight(View j){
+        j.addString(nom);
+        j.addString("Niveau : " + niveau);
+        j.addString("Vie : " + vie + "/" + getVitaliteTotale());
+        j.addString("Force : " + getForceTotale());
+        j.addString("Dexterite : " + getDextTotale());
+        j.addString("Intelligence : " + getIntellTotale());
     }
     
-    public void levelUp(Vue j){
+    public void levelUp(View j){
         this.niveau++;
-        j.addChaine("Vous êtes montés au niveau " + this.niveau + " !!!");
+        j.addString("Vous êtes montés au niveau " + this.niveau + " !!!");
         int vie;
         int force;
         int dext;
@@ -158,26 +158,26 @@ public class Personnage {
         carac.replace(Caracteristique.INTELLIGENCE, carac.get(Caracteristique.INTELLIGENCE) + intel);
         regen();
         if (niveau%5 ==0){
-            apprendreCompetence(j);
+            learnSpell(j);
         }
     }
     
-    public void apprendreCompetence(Vue v){
-        Competence c = null;
+    public void learnSpell(View v){
+        Spell c = null;
         switch (classe) {
             case "Boulanger":
                     switch (niveau/5) {
                         case 1:
-                            c = new Competence("Lancer de croissant", 3,5, 10,2, false);
+                            c = new Spell("Lancer de croissant", 3,5, 10,2, false);
                             break;
                         case 2:
-                            c = new Competence("Fougasse", 6,10, 20,2, false);
+                            c = new Spell("Fougasse", 6,10, 20,2, false);
                             break;
                         case 3:
-                            c = new Competence("Baguette magique", 9,15, 25,2, false);
+                            c = new Spell("Baguette magique", 9,15, 25,2, false);
                             break;
                         case 4:
-                            c = new Competence("Chausson aux pommes", 12,20, 30,2, false);
+                            c = new Spell("Chausson aux pommes", 12,20, 30,2, false);
                             break;
                         default:
                             break;
@@ -185,16 +185,16 @@ public class Personnage {
             case "Cuisinier":
                     switch (niveau/5) {
                         case 1:
-                            c = new Competence("Frite bouillante", 3,5, 10,3, false);
+                            c = new Spell("Frite bouillante", 3,5, 10,3, false);
                             break;
                         case 2:
-                            c = new Competence("Viande de kebab", 6,10, 20,3, false);
+                            c = new Spell("Viande de kebab", 6,10, 20,3, false);
                             break;
                         case 3:
-                            c = new Competence("Menu tacos", 9,15, 25,3, false);
+                            c = new Spell("Menu tacos", 9,15, 25,3, false);
                             break;
                         case 4:
-                            c = new Competence("Jambon", 1000,1000, 30,3, false);
+                            c = new Spell("Jambon", 1000,1000, 30,3, false);
                             break;
                         default:
                             break;
@@ -202,16 +202,16 @@ public class Personnage {
             case "SAV":
                     switch (niveau/5) {
                         case 1:
-                            c = new Competence("Pause café", 3,5, 5,1, false);
+                            c = new Spell("Pause café", 3,5, 5,1, false);
                             break;
                         case 2:
-                            c = new Competence("Tournevis", 6,10, 10,1, false);
+                            c = new Spell("Tournevis", 6,10, 10,1, false);
                             break;
                         case 3:
-                            c = new Competence("Tuto youtube", 9,15, 15,1, false);
+                            c = new Spell("Tuto youtube", 9,15, 15,1, false);
                             break;
                         case 4:
-                            c = new Competence("Extension de garantie", 12,20, 20,1, false);
+                            c = new Spell("Extension de garantie", 12,20, 20,1, false);
                             break;
                         default:
                             break;
@@ -219,16 +219,16 @@ public class Personnage {
             case "Pharmacien":
                     switch (niveau/5) {
                         case 1:
-                            c = new Competence("Antibiotique", 3,5, 10,4, true);
+                            c = new Spell("Antibiotique", 3,5, 10,4, true);
                             break;
                         case 2:
-                            c = new Competence("Sirop", 6,10, 20,4, true);
+                            c = new Spell("Sirop", 6,10, 20,4, true);
                             break;
                         case 3:
-                            c = new Competence("Bandage", 9,15, 25,4, true);
+                            c = new Spell("Bandage", 9,15, 25,4, true);
                             break;
                         case 4:
-                            c = new Competence("Ebola", 1000,1000, 30,4, false);
+                            c = new Spell("Ebola", 1000,1000, 30,4, false);
                             break;
                         default:
                             break;
@@ -236,22 +236,22 @@ public class Personnage {
             default: break;
         }
         if (c != null){
-            inventaire.setCompetence(c);
-            v.addChaine("Vous avez appris la compétence " + c.nom);
-            c.drawCompetence(v);
+            inventaire.setSpell(c);
+            v.addString("Vous avez appris la compétence " + c.nom);
+            c.drawSpell(v);
         }
     }
     
-    public void gagnerXP(Vue j,int xp){
+    public void winXP(View j,int xp){
         experience += xp;
-        j.addChaine("Vous avez gagné " + xp + " points d'expérience !");
+        j.addString("Vous avez gagné " + xp + " points d'expérience !");
         while (experience >= pow(2,niveau)){
             experience -= pow(2,niveau);
             levelUp(j);
         }
     }
     
-    public String getNom(){
+    public String getName(){
         return nom;
     }
 
@@ -262,27 +262,27 @@ public class Personnage {
     
     public int getDextTotale(){
         int val = carac.get(Caracteristique.DEXTERITE);
-        if (inventaire.getArmure() != null){
-            val += inventaire.getArmure().getDexterite();
+        if (inventaire.getArmor() != null){
+            val += inventaire.getArmor().getDexterite();
         }
         return val;
     }
     
     public int getIntellTotale(){
         int val =carac.get(Caracteristique.INTELLIGENCE);
-        if (inventaire.getArmure() != null){
-            val += inventaire.getArmure().getIntell();
+        if (inventaire.getArmor() != null){
+            val += inventaire.getArmor().getIntell();
         }
         return val;
     }
     
-    public void utiliserSoin(Vue j,int val){
-        soigner(val);
-        j.addChaine(nom + " a récupéré " + val + " points de vie.");
-        j.addChaine("");
+    public void useHeal(View j,int val){
+        heal(val);
+        j.addString(nom + " a récupéré " + val + " points de vie.");
+        j.addString("");
     }
     
-    public void soigner(int vie){
+    public void heal(int vie){
         this.vie += vie;
         if (this.vie > getVitaliteTotale()){
             regen();
@@ -291,21 +291,21 @@ public class Personnage {
     
     public int getVitaliteTotale(){
         int val =carac.get(Caracteristique.VITALITE);
-        if (inventaire.getArmure() != null){
-            val += inventaire.getArmure().getVitalite();
+        if (inventaire.getArmor() != null){
+            val += inventaire.getArmor().getVitalite();
         }
         return val;
     }
     
     public int getForceTotale(){
         int val =carac.get(Caracteristique.FORCE);
-        if (inventaire.getArmure() != null){
-            val += inventaire.getArmure().getForce();
+        if (inventaire.getArmor() != null){
+            val += inventaire.getArmor().getForce();
         }
         return val;
     }
     
-    public int getDminArme(Arme c){
+    public int getDminArme(Weapon c){
         int car = 0;
         switch (c.carac) {
             case 1: car = carac.get(Caracteristique.VITALITE); break; // Vitalite
@@ -318,7 +318,7 @@ public class Personnage {
         return c.dmin + (c.ratio * car) / 100;
     }
     
-    public int getDmaxArme(Arme c){
+    public int getDmaxArme(Weapon c){
         int car = 0;
         switch (c.carac) {
             case 1: car = getVitaliteTotale();break; // Vitalite
@@ -330,50 +330,50 @@ public class Personnage {
         return c.dmax + (c.ratio * car) / 100;
     }
     
-    public int attaquer(Vue j, int choix){
+    public int attack(View j, int choix){
         int max, min;
         Random rand = new Random();
         if (choix == 1){
-            if(inventaire.getArmePrincipale() == null){
+            if(inventaire.getMainWeapon() == null){
                 choix++;
             }
             else {
-                max = getDmaxArme(inventaire.getArmePrincipale());
-                min = getDminArme(inventaire.getArmePrincipale());
-                if (!"Mains nues".equals(inventaire.getArmePrincipale().nom)){
-                    j.addChaine(nom + " utilise l'arme " + inventaire.getArmePrincipale().nom);
+                max = getDmaxArme(inventaire.getMainWeapon());
+                min = getDminArme(inventaire.getMainWeapon());
+                if (!"Mains nues".equals(inventaire.getMainWeapon().nom)){
+                    j.addString(nom + " utilise l'arme " + inventaire.getMainWeapon().nom);
                 }
                 else{
-                    j.addChaine(nom + " attaque à mains nues");
+                    j.addString(nom + " attaque à mains nues");
                 }
                 return rand.nextInt(max - min + 1) + min;
             }
         }
         if (choix == 2){
-            if(inventaire.getArmeSecondaire() == null){
+            if(inventaire.getSecondWeapon() == null){
                 choix++;
             }
             else {
-                max = getDmaxArme(inventaire.getArmeSecondaire());
-                min = getDminArme(inventaire.getArmeSecondaire());
-                j.addChaine(nom + " utilise l'arme " + inventaire.getArmeSecondaire().nom);
-                if (inventaire.getArmeSecondaire().utiliserMunition()){
-                    j.addChaine("L'arme "+inventaire.getArmeSecondaire().nom + " n'a plus de munitions");
-                    inventaire.setArmeSecondaire(null);
+                max = getDmaxArme(inventaire.getSecondWeapon());
+                min = getDminArme(inventaire.getSecondWeapon());
+                j.addString(nom + " utilise l'arme " + inventaire.getSecondWeapon().nom);
+                if (inventaire.getSecondWeapon().useMunition()){
+                    j.addString("L'arme "+inventaire.getSecondWeapon().nom + " n'a plus de munitions");
+                    inventaire.setSecondWeapon(null);
                 }
                 return rand.nextInt(max - min + 1) + min;
             }
         }
         if (choix == 3){
-            if(inventaire.getCompetence()== null){
+            if(inventaire.getSpell()== null){
                 choix++;
             }
             else {
-                max = getDmaxArme(inventaire.getCompetence());
-                min = getDminArme(inventaire.getCompetence());
-                j.addChaine(nom + " utilise la compétence " + inventaire.getCompetence().nom);
+                max = getDmaxArme(inventaire.getSpell());
+                min = getDminArme(inventaire.getSpell());
+                j.addString(nom + " utilise la compétence " + inventaire.getSpell().nom);
                 int val = rand.nextInt(max - min + 1) + min;
-                if (inventaire.getCompetence().isSoin()){
+                if (inventaire.getSpell().isHeal()){
                     val = -val;
                 }
                 return val;
@@ -383,20 +383,20 @@ public class Personnage {
         return 0;
     }
     
-    public void infligerDegats(Vue j,int deg){
+    public void takeDamages(View j,int deg){
         vie -= deg;
         if (vie <0){
             vie = 0;
         }
-        j.addChaine(nom + " a subit " + deg + " dégats.");
-        if (inventaire.getArmure() != null && inventaire.getArmure().endommagerArmure(deg)){
-            j.addChaine("L'armure "+inventaire.getArmure().nom + " est cassée");
-            inventaire.setArmure(null);
+        j.addString(nom + " a subit " + deg + " dégats.");
+        if (inventaire.getArmor() != null && inventaire.getArmor().attackArmor(deg)){
+            j.addString("L'armure "+inventaire.getArmor().nom + " est cassée");
+            inventaire.setArmor(null);
             if (vie > getVitaliteTotale()){
                 regen();
             }
         }
-        j.addChaine("");
+        j.addString("");
     }
     
     public void regen(){
@@ -407,54 +407,54 @@ public class Personnage {
         return experience;
     }
     
-    public void gagnerArgent(Vue j,int sous){
+    public void winMoney(View j,int sous){
         argent += sous;
-        j.addChaine("Vous avez gagné " + sous + " euros !");
+        j.addString("Vous avez gagné " + sous + " euros !");
     }
     
-    public int getArgent(){
+    public int getMoney(){
         return argent;
     }
     
-    public Inventaire getInventaire(){
+    public Inventory getInventory(){
         return inventaire;
     }
     
-    public int drawActions(Vue j){
+    public int drawActions(View j){
         int nb = 0;
         String str;
-        if (inventaire.getArmePrincipale()!=null){
+        if (inventaire.getMainWeapon()!=null){
             nb++;
-            str = " " + nb + ". " + inventaire.getArmePrincipale().nom + " : ";
-            str += getDminArme(inventaire.getArmePrincipale()) + "-";
-            str+= getDmaxArme(inventaire.getArmePrincipale()) + " dégats";
-            j.addChaine(str);
+            str = " " + nb + ". " + inventaire.getMainWeapon().nom + " : ";
+            str += getDminArme(inventaire.getMainWeapon()) + "-";
+            str+= getDmaxArme(inventaire.getMainWeapon()) + " dégats";
+            j.addString(str);
         }
-        if (inventaire.getArmeSecondaire()!=null){
+        if (inventaire.getSecondWeapon()!=null){
             nb++;
-            str = " " + nb + ". " + inventaire.getArmeSecondaire().nom + " : ";
-            str += getDminArme(inventaire.getArmeSecondaire()) + "-";
-            str += getDmaxArme(inventaire.getArmeSecondaire()) + " dégats et ";
-            str += inventaire.getArmeSecondaire().getMunitions() + " munitions";
-            j.addChaine(str);
+            str = " " + nb + ". " + inventaire.getSecondWeapon().nom + " : ";
+            str += getDminArme(inventaire.getSecondWeapon()) + "-";
+            str += getDmaxArme(inventaire.getSecondWeapon()) + " dégats et ";
+            str += inventaire.getSecondWeapon().getMunitions() + " munitions";
+            j.addString(str);
         }
-        if (inventaire.getCompetence()!=null){
+        if (inventaire.getSpell()!=null){
             nb++;
-            str = " " + nb + ". " + inventaire.getCompetence().nom + " : ";
-            str += getDminArme(inventaire.getCompetence()) + "-";
-            str += getDmaxArme(inventaire.getCompetence());
-            if (inventaire.getCompetence().isSoin()){
+            str = " " + nb + ". " + inventaire.getSpell().nom + " : ";
+            str += getDminArme(inventaire.getSpell()) + "-";
+            str += getDmaxArme(inventaire.getSpell());
+            if (inventaire.getSpell().isHeal()){
                 str += " soins";
             }
             else {
                 str += " dégats";
             }
-            j.addChaine(str);
+            j.addString(str);
         }
         return nb;
     }
       
-    public void sauvegarder(PrintWriter fichierSortie){        
+    public void save(PrintWriter fichierSortie){        
         fichierSortie.println ("classe=" + classe.replace(" ", "_"));
         
         String personnage = "Personnage=" + nom.replace(" ", "_") + " " + niveau + " "+ experience+ " " + argent+ " ";
@@ -465,15 +465,15 @@ public class Personnage {
 
         fichierSortie.println (personnage);      
         if (inventaire != null){
-            inventaire.sauvegarder(fichierSortie); 
+            inventaire.save(fichierSortie); 
         } 
     }
     
-    public void perdreCombat(Vue vue){
+    public void loseFight(View vue){
         regen();
         int perte = argent/2;
         argent -= perte;
-        vue.addChaine("J'avais du m'enfuire.");
-        vue.addChaine("Durant ma course j'ai fait tomber "+perte+" euros.....");
+        vue.addString("J'avais du m'enfuire.");
+        vue.addString("Durant ma course j'ai fait tomber "+perte+" euros.....");
     }
 }

@@ -10,48 +10,48 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 
-public class Jeu {
-    private Personnage personnage;
+public class Game {
+    private Caracter personnage;
     private int avancement;
-    private Joueur joueur;
+    private PlayerControl joueur;
     
-    public Jeu(){
+    public Game(){
         this.personnage=null;
         this.avancement=0;
-        this.joueur=new Joueur();
+        this.joueur=new PlayerControl();
     }
     
-    public Joueur getJoueur(){
+    public PlayerControl getPlayer(){
         return this.joueur;
     }  
     
-    public boolean chargerPartie(Vue vue) {        
-        vue.addChaine("Chargement ...");
+    public boolean loadGame(View vue) {        
+        vue.addString("Chargement ...");
         vue.draw();
         
-        this.charger(vue);
-        this.lancerAventure(vue);        
+        this.load(vue);
+        this.runAdventure(vue);        
         return true;
     }   
     
-      public boolean nouvellePartie(Vue vue){ 
+      public boolean newGame(View vue){ 
         
         boolean arret = false;
-        vue.addChaine("Je vais vous raconter mon histoire");
-        vue.addChaine("");
-        vue.addChaine("Tout à commencer un mardi matin, j'étais dans ma boutique de...");
-        vue.addChaine("heu...");
-        vue.addChaine("Quel-était mon metier de l'époque?");
+        vue.addString("Je vais vous raconter mon histoire");
+        vue.addString("");
+        vue.addString("Tout à commencer un mardi matin, j'étais dans ma boutique de...");
+        vue.addString("heu...");
+        vue.addString("Quel-était mon metier de l'époque?");
         
         joueur.pause(vue);
         
-        vue.addChaine("--- Choisi une profession ---");
-        vue.addChaine("Le Boulanger : tapez 1");
-        vue.addChaine("Le Cuisinier : tapez 2");
-        vue.addChaine("Le relou du SaV de Darty : tapez 3");
-        vue.addChaine("Le Pharmacien : tapez 4");
-        vue.addChaine("Retour : tapez 5");
-        int classe = this.joueur.lireChoix(vue, 5);
+        vue.addString("--- Choisi une profession ---");
+        vue.addString("Le Boulanger : tapez 1");
+        vue.addString("Le Cuisinier : tapez 2");
+        vue.addString("Le relou du SaV de Darty : tapez 3");
+        vue.addString("Le Pharmacien : tapez 4");
+        vue.addString("Retour : tapez 5");
+        int classe = this.joueur.readChose(vue, 5);
         
         if (classe == 5){
             arret = true;
@@ -59,56 +59,56 @@ public class Jeu {
         
         if(!arret)
         {
-            vue.addChaine("Je vais vous avouer que j'ai quelques trous de mémoire depuis ce jour maudit.");
-            vue.addChaine("Pourriez-vous également me rappeler mon nom du coup?");
+            vue.addString("Je vais vous avouer que j'ai quelques trous de mémoire depuis ce jour maudit.");
+            vue.addString("Pourriez-vous également me rappeler mon nom du coup?");
             joueur.pause(vue);
             String nom;
             do{
-                vue.addChaine("--- Choisi un nom ---");
-                nom =this.joueur.lireString(vue);
+                vue.addString("--- Choisi un nom ---");
+                nom =this.joueur.readString(vue);
 
-                vue.addChaine("As-tu choisis le nom " + nom + " ?");
-                vue.addChaine("oui : tapez 1");
-                vue.addChaine("non : tapez 2");
-            } while(this.joueur.lireChoix(vue, 2) != 1);
+                vue.addString("As-tu choisis le nom " + nom + " ?");
+                vue.addString("oui : tapez 1");
+                vue.addString("non : tapez 2");
+            } while(this.joueur.readChose(vue, 2) != 1);
             
             switch(classe){
-                case 1 :    vue.addChaine("Ha oui voilà je suis " + nom + " et j'étais dans ma boulangerie.");
-                            this.personnage=new Boulanger(nom); break;
-                case 2 :    vue.addChaine("Ha oui voilà je suis " + nom + " et j'étais dans ma cuisine.");
-                            this.personnage=new Cuisinier(nom); break;
-                case 3 :    vue.addChaine("Ha oui voilà je suis " + nom + " et j'étais au SaV de Darty.");
+                case 1 :    vue.addString("Ha oui voilà je suis " + nom + " et j'étais dans ma boulangerie.");
+                            this.personnage=new Baker(nom); break;
+                case 2 :    vue.addString("Ha oui voilà je suis " + nom + " et j'étais dans ma cuisine.");
+                            this.personnage=new Cook(nom); break;
+                case 3 :    vue.addString("Ha oui voilà je suis " + nom + " et j'étais au SaV de Darty.");
                             this.personnage=new Sav(nom); break;
-                case 4 :    vue.addChaine("Ha oui voilà je suis " + nom + " et j'étais dans ma pharmacie.");
+                case 4 :    vue.addString("Ha oui voilà je suis " + nom + " et j'étais dans ma pharmacie.");
                             this.personnage=new Pharmacien(nom); break;
                 default : System.out.println("Fatal Error"); return true ;
             }
             
-            vue.addChaine("Quand soudainement j'entendis des hurlements venant du hall...");
+            vue.addString("Quand soudainement j'entendis des hurlements venant du hall...");
             this.joueur.pause(vue);
             
-            sauvegarder(vue);
+            save(vue);
             
-            this.lancerAventure(vue);
+            this.runAdventure(vue);
         }
         
         return true;
     }
      
-    public Personnage chargerPersonnage(BufferedReader br){
+    public Caracter loadCaracter(BufferedReader br){
         String lecture[];
         try{           
             String ligne=br.readLine();
             lecture=ligne.split("=");
             
-            Personnage perso = null;
+            Caracter perso = null;
             
             if (null != lecture[1])switch (lecture[1]) {
                 case "Boulanger":
-                    perso= new Boulanger(br);
+                    perso= new Baker(br);
                     break;
                 case "Cuisinier":
-                    perso= new Cuisinier(br);
+                    perso= new Cook(br);
                     break;
                 case "Pharmacien":
                     perso= new Pharmacien(br);
@@ -127,10 +127,10 @@ public class Jeu {
         return null;
     }
     
-    public Combat chargerCombat(int id, int avancement, Vue vue){
+    public Fight loadFight(int id, int avancement, View vue){
         String fichier ="CentreCommercial/chapitre" + avancement + ".txt";
-        Combat combat;
-        Personnage perso;
+        Fight combat;
+        Caracter perso;
         
         try{ 
                 InputStream ips=new FileInputStream(fichier); 
@@ -154,7 +154,7 @@ public class Jeu {
                 }
                 else
                 {                       
-                    perso=new Personnage(br);
+                    perso=new Caracter(br);
                     ligne=br.readLine();
                     String lecture[];
                     lecture=ligne.split("=");
@@ -162,9 +162,9 @@ public class Jeu {
                     
                 
                     if(nbTour<=0)
-                        combat= new Combat(joueur, vue, personnage, perso);
+                        combat= new Fight(joueur, vue, personnage, perso);
                     else
-                        combat= new CombatLimite(joueur, vue, personnage, perso,nbTour);
+                        combat= new FightLimit(joueur, vue, personnage, perso,nbTour);
                 }
                 br.close();
                 return combat;
@@ -175,7 +175,7 @@ public class Jeu {
         return null;
     }
     
-    public void sauvegarder(Vue vue){
+    public void save(View vue){
         String fichier ="sauvegarde.txt";
         
         try{
@@ -184,7 +184,7 @@ public class Jeu {
             try (PrintWriter fichierSortie = new PrintWriter(bw)) {
                 fichierSortie.println("Avancement="+avancement);
                 if (personnage != null){
-                    personnage.sauvegarder(fichierSortie);
+                    personnage.save(fichierSortie);
                 }
                 fichierSortie.println("fin");
             }
@@ -193,11 +193,11 @@ public class Jeu {
                 System.out.println(e.toString());
         }
         
-        vue.addChaine("La Partie a été enregistrée!!");
+        vue.addString("La Partie a été enregistrée!!");
         this.joueur.pause(vue);
     }
     
-    public void charger(Vue vue){
+    public void load(View vue){
         String fichier="sauvegarde.txt";
 
         try{
@@ -212,35 +212,35 @@ public class Jeu {
             this.avancement=Integer.parseInt(lecture[1]);
             
             //Chargement Personnage
-            this.personnage = chargerPersonnage(br);
+            this.personnage = loadCaracter(br);
         }		
         catch (IOException | NumberFormatException e){
                 System.out.println(e.toString());
         }
     }
     
-    public boolean choisirChapitre(Vue vue){
+    public boolean chooseChapitre(View vue){
         
         int choix;
         
-        vue.addChaine("-- Panique au Centre Commercial --");
-        vue.addChaine("Votre Boutique : tapez 1");
-        vue.addChaine("Magasin de chaussure : tapez 2");
-        vue.addChaine("McDonald's : tapez 3");
-        vue.addChaine("Retour : tapez 4");             
-        choix =joueur.lireChoix(vue,4);
+        vue.addString("-- Panique au Centre Commercial --");
+        vue.addString("Votre Boutique : tapez 1");
+        vue.addString("Magasin de chaussure : tapez 2");
+        vue.addString("McDonald's : tapez 3");
+        vue.addString("Retour : tapez 4");             
+        choix =joueur.readChose(vue,4);
 
         while(choix-1 > this.avancement && choix <= 3){
-            vue.addChaine("Attention!!!");
-            vue.addChaine("Cette zone n'est pas encore débloquée.");
+            vue.addString("Attention!!!");
+            vue.addString("Cette zone n'est pas encore débloquée.");
             joueur.pause(vue);
 
-            vue.addChaine("-- Panique au Centre Commercial  --");
-            vue.addChaine("Votre Boutique : tapez 1");
-            vue.addChaine("Magasin de chaussure : tapez 2");
-            vue.addChaine("McDonald's : tapez 3");
-            vue.addChaine("Retour : tapez 4");            
-            choix =joueur.lireChoix(vue,4);
+            vue.addString("-- Panique au Centre Commercial  --");
+            vue.addString("Votre Boutique : tapez 1");
+            vue.addString("Magasin de chaussure : tapez 2");
+            vue.addString("McDonald's : tapez 3");
+            vue.addString("Retour : tapez 4");            
+            choix =joueur.readChose(vue,4);
         }
 
         switch(choix)
@@ -254,46 +254,46 @@ public class Jeu {
         return true;
     }
     
-    public boolean lancerAventure(Vue vue){
+    public boolean runAdventure(View vue){
         
         boolean arret=false;
         
         while (!arret)
         {                
-            vue.addChaine("-- Panique au Centre Commercial  --");
-            vue.addChaine("Choisir un Chapitre : tapez 1");
-            vue.addChaine("Voir les informations du personnage : tapez 2");
-            vue.addChaine("Sauvegarder la partie : tapez 3");
-            vue.addChaine("Retour au menu principal : tapez 4");
+            vue.addString("-- Panique au Centre Commercial  --");
+            vue.addString("Choisir un Chapitre : tapez 1");
+            vue.addString("Voir les informations du personnage : tapez 2");
+            vue.addString("Sauvegarder la partie : tapez 3");
+            vue.addString("Retour au menu principal : tapez 4");
             
-            switch(joueur.lireChoix(vue,4))
+            switch(joueur.readChose(vue,4))
             {
-                    case 1 : choisirChapitre(vue); break;
-                    case 2 : afficherInfo(vue);  break;
-                    case 3 : sauvegarder(vue); break;
-                    case 4 : arret = quitterPartie(vue); break;
+                    case 1 : chooseChapitre(vue); break;
+                    case 2 : drawInfo(vue);  break;
+                    case 3 : save(vue); break;
+                    case 4 : arret = leaveGame(vue); break;
                     default : System.out.println("\nFatal Error"); return true ;
             }
         }        
         return true;
     }
     
-    public void afficherInfo(Vue vue){
-        personnage.drawPersonnage(vue);
+    public void drawInfo(View vue){
+        personnage.drawCaracter(vue);
         joueur.pause(vue);
         for(int i=1; i<5; i++){            
-            personnage.getInventaire().drawInventaire(vue, i);
+            personnage.getInventory().drawInventory(vue, i);
             joueur.pause(vue);
         }
     }
     
-    public boolean quitterPartie(Vue vue){        
-        vue.addChaine("Tout avancement non sauvegardé sera perdu!!");
-        vue.addChaine("Vouez-vous vraiment quitter?");
-        vue.addChaine("oui : tapez 1");
-        vue.addChaine("non : tapez 2");
+    public boolean leaveGame(View vue){        
+        vue.addString("Tout avancement non sauvegardé sera perdu!!");
+        vue.addString("Vouez-vous vraiment quitter?");
+        vue.addString("oui : tapez 1");
+        vue.addString("non : tapez 2");
         
-        switch(joueur.lireChoix(vue,2))
+        switch(joueur.readChose(vue,2))
         {
             case 1 : return true;
             case 2 : return false;
@@ -301,34 +301,34 @@ public class Jeu {
         }
     }
             
-    public boolean lancerChapitre(Vue vue, int avancement){        
+    public boolean lancerChapitre(View vue, int avancement){        
         int id=0;
         boolean vivant=true;
-        Combat combat;         
+        Fight combat;         
         
         if (avancement == this.avancement){
             lireHistoire(vue, avancement);
         }
         
-        combat = chargerCombat(id, avancement, vue);
+        combat = loadFight(id, avancement, vue);
         
         while(combat != null && vivant)
         {
-            vue.addChaine("Un mechant sauvage apparait!!");
+            vue.addString("Un mechant sauvage apparait!!");
             joueur.pause(vue);
             
-            if(combat.doCombat()){                
-                vue.addChaine("J'ai réussi à battre " + combat.getEnnemi().getNom() + " !");
+            if(combat.doFight()){                
+                vue.addString("J'ai réussi à battre " + combat.getEnnemi().getName() + " !");
                 joueur.pause(vue);
                 
-                combat.gagnerRecompenses();
+                combat.winStuff();
                 
                 id++;
-                combat = chargerCombat(id, avancement, vue); 
+                combat = loadFight(id, avancement, vue); 
             }
             else{                
-                vue.addChaine("J'ai pris une raclé par " + combat.getEnnemi().getNom());
-                personnage.perdreCombat(vue);
+                vue.addString("J'ai pris une raclé par " + combat.getEnnemi().getName());
+                personnage.loseFight(vue);
                 joueur.pause(vue);
                 
                 vivant=false;
@@ -336,22 +336,22 @@ public class Jeu {
         }
         
         if(vivant){            
-            vue.addChaine("Tout les méchants ont mouru!");
-            vue.addChaine("");
+            vue.addString("Tout les méchants ont mouru!");
+            vue.addString("");
             personnage.regen();
-            sauvegarder(vue);
+            save(vue);
         }
         
         if(this.avancement==avancement && vivant){
             this.avancement++;
-            vue.addChaine("Félicitation, vous avez débloquer le chapitre suivant!!");
+            vue.addString("Félicitation, vous avez débloquer le chapitre suivant!!");
             joueur.pause(vue);
         }
         
         return true;
     }    
     
-    public void lireHistoire(Vue vue, int avancement){
+    public void lireHistoire(View vue, int avancement){
         String fichier ="CentreCommercial/chapitre" + avancement + "_histoire.txt";
         
          try{                
@@ -366,7 +366,7 @@ public class Jeu {
                     joueur.pause(vue); 
                 } 
                 else {
-                    vue.addChaine(ligne);
+                    vue.addString(ligne);
                 }
             }
             joueur.pause(vue); 

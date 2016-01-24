@@ -3,32 +3,32 @@ package rpgcommercial;
 import java.io.BufferedReader;
 import java.io.PrintWriter;
 
-public class Inventaire {
-    private Arme armePrincipale;
-    private ArmeSecondaire armeSecondaire;
-    private Armure armure;
-    private Competence competence;
+public class Inventory {
+    private Weapon armePrincipale;
+    private SecondWeapon armeSecondaire;
+    private Armor armure;
+    private Spell competence;
     
-    public Inventaire(){
-        this.armePrincipale =new Arme("Mains nues", 1, 3, 5, 2);
+    public Inventory(){
+        this.armePrincipale =new Weapon("Mains nues", 1, 3, 5, 2);
         this.armeSecondaire = null;
         this.armure = null;
         this.competence = null;
     }
     
-    public Inventaire(BufferedReader br){
+    public Inventory(BufferedReader br){
         String lecture[];
         try{
             String ligne=br.readLine();
             lecture=ligne.split("=");
             lecture=lecture[1].split(" ");
-            this.armePrincipale =new Arme(lecture);
+            this.armePrincipale =new Weapon(lecture);
             
             ligne=br.readLine();
             lecture=ligne.split("=");
             if(lecture.length >1){
                 lecture=lecture[1].split(" ");
-                this.armeSecondaire =new ArmeSecondaire(lecture);
+                this.armeSecondaire =new SecondWeapon(lecture);
             }
             else{
                 this.armeSecondaire = null;
@@ -38,7 +38,7 @@ public class Inventaire {
             lecture=ligne.split("=");
             if(lecture.length >1){
                 lecture=lecture[1].split(" ");
-                this.armure =new Armure(lecture);
+                this.armure =new Armor(lecture);
             }
             else{
                 this.armure = null;
@@ -48,7 +48,7 @@ public class Inventaire {
             lecture=ligne.split("=");
             if(lecture.length >1){
                 lecture=lecture[1].split(" ");
-                this.competence = new Competence(lecture);
+                this.competence = new Spell(lecture);
             }
             else{
                 this.competence = null;
@@ -61,48 +61,48 @@ public class Inventaire {
         
     }
     
-    public void setArmePrincipale(Arme a){
+    public void setMainWeapon(Weapon a){
         this.armePrincipale = a;
     }
     
-    public void setArmeSecondaire(ArmeSecondaire a){
+    public void setSecondWeapon(SecondWeapon a){
         this.armeSecondaire = a;
     }
     
-    public void setArmure(Armure a){
+    public void setArmor(Armor a){
         this.armure = a;
     }
     
-    public void setCompetence(Competence c){
+    public void setSpell(Spell c){
         this.competence = c;
     }
     
-    public Arme getArmePrincipale(){
+    public Weapon getMainWeapon(){
         return armePrincipale;
     }
     
-    public ArmeSecondaire getArmeSecondaire(){
+    public SecondWeapon getSecondWeapon(){
         return armeSecondaire;
     }
     
-    public Armure getArmure(){
+    public Armor getArmor(){
         return armure;
     }
     
-    public Competence getCompetence(){
+    public Spell getSpell(){
         return competence;
     }
     
-    public void drawInventaire(Vue v, int affiche){
+    public void drawInventory(View v, int affiche){
         String car;
         
         switch(affiche)
         {
-            case 1 : v.addChaine("Arme principale :");
+            case 1 : v.addString("Arme principale :");
                 if(armePrincipale != null){
-                v.addChaine("Nom : "+ armePrincipale.nom);
-                v.addChaine("Dégats d'arme : " + armePrincipale.dmin + " - " + armePrincipale.dmax);
-                v.addChaine("Ratio : ");
+                v.addString("Nom : "+ armePrincipale.nom);
+                v.addString("Dégats d'arme : " + armePrincipale.dmin + " - " + armePrincipale.dmax);
+                v.addString("Ratio : ");
 
                 switch(armePrincipale.carac)
                 {
@@ -115,12 +115,12 @@ public class Inventaire {
                 v.concatLastLigne(" + "+ armePrincipale.ratio + car);
             }break;
 
-            case 2 : v.addChaine("Arme secondaire :");
+            case 2 : v.addString("Arme secondaire :");
                 if(armeSecondaire != null){
-                v.addChaine("Nom : " + armeSecondaire.nom);
-                v.addChaine("Dégats d'arme : " + armeSecondaire.dmin + " - " + armeSecondaire.dmax);
-                v.addChaine("Munitions restantes : " + armeSecondaire.getMunitions());
-                v.addChaine("Ratio : ");
+                v.addString("Nom : " + armeSecondaire.nom);
+                v.addString("Dégats d'arme : " + armeSecondaire.dmin + " - " + armeSecondaire.dmax);
+                v.addString("Munitions restantes : " + armeSecondaire.getMunitions());
+                v.addString("Ratio : ");
 
                 switch(armeSecondaire.carac)
                 {
@@ -133,27 +133,27 @@ public class Inventaire {
                 v.concatLastLigne(" + "+ armeSecondaire.ratio + car);
             }break;
 
-            case 3 : v.addChaine("Armure :");
+            case 3 : v.addString("Armure :");
                 if(armure != null){
-                v.addChaine("Nom : " + armure.nom);
-                v.addChaine("Vitalité : " + armure.getVitalite());
-                v.addChaine("Force : " + armure.getForce());
-                v.addChaine("Dexterité : " + armure.getDexterite());
-                v.addChaine("Intelligence : " + armure.getIntell());
-                v.addChaine("Durabilité : " + armure.getDurabilite());
+                v.addString("Nom : " + armure.nom);
+                v.addString("Vitalité : " + armure.getVitalite());
+                v.addString("Force : " + armure.getForce());
+                v.addString("Dexterité : " + armure.getDexterite());
+                v.addString("Intelligence : " + armure.getIntell());
+                v.addString("Durabilité : " + armure.getDurabilite());
             }break;
 
-            case 4 : v.addChaine("Compétence :");
+            case 4 : v.addString("Compétence :");
                 if(competence != null){
-                v.addChaine("Nom : " + competence.nom);
-                if (competence.isSoin()){
-                    v.addChaine("Soins : ");
+                v.addString("Nom : " + competence.nom);
+                if (competence.isHeal()){
+                    v.addString("Soins : ");
                 }
                 else{
-                    v.addChaine("Dégats : ");
+                    v.addString("Dégats : ");
                 }
                 v.concatLastLigne(competence.dmin + " - " + competence.dmax);
-                v.addChaine("Ratio : ");
+                v.addString("Ratio : ");
 
                 switch(competence.carac)
                 {
@@ -168,10 +168,10 @@ public class Inventaire {
         }
     }
     
-    public void sauvegarder(PrintWriter fichierSortie){
+    public void save(PrintWriter fichierSortie){
         fichierSortie.print("armePrincipale=");
         if (armePrincipale != null){
-            armePrincipale.sauvegarder(fichierSortie);
+            armePrincipale.save(fichierSortie);
         }
         else{
             fichierSortie.println();
@@ -179,7 +179,7 @@ public class Inventaire {
         
         fichierSortie.print("armeSecondaire=");
         if (armeSecondaire != null){
-            armeSecondaire.sauvegarder(fichierSortie);
+            armeSecondaire.save(fichierSortie);
         }
         else{
             fichierSortie.println();
@@ -187,7 +187,7 @@ public class Inventaire {
 
         fichierSortie.print("armure=");
         if (armure != null){
-            armure.sauvegarder(fichierSortie);
+            armure.save(fichierSortie);
         }
         else{
             fichierSortie.println();
@@ -195,7 +195,7 @@ public class Inventaire {
 
         fichierSortie.print("competence=");
         if (competence != null){
-            competence.sauvegarder(fichierSortie);
+            competence.save(fichierSortie);
         }
         else{
             fichierSortie.println();

@@ -3,11 +3,11 @@ package rpgcommercial;//Test
 import java.io.PrintWriter;
 import java.util.EnumMap;
 
-public class Armure extends Item {
+public class Armor extends Item {
     private EnumMap<Caracteristique, Integer> carac;
     private int durabilite;
         
-    public Armure(String nom, int vie, int force, int dext, int intell, int dura){
+    public Armor(String nom, int vie, int force, int dext, int intell, int dura){
         super(nom);
         this.carac = new EnumMap<>(Caracteristique.class);
         carac.put(Caracteristique.VITALITE, vie);
@@ -17,7 +17,7 @@ public class Armure extends Item {
         this.durabilite = dura;
     }
      
-    public Armure(String[] lecture){
+    public Armor(String[] lecture){
         super(lecture[0].replace("_", " "));
         this.carac = new EnumMap<>(Caracteristique.class);
         carac.put(Caracteristique.VITALITE, Integer.parseInt(lecture[1]));
@@ -43,17 +43,17 @@ public class Armure extends Item {
         return durabilite;
     }
     
-    public void drawArmure(Vue v){
-        v.addChaine("  "+nom);
-        v.addChaine("  Vitalité : " +carac.get(Caracteristique.VITALITE));
-        v.addChaine("  Force : " +carac.get(Caracteristique.FORCE));
-        v.addChaine("  Dexterité : " +carac.get(Caracteristique.DEXTERITE));
-        v.addChaine("  Intelligence : " +carac.get(Caracteristique.INTELLIGENCE));
-        v.addChaine("  Durabilité : " +durabilite +" points de dégats");
+    public void drawArmor(View v){
+        v.addString("  "+nom);
+        v.addString("  Vitalité : " +carac.get(Caracteristique.VITALITE));
+        v.addString("  Force : " +carac.get(Caracteristique.FORCE));
+        v.addString("  Dexterité : " +carac.get(Caracteristique.DEXTERITE));
+        v.addString("  Intelligence : " +carac.get(Caracteristique.INTELLIGENCE));
+        v.addString("  Durabilité : " +durabilite +" points de dégats");
     }
     
     // return true si l'armure est cassée, faux sinon
-    public boolean endommagerArmure(int degats){
+    public boolean attackArmor(int degats){
         this.durabilite -= degats;
         if (durabilite <=0){
             return true;
@@ -63,7 +63,7 @@ public class Armure extends Item {
         }
     }
     
-    public void sauvegarder(PrintWriter fichierSortie){
+    public void save(PrintWriter fichierSortie){
         if (this != null){
             fichierSortie.println(this.nom.replace(" ", "_") + " "+ carac.get(Caracteristique.VITALITE) + " "+carac.get(Caracteristique.FORCE) +" "+ carac.get(Caracteristique.DEXTERITE) + " "+carac.get(Caracteristique.INTELLIGENCE)+" "+durabilite);        
         }

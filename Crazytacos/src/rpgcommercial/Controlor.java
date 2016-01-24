@@ -1,6 +1,6 @@
 package rpgcommercial;
 
 
-public interface Controleur {
+public interface Controlor {
     
 }

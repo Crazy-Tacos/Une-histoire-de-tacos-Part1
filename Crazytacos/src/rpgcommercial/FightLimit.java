@@ -1,10 +1,10 @@
 
 package rpgcommercial;
 
-public class CombatLimite extends Combat{
+public class FightLimit extends Fight{
     private int nbTour;
     
-    public CombatLimite(Joueur control, Vue j, Personnage joueur, Personnage ennemi, int nbTour) {
+    public FightLimit(PlayerControl control, View j, Caracter joueur, Caracter ennemi, int nbTour) {
         super(control, j, joueur, ennemi);
         this.nbTour=nbTour;
     }
@@ -13,30 +13,30 @@ public class CombatLimite extends Combat{
         return nbTour;
     }
     
-    public void drawCombat(){
-        j.addChaine("--- COMBAT LIMITE ---");
-        j.addChaine("Nombre de Tour restants : " + (nbTour - 1));
-        j.addChaine(joueur.getNom() + " VS " + ennemi.getNom());        
+    public void drawFight(){
+        j.addString("--- COMBAT LIMITE ---");
+        j.addString("Nombre de Tour restants : " + (nbTour - 1));
+        j.addString(joueur.getName() + " VS " + ennemi.getName());        
         int i = j.getNextLigne();
-        joueur.drawPersonnageCombat(j);
-        ennemi.drawPersonnageCombat(j,i, 30);
+        joueur.drawCaracterFight(j);
+        ennemi.drawCaracterFight(j,i, 30);
     }
     
-    public boolean doCombat(){        
+    public boolean doFight(){        
         boolean tourJ;
         int degats;
         int nbchoix;
-        this.drawCombat();
-        j.addChaine("");
-        j.addChaine("Le plus intelligent et le plus agile commence : ");
+        this.drawFight();
+        j.addString("");
+        j.addString("Le plus intelligent et le plus agile commence : ");
         
         if ((joueur.getDextTotale() + joueur.getIntellTotale()) >= (ennemi.getDextTotale() + ennemi.getIntellTotale())){
             tourJ = true;
-            j.concatLastLigne(joueur.getNom());
+            j.concatLastLigne(joueur.getName());
         }
         else {
             tourJ = false;
-            j.concatLastLigne(ennemi.getNom());
+            j.concatLastLigne(ennemi.getName());
         }
         j.drawPause(control);
         
@@ -44,26 +44,26 @@ public class CombatLimite extends Combat{
 
             if (tourJ){
                 //le joueur fait une action
-                drawCombat();
-                j.addChaine("");
+                drawFight();
+                j.addString("");
                 nbchoix = joueur.drawActions(j);
-                degats =joueur.attaquer(j,control.lireChoix(j,nbchoix));
+                degats =joueur.attack(j,control.readChose(j,nbchoix));
                 if (degats >= 0){
-                    ennemi.infligerDegats(j, degats);
+                    ennemi.takeDamages(j, degats);
                 }
                 else{
-                    joueur.utiliserSoin(j, -degats);
+                    joueur.useHeal(j, -degats);
                 }
                 nbTour--;
             }
             else{
                 // L'ennemi attaque avec son IA 
-                degats = ennemi.attaquer(j,iaControl.choixAttaque(ennemi, joueur));
+                degats = ennemi.attack(j,iaControl.choixAttaque(ennemi, joueur));
                 if (degats >= 0){
-                    joueur.infligerDegats(j, degats);
+                    joueur.takeDamages(j, degats);
                 }
                 else{
-                    ennemi.utiliserSoin(j, -degats);
+                    ennemi.useHeal(j, -degats);
                 }
                 control.pause(j);
             }

@@ -2,10 +2,10 @@ package rpgcommercial;
 
 import java.io.PrintWriter;
 
-public class ArmeSecondaire extends Arme {
+public class SecondWeapon extends Weapon {
     private int munitions;
 
-    public ArmeSecondaire(String[] lecture) {
+    public SecondWeapon(String[] lecture) {
         super(lecture);
         this.munitions = Integer.parseInt(lecture[5]);
     }
@@ -14,7 +14,7 @@ public class ArmeSecondaire extends Arme {
         return munitions;
     }
     
-    public boolean utiliserMunition(){
+    public boolean useMunition(){
         // Return vrai si l'arme n'a plus de munitions
         munitions--;
         if (munitions <= 0){
@@ -25,12 +25,12 @@ public class ArmeSecondaire extends Arme {
         }
     }
     
-    public void drawArme(Vue v){
-        super.drawArme(v);
-        v.addChaine("  Munitions restantes : "+ munitions);
+    public void drawWeapon(View v){
+        super.drawWeapon(v);
+        v.addString("  Munitions restantes : "+ munitions);
     }
     
-    public void sauvegarder(PrintWriter fichierSortie){
+    public void save(PrintWriter fichierSortie){
         if (this != null){
             fichierSortie.println(this.nom.replace(" ", "_") + " " + dmin + " "+ dmax + " " + ratio + " " + carac + " " + munitions );
         }

@@ -1,15 +1,15 @@
 package rpgcommercial;
 
 
-public class Vue {
+public class View {
     private String[] ecran;
     
-    public Vue(){
+    public View(){
         ecran = new String[20];
-        initEcran();
+        initScreen();
     }
     
-    public void initEcran(){
+    public void initScreen(){
         for (int i = 0; i<20; i++){
             ecran[i] = null;
         }
@@ -24,22 +24,22 @@ public class Vue {
                 System.out.println();
             }
         }
-        initEcran();
+        initScreen();
     }
     
-    public void drawCalibrate(Joueur control){
-        control.tailleFenetre(this);
+    public void drawCalibrate(PlayerControl control){
+        control.calibrateWindow(this);
     }
     
-    public void drawPause(Joueur control){
+    public void drawPause(PlayerControl control){
         control.pause(this);
     }
     
-    public int drawChoix(Joueur control, int max){
-        return control.lireChoix(this,max);
+    public int drawChoix(PlayerControl control, int max){
+        return control.readChose(this,max);
     }
     
-    public void addChaine(String str, int ligne, int decalage){
+    public void addString(String str, int ligne, int decalage){
         if(ligne <20){
             while(ecran[ligne].length()<decalage){
                 ecran[ligne] += " ";
@@ -48,7 +48,7 @@ public class Vue {
         }
     }
     
-    public void addChaine(String str){
+    public void addString(String str){
         int i = getNextLigne();
         if(i <20){
             ecran[i] = str;
@@ -62,7 +62,7 @@ public class Vue {
         }
     }
     
-    public void addChaineFin(String str){
+    public void addStringEnd(String str){
         int i = 19;
         while(ecran[i] != null && i>0){
             i--;

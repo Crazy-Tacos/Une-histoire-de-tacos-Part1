@@ -2,7 +2,7 @@ package rpgcommercial;
 
 import java.io.PrintWriter;
 
-public class Arme extends Item {
+public class Weapon extends Item {
     protected int dmin;
     protected int dmax;
     protected int ratio;
@@ -10,7 +10,7 @@ public class Arme extends Item {
     
     // Carac : A = VITA, 2 = FORCE, 3 = DEXT, 4 = VITA
     // Ratio : Pourcentage de la caractéristique
-    public Arme(String nom, int dmin, int dmax, int ratio, int carac){
+    public Weapon(String nom, int dmin, int dmax, int ratio, int carac){
         super(nom);
         this.dmin = dmin;
         this.dmax = dmax;
@@ -18,7 +18,7 @@ public class Arme extends Item {
         this.carac = carac;
     }
     
-    public Arme(String[] lecture){
+    public Weapon(String[] lecture){
         super(lecture[0].replace("_", " "));
         
         this.dmin = Integer.parseInt(lecture[1]);
@@ -28,9 +28,9 @@ public class Arme extends Item {
     }
     
     
-    public void drawArme(Vue v){
-        v.addChaine("  " +nom);
-        v.addChaine("  Dégats : "+ dmin + "-" + dmax);
+    public void drawWeapon(View v){
+        v.addString("  " +nom);
+        v.addString("  Dégats : "+ dmin + "-" + dmax);
         String car = "";
         if (carac == 1){ // Vitalite
             car = "% de la VITALITE";
@@ -47,7 +47,7 @@ public class Arme extends Item {
         v.concatLastLigne(" + "+ ratio + car);
     }
     
-    public void sauvegarder(PrintWriter fichierSortie){
+    public void save(PrintWriter fichierSortie){
         if (this != null){
             fichierSortie.println(this.nom.replace(" ", "_") + " " + dmin + " "+ dmax+ " " + ratio+ " " + carac);
         }

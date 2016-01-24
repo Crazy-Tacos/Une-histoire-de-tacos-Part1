@@ -1,16 +1,16 @@
 package rpgcommercial;
 
-public class Ia implements Controleur{
+public class Ia implements Controlor{
     
     public Ia (){
         
     }
     
-    public int choixAttaque(Personnage monstre, Personnage player){//Gerer les consos id(ennemi.hp <= degat, taper!!! sinon si monstre.hp < blaba -> heal
-        Inventaire inventaire = monstre.getInventaire();
-        Arme armeSecondaire = inventaire.getArmeSecondaire();
-        Arme armePrincipale = inventaire.getArmePrincipale();
-        Competence conso = inventaire.getCompetence();
+    public int choixAttaque(Caracter monstre, Caracter player){//Gerer les consos id(ennemi.hp <= degat, taper!!! sinon si monstre.hp < blaba -> heal
+        Inventory inventaire = monstre.getInventory();
+        Weapon armeSecondaire = inventaire.getSecondWeapon();
+        Weapon armePrincipale = inventaire.getMainWeapon();
+        Spell conso = inventaire.getSpell();
         
         if (armeSecondaire == null)
         {

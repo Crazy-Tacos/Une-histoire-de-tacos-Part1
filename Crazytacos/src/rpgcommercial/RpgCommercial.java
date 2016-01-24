@@ -6,24 +6,24 @@ public class RpgCommercial {
     
     public static void main(String[] args){
        
-        Jeu jeu = new Jeu();
-        Vue vue = new Vue(); 
+        Game jeu = new Game();
+        View vue = new View(); 
                 
         boolean arret = false;
         
-        jeu.getJoueur().tailleFenetre(vue);
+        jeu.getPlayer().calibrateWindow(vue);
                 
         while (!arret)
         {
-	        vue.addChaine("-- Panique au Centre Commecial --");
-	        vue.addChaine("Nouvelle Partie : tapez 1");
-	        vue.addChaine("Charger Partie : tapez 2");
-	        vue.addChaine("Quitter : tapez 3");
+	        vue.addString("-- Panique au Centre Commecial --");
+	        vue.addString("Nouvelle Partie : tapez 1");
+	        vue.addString("Charger Partie : tapez 2");
+	        vue.addString("Quitter : tapez 3");
 	                        
-	        switch(jeu.getJoueur().lireChoix(vue, 3))
+	        switch(jeu.getPlayer().readChose(vue, 3))
 	        {
-	                case 1 :    jeu.nouvellePartie(vue); break;
-	                case 2 :    jeu.chargerPartie(vue);  break;
+	                case 1 :    jeu.newGame(vue); break;
+	                case 2 :    jeu.loadGame(vue);  break;
 	                case 3 :    arret = true; break;
 	                default : System.out.println("\nFatal Error"); return ;
 	        }

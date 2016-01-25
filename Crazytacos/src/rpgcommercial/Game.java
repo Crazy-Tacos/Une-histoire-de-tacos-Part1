@@ -190,10 +190,10 @@ public class Game {
                     personnage.save(fichierSortie);
                 }
                 fichierSortie.println("fin");
-                fw.close();
-                bw.close();
                 fichierSortie.close();
             }
+            fw.close();
+            bw.close();
         }
         catch (Exception e){
                 System.out.println(e.toString());
@@ -303,8 +303,8 @@ public class Game {
         if (personnage.getInventory().getSpell() !=null){ 
             vue.addString("Compétence :");
             personnage.getInventory().getSpell().drawWeapon(vue);
-            joueur.pause(vue);
         }
+        joueur.pause(vue);
     }
     
     public boolean leaveGame(View vue){        
@@ -425,10 +425,10 @@ public class Game {
                     fichierSortie.println("Argent="+personnage.getMoney());
                     fichierSortie.println();
                 }
-                fw.close();
-                bw.close();
                 fichierSortie.close();
             }
+            fw.close();
+            bw.close();
         }
         catch (Exception e){
                 System.out.println(e.toString());

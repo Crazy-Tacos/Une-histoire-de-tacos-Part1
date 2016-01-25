@@ -1,8 +1,8 @@
-﻿Avancement=2
-classe=Pharmacien
-Personnage=Testeur 50 668 4158 90 18 18 20
+Avancement=3
+classe=Cuisinier
+Personnage=Sabrine_du_Tacos 1 0 0 50 10 20 10
 armePrincipale=Mains_nues 1 3 5 2
 armeSecondaire=
-armure=Lunettes 10 -10 0 50 913
-competence=Crotte 300 500 10 4
+armure=
+competence=
 fin

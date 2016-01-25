@@ -1,4 +1,4 @@
-﻿id=0
+id=0
 mob=Etagere_de_chaussure 4 10 50 30 10 10 10
 armePrincipale=Talon_aiguille 3 12 4 3
 armeSecondaire=Sprai_d'entretien 6 10 20 2 50

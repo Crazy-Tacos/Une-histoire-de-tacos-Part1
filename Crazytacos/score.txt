@@ -1,4 +1,8 @@
-﻿Nom=Testeur
+Nom=Testeur
 Classe=Pharmacien
 Argent=4158
+
+Nom=Dieu
+Classe=Boulanger
+Argent=100001461
 

@@ -423,7 +423,6 @@ public class Game {
                     fichierSortie.println("Nom="+ personnage.getName().replace(" ", "_" ));
                     fichierSortie.println("Classe="+personnage.getClasse());
                     fichierSortie.println("Argent="+personnage.getMoney());
-                    fichierSortie.println();
                 }
                 fichierSortie.close();
             }
@@ -438,5 +437,58 @@ public class Game {
         vue.addString("");
     }
     
+    public void loadScore(View vue) {        
+        Score[] tab = new Score[10];
+        String fichier ="score.txt";
+         try{
+            InputStream ips=new FileInputStream(fichier); 
+            InputStreamReader ipsr=new InputStreamReader(ips);
+            BufferedReader br=new BufferedReader(ipsr);
+            String ligne; 
+            String[] lecture;
+            String nom, classe;
+            int argent, i;
+
+            while ((ligne=br.readLine()) !=null){
+                lecture = ligne.split("=");
+                if ("Nom".equals(lecture[0])){
+                    nom = lecture[1];
+                    ligne=br.readLine();
+                    lecture = ligne.split("=");
+                    classe = lecture[1];
+                    ligne=br.readLine();
+                    lecture = ligne.split("=");
+                    argent = Integer.parseInt(lecture[1]);
+                    tab = orderScore(tab, new Score(nom, classe, argent));
+                }
+            }
+            ips.close();
+            ipsr.close();
+            br.close();
+         }
+        catch (Exception e){
+            System.out.println(e.toString());
+        }
+         int i = 0;
+         vue.addString("Meilleurs scores :");
+         while(i<tab.length && tab[i] != null){
+             tab[i].drawScore(vue);
+             i++;
+         }
+    }  
+    
+    public Score[] orderScore(Score[] tab, Score score){
+        
+        int argent = score.getMoney();
+        int i = 0;
+        while(i<tab.length && tab[i] != null && argent <tab[i].getMoney()){
+            i++;
+        }
+        for (int j =tab.length - 2;j>=i;j--){
+            tab[j+1] = tab[j];
+        }
+        tab[i] = score;
+        return tab;
+    }
     
 }

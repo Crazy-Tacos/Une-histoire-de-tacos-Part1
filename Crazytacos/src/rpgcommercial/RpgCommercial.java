@@ -10,28 +10,32 @@ public class RpgCommercial {
        
         Game jeu = new Game();
         View vue = new View();
-        File f;
                 
         boolean arret = false;
         
         jeu.getPlayer().calibrateWindow(vue);
                 
         while (!arret)
-        {
-            f =  new File("sauvegarde.txt");
-                        
+        {      
             vue.addString("-- Panique au Centre Commecial --");
             vue.addString("Nouvelle Partie : tapez 1");
-            if (f.exists()){
+            if (new File("sauvegarde.txt").exists()){
                 vue.addString("Charger Partie : tapez 2");
             }
-            vue.addString("Quitter : tapez 3");
+            if (new File("score.txt").exists()){
+                vue.addString("Voir scores : tapez 3");
+            }
+            vue.addString("Quitter : tapez 4");
 
-            switch(jeu.getPlayer().readChose(vue, 3))
+            switch(jeu.getPlayer().readChose(vue, 4))
             {
                     case 1 :    jeu.newGame(vue); break;
-                    case 2 :    if (f.exists()){jeu.loadGame(vue);}  break;
-                    case 3 :    arret = true; break;
+                    case 2 :    if (new File("sauvegarde.txt").exists()){jeu.loadGame(vue);}  break;
+                    case 3 :    if (new File("score.txt").exists()){
+                        jeu.loadScore(vue);
+                        jeu.getPlayer().pause(vue);
+                    }  break; 
+                    case 4 :    arret = true; break;
                     default : System.out.println("\nFatal Error"); return ;
             }
         }

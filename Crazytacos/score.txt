@@ -1,8 +1,12 @@
 Nom=Testeur
 Classe=Pharmacien
 Argent=4158
-
 Nom=Dieu
 Classe=Boulanger
 Argent=100001461
-
+Nom=Diego
+Classe=SAV
+Argent=10
+Nom=Lilian
+Classe=Cuisinier
+Argent=999999999

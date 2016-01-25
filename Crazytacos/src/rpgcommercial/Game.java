@@ -334,7 +334,7 @@ public class Game {
         
         while(combat != null && vivant)
         {
-            vue.addString("Un mechant sauvage apparait!!");
+            vue.addString("Un méchant sauvage apparait!!");
             joueur.pause(vue);
             
             if(combat.doFight()){                
@@ -356,7 +356,7 @@ public class Game {
         }
         
         if(vivant){            
-            vue.addString("Tout les méchants ont mouru!");
+            vue.addString("Tous les méchants ont mouru!");
             vue.addString("");
             personnage.regen();
             save(vue);
@@ -364,7 +364,7 @@ public class Game {
         
         if(this.avancement==avancement && vivant){
             this.avancement++;
-            vue.addString("Félicitation, vous avez débloquer le chapitre suivant!!");
+            vue.addString("Félicitations, vous avez débloqué le chapitre suivant!!");
             joueur.pause(vue);
             if (this.avancement ==3){
                 endTheGame(vue);
@@ -452,7 +452,7 @@ public class Game {
             while ((ligne=br.readLine()) !=null){
                 lecture = ligne.split("=");
                 if ("Nom".equals(lecture[0])){
-                    nom = lecture[1];
+                    nom = lecture[1].replace("_", " " );
                     ligne=br.readLine();
                     lecture = ligne.split("=");
                     classe = lecture[1];

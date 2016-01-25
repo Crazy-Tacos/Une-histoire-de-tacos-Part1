@@ -10,3 +10,6 @@ Argent=10
 Nom=Lilian
 Classe=Cuisinier
 Argent=999999999
+Nom=Sabrine_du_Tacos
+Classe=Cuisinier
+Argent=700

@@ -1,8 +1,0 @@
-Avancement=3
-classe=Cuisinier
-Personnage=Sabrine_du_Tacos 1 0 0 50 10 20 10
-armePrincipale=Mains_nues 1 3 5 2
-armeSecondaire=
-armure=
-competence=
-fin

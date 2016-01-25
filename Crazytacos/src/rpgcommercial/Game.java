@@ -472,7 +472,8 @@ public class Game {
          int i = 0;
          vue.addString("Meilleurs scores :");
          while(i<tab.length && tab[i] != null){
-             tab[i].drawScore(vue);
+             vue.addString((i+1)+". ");
+             tab[i].drawScoreConcat(vue);
              i++;
          }
     }  

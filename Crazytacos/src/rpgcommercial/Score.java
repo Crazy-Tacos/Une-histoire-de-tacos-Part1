@@ -15,7 +15,7 @@ public class Score {
         return argent;
     }
     
-    public void drawScore(View vue){
-        vue.addString(nom + " le " + classe+ " : "+ argent+" euros");
+    public void drawScoreConcat(View vue){
+        vue.concatLastLigne(nom + " le " + classe+ " : "+ argent+" euros");
     }
 }

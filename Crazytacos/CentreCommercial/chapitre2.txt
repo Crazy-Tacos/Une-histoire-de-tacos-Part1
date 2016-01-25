@@ -1,4 +1,4 @@
-id=0
+﻿id=0
 mob=Soldat_solide 6 30 70 50 20 20 20
 armePrincipale=Couteau_papillon 6 15 10 3   
 armeSecondaire=

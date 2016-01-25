@@ -1,3 +1,4 @@
-Nom=Testeur
-Argent=3808
+﻿Nom=Testeur
+Classe=Pharmacien
+Argent=4158
 

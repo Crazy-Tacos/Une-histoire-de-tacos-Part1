@@ -476,4 +476,8 @@ public class Caracter {
         vue.addString("J'avais du m'enfuire.");
         vue.addString("Durant ma course j'ai fait tomber "+perte+" euros.....");
     }
+    
+    public String getClasse(){
+        return this.classe;
+    }
 }

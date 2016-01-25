@@ -167,6 +167,8 @@ public class Game {
                     else
                         combat= new FightLimit(joueur, vue, personnage, perso,nbTour);
                 }
+                ips.close();
+                ipsr.close();
                 br.close();
                 return combat;
         }		
@@ -188,6 +190,9 @@ public class Game {
                     personnage.save(fichierSortie);
                 }
                 fichierSortie.println("fin");
+                fw.close();
+                bw.close();
+                fichierSortie.close();
             }
         }
         catch (Exception e){
@@ -214,6 +219,9 @@ public class Game {
             
             //Chargement Personnage
             this.personnage = loadCaracter(br);
+            ips.close();
+            ipsr.close();
+            br.close();
         }		
         catch (IOException | NumberFormatException e){
                 System.out.println(e.toString());
@@ -386,6 +394,9 @@ public class Game {
                 }
             }
             joueur.pause(vue); 
+            ips.close();
+            ipsr.close();
+            br.close();
          }
         catch (Exception e){
             System.out.println(e.toString());
@@ -398,9 +409,8 @@ public class Game {
         if (new File("sauvegarde.txt").delete()){
             vue.addString("L'explosion vous a fait perdre la mémoire... Encore");
         }
-        else{ vue.addString("Erreur lors de la suppression de la sauvergarde");}
-        
-        
+        else{ vue.addString("Erreur lors de la suppression de la sauvegarde");}
+        vue.addString("");
     }
     
     public void writeScore(View vue){
@@ -411,9 +421,13 @@ public class Game {
             try (PrintWriter fichierSortie = new PrintWriter(bw)) {
                 if (personnage != null){
                     fichierSortie.println("Nom="+ personnage.getName().replace(" ", "_" ));
+                    fichierSortie.println("Classe="+personnage.getClasse());
                     fichierSortie.println("Argent="+personnage.getMoney());
                     fichierSortie.println();
                 }
+                fw.close();
+                bw.close();
+                fichierSortie.close();
             }
         }
         catch (Exception e){
